@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![.gitignore](https://img.shields.io/badge/.gitignore-view-lightgrey)](./.gitignore)
+[![.gitattributes](https://img.shields.io/badge/.gitattributes-view-lightgrey)](./.gitattributes)
 [![Game Folder](https://img.shields.io/badge/Game%20Folder-open-blueviolet)](./TRACE)
 
 **Parkour FPS Adventure** is a fast-paced first-person game that blends high-speed parkour movement with intense gunplay and thrilling boss battles. Dive into a world full of challenging levels, creative mechanics, and non-stop action.
