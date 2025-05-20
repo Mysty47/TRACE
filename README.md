@@ -1,4 +1,5 @@
-# 🕹️ Parkour FPS Adventure
+# 🕹️ TRACE
+## Parkour FPS Adventure
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![.gitignore](https://img.shields.io/badge/.gitignore-view-lightgrey)](./.gitignore)
