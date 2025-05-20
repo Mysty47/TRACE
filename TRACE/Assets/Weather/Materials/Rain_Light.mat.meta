@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d0fbeece6acdf49e0ab0ace8e1e8b4ed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 1817
+  packageName: Dead Tower Scene
+  packageVersion: 1.0
+  assetPath: Assets/Weather/Materials/Rain_Light.mat
+  uploadId: 25462

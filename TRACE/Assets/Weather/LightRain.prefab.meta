@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 49c5b2dc2568546d1bd295e9847651f1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 1817
+  packageName: Dead Tower Scene
+  packageVersion: 1.0
+  assetPath: Assets/Weather/LightRain.prefab
+  uploadId: 25462
