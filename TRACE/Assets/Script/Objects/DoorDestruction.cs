@@ -4,6 +4,7 @@ public class DoorDestruction : MonoBehaviour
 {
     public GameObject Cover;
     public bool isGlass = false;
+    
     public void DestroyWall()
     {
         // Loop through all child objects

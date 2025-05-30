@@ -18,6 +18,7 @@ public class WeaponScript : MonoBehaviour
     public WeaponSwap ws;
     public GrapplingGun gg;
     public GunRecoil gr;
+    public PlayerMovement pm;
     
     public GameObject glassForDestruction;
     public GameObject glassForDestruction1;
@@ -27,12 +28,17 @@ public class WeaponScript : MonoBehaviour
     public GameObject Cover1;
     public GameObject Cover2;
     public GameObject Cover3;
+    public GameObject impactEffect;
+    
     public Camera fpsCam;
+    
     public ParticleSystem muzzleFlashSMG;
     public ParticleSystem muzzleFlashPistol;
-    public GameObject impactEffect;
+    
     public TextMeshProUGUI ammoText;
+    
     public Animator animatorPistol;
+    
     public Image AmmoIcon;
 
     void Start()
