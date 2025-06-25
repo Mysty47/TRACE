@@ -23,9 +23,9 @@ public class PlayerMovement : MonoBehaviour
 	//Movement Settings 
 	public float sensitivity = 50f;
 
-	public float moveSpeed = 9000f;
-	public float walkSpeed = 60f;
-	public float runSpeed = 30f;
+	public float moveSpeed = 450f;
+	public float walkSpeed = 10f;
+	public float runSpeed = 15f;
 	public bool grounded;
 	public bool onWall;
 
