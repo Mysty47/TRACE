@@ -83,9 +83,12 @@ public class PlayerMovement : MonoBehaviour
 
 	public EscapeMenuController escapeMenuController;
 
+	public WeaponScript weaponscript;
+
 	[Header("Audio Settings")]
 	public AudioSource runningSound;
-	public AudioSource airSound;
+	public AudioSource wallrunSound;
+
 
 	private void Awake()
 	{
@@ -140,38 +143,34 @@ public class PlayerMovement : MonoBehaviour
 
 	void HandleRunningSound()
 	{
-		bool isRunning = Input.GetKey(KeyCode.W) && grounded;
-        
-		if (isRunning && !runningSound.isPlaying)
-		{
-			runningSound.Play();
-		}
-		else if (!isRunning && runningSound.isPlaying)
-		{
-			runningSound.Stop();
-		}
+    	// Check if any movement key is pressed and player is grounded
+    	bool isMoving = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && grounded;
+
+    	if (isMoving && !runningSound.isPlaying)
+    	{
+        	runningSound.Play();
+    	}
+    	else if (!isMoving && runningSound.isPlaying)
+    	{
+        	runningSound.Stop();
+    	}
 	}
 
-	void HandleAirSound()
+
+	void HandleWallRunningSound()
 	{
-		airSound.volume = 0.5f;
-		
-		if (!grounded && !airSound.isPlaying && rb.linearVelocity.y < 0)
+		if (wallRunning && !wallrunSound.isPlaying)
 		{
-			airSound.Play();
+			wallrunSound.Play();
 		}
-		else if (grounded && airSound.isPlaying)
-		{
-			StartCoroutine(FadeOutSound(airSound));
-		}
+		else if(!wallRunning && wallrunSound.isPlaying) wallrunSound.Stop();
 	}
-	
+
 	private void Update()
 	{
-		Debug.Log(sprinting);
 		HandleRunningSound();
-		HandleAirSound();
-		
+		HandleWallRunningSound();
+
 		if (rb.linearVelocity.magnitude > velocityThreshold || !grounded)
 		{
 			if (fastMovementParticles != null && !fastMovementParticles.isPlaying)
