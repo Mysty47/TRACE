@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 	public float sensitivity = 50f;
 
 	public float moveSpeed = 450f;
-	public float walkSpeed = 10f;
+	public float walkSpeed = 5f;
 	public float runSpeed = 15f;
 	public bool grounded;
 	public bool onWall;
@@ -69,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
 	//Private int
 	private int nw;
+
+	private int sprintController = 0;
 
 	bool isCrouched = false;
 	float crouchSpeed = 2f; // Adjust this for desired crouch-walking speed
@@ -166,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	private void Update()
 	{
+		Debug.Log(sprinting);
 		HandleRunningSound();
 		HandleAirSound();
 		
@@ -229,8 +232,13 @@ public class PlayerMovement : MonoBehaviour
 	{
 		x = Input.GetAxisRaw("Horizontal");
 		y = Input.GetAxisRaw("Vertical");
+
 		jumping = Input.GetButton("Jump");
+
 		crouching = Input.GetKey(KeyCode.LeftControl);
+
+		sprinting = Input.GetKey(KeyCode.LeftShift);
+
 		if (Input.GetKeyDown(KeyCode.LeftControl))
 		{
 			StartCrouch();
@@ -278,7 +286,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		float num3 = walkSpeed;
-		if (sprinting)
+		if (!sprinting)
 		{
 			num3 = runSpeed;
 		}
