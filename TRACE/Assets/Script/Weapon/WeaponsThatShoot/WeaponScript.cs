@@ -17,9 +17,6 @@ public class WeaponScript : MonoBehaviour
 
     // public float fireRate = 0.1f; // Time between shots (e.g. 0.3s)
     // private float nextTimeToFire = 0f;
-
-
-
     public WeaponSwap ws;
     public GrapplingGun gg;
     public GunRecoil gr;
@@ -35,10 +32,12 @@ public class WeaponScript : MonoBehaviour
     public Animator animatorPistol;
     
     private Image AmmoIcon;
-
+    [Header("AudioSource")]
+    public AudioSource reloadSound;
+    public AudioSource shootSound;
     void Start()
     {
-        CurrentAmmo1 = 12;
+        CurrentAmmo1 = 7;
         animatorPistol = GetComponentInChildren<Animator>();
     }
     
@@ -57,12 +56,11 @@ public class WeaponScript : MonoBehaviour
             {
                 AmmoIcon.enabled = true;
             }
-            if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo1 != 12 && !isReloading)
+            if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo1 != 7 && !isReloading)
             {
                 StartCoroutine(Reload());
             }
             ammoText.text = CurrentAmmo1.ToString();
-            Debug.Log(CurrentAmmo1);
         }
 
         if (ws.currentWeaponIndex == 1)
@@ -101,6 +99,7 @@ public class WeaponScript : MonoBehaviour
         // Handle ammo reduction and muzzle flash for current weapon
         if (ws.currentWeaponIndex == 0)
         {
+            shootSound.Play();
             CurrentAmmo1 -= 1;
             if (muzzleFlashPistol != null) muzzleFlashPistol.Play();
             if (CurrentAmmo1 <= 0) StartCoroutine(Reload());
@@ -144,6 +143,8 @@ public class WeaponScript : MonoBehaviour
 
     trail.SetActive(true);
 
+    reloadSound.Play();
+
     AnimatorClipInfo[] clipInfo = animatorPistol.GetCurrentAnimatorClipInfo(0);
 
     float reloadTime = clipInfo.Length > 0 ? clipInfo[0].clip.length : 0.8f;
@@ -152,7 +153,7 @@ public class WeaponScript : MonoBehaviour
 
     if (ws.currentWeaponIndex == 0)
     {
-        CurrentAmmo1 = 12;
+        CurrentAmmo1 = 7;
     }
 
     isReloading = false;

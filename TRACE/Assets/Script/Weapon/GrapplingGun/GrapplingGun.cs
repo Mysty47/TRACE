@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI; // Required for UI components
+using EZCameraShake;
 
 public class GrapplingGun : MonoBehaviour {
     private Vector3 grapplePoint;
@@ -8,6 +9,7 @@ public class GrapplingGun : MonoBehaviour {
     private float maxDistance = 100f;
     private SpringJoint joint;
     public bool isGrappled = false;
+    public float AimAssistSize = 1f;
     public WeaponSwap ws;
 
     // Grapple Indicator
@@ -15,6 +17,9 @@ public class GrapplingGun : MonoBehaviour {
     public Image crosshair; // Canvas-based crosshair image
 
     private Vector3 currentGrapplePosition;
+
+    [Header("Audio Source")]
+    public AudioSource grapplingGunSound;
 
     void Awake() {
         if (grappleIndicator != null) grappleIndicator.SetActive(false); // Hide indicator initially
@@ -37,10 +42,12 @@ public class GrapplingGun : MonoBehaviour {
 
     void StartGrapple()
     {
-        isGrappled = true;
         RaycastHit hit;
-        if (Physics.Raycast(cameraPlayer.position, cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable))
+        if (Physics.SphereCast(cameraPlayer.position, AimAssistSize ,cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable))
         {
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+            grapplingGunSound.Play();
+            isGrappled = true;
             grapplePoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
@@ -77,7 +84,8 @@ public class GrapplingGun : MonoBehaviour {
     /// </summary>
     void UpdateCrosshairAndIndicator() {
         RaycastHit hit;
-        if (Physics.Raycast(cameraPlayer.position, cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable)) {
+        // Use SphereCast with AimAssistSize radius like in StartGrapple
+        if (Physics.SphereCast(cameraPlayer.position, AimAssistSize, cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable)) {
             if (crosshair != null) crosshair.enabled = false; // Hide crosshair
             if (grappleIndicator != null) {
                 grappleIndicator.SetActive(true);
@@ -88,4 +96,5 @@ public class GrapplingGun : MonoBehaviour {
             if (grappleIndicator != null) grappleIndicator.SetActive(false);
         }
     }
+
 }

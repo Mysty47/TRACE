@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
 	public float sensitivity = 50f;
 
 	public float moveSpeed = 450f;
-	public float walkSpeed = 5f;
-	public float runSpeed = 15f;
+	public float walkSpeed = 10f;
+	public float runSpeed = 10f;
 	public bool grounded;
 	public bool onWall;
 
@@ -59,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
 	private bool cancellingGrounded;
 	private bool cancellingWall;
 	private bool cancellingSurf;
+	private bool hasShakenFall = false;
+
 
 	//Private Vector3's
 	private Vector3 grapplePoint;
@@ -88,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Audio Settings")]
 	public AudioSource runningSound;
 	public AudioSource wallrunSound;
+	public AudioSource jumpSound;
 
 
 	private void Awake()
@@ -106,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
 		wallNormalVector = Vector3.up;
 		originalScale = transform.localScale;
 		crouchScale = new Vector3(originalScale.x, originalScale.y * 0.5f, originalScale.z);
+		wallrunSound.Stop();
 		
 		// Ensure the particle system is disabled at the start
 		if (fastMovementParticles != null)
@@ -166,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
 		else if(!wallRunning && wallrunSound.isPlaying) wallrunSound.Stop();
 	}
 
+
 	private void Update()
 	{
 		HandleRunningSound();
@@ -184,6 +190,19 @@ public class PlayerMovement : MonoBehaviour
 			{
 				fastMovementParticles.Stop();
 			}
+		}
+
+		if (!grounded && rb.linearVelocity.y < -15f)
+		{
+    		if (!hasShakenFall)
+    		{
+        		hasShakenFall = true;
+        		CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+    		}
+		}
+		else
+		{
+    		hasShakenFall = false; // Reset when grounded or falling slower
 		}
 
 		MyInput();
@@ -285,10 +304,10 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		float num3 = walkSpeed;
-		if (!sprinting)
-		{
-			num3 = runSpeed;
-		}
+		// if (sprinting)
+		// {
+		// 	num3 = runSpeed;
+		// }
 
 		if (crouching && grounded && readyToJump)
 		{
@@ -373,6 +392,11 @@ public class PlayerMovement : MonoBehaviour
 			if (wallRunning)
 			{
 				rb.AddForce(wallNormalVector * jumpForce * 3f);
+			}
+
+			if (!jumpSound.isPlaying)
+			{
+				jumpSound.Play();
 			}
 
 			Invoke("ResetJump", jumpCooldown);

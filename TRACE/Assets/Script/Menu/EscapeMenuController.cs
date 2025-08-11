@@ -12,6 +12,7 @@ public class EscapeMenuController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Time.timeScale = 1f;
     }
 
     void Update()
@@ -33,20 +34,20 @@ public class EscapeMenuController : MonoBehaviour
             Cursor.visible = true;
             Time.timeScale = 0f; // Pause the game
         }
-        else
+        else if(!isPaused)
         {
-            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f; // Resume the game
         }
     }
 
-    public void restartLevel(int currentLevel)
+    public void restartLevel()
     {
         isPaused = false;
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene(currentLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 }
