@@ -485,6 +485,8 @@
 "Assets/EZ Camera Shake/Scripts/Utilities/CameraUtilities.cs"
 "Assets/Script/CanBeDamaged/Target.cs"
 "Assets/Script/CanBeDamaged/Tries.cs"
+"Assets/Script/Enemy/EnemyAi.cs"
+"Assets/Script/Enemy/Projectile.cs"
 "Assets/Script/Level/LevelManager.cs"
 "Assets/Script/Level/LevelReload.cs"
 "Assets/Script/Menu/EscapeMenuController.cs"

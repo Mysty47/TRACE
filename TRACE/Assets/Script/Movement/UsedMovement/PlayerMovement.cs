@@ -60,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
 	private bool cancellingGrounded;
 	private bool cancellingWall;
 	private bool cancellingSurf;
-	private bool hasShakenFall = false;
 
 
 	//Private Vector3's
@@ -192,18 +191,7 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-		if (!grounded && rb.linearVelocity.y < -15f)
-		{
-    		if (!hasShakenFall)
-    		{
-        		hasShakenFall = true;
-        		CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
-    		}
-		}
-		else
-		{
-    		hasShakenFall = false; // Reset when grounded or falling slower
-		}
+		
 
 		MyInput();
 
@@ -592,62 +580,60 @@ public class PlayerMovement : MonoBehaviour
 	private void OnCollisionStay(Collision other)
 	{
 		int layer = other.gameObject.layer;
-		if ((int)whatIsGround != ((int)whatIsGround | (1 << layer)))
-		{
-			return;
-		}
 
 		for (int i = 0; i < other.contactCount; i++)
 		{
 			Vector3 normal = other.contacts[i].normal;
-			if (IsFloor(normal))
-			{
-				if (wallRunning)
-				{
-					wallRunning = false;
-				}
 
+			// Ground check: only if layer is Ground
+			if (((1 << layer) & whatIsGround.value) != 0 && IsFloor(normal))
+			{
 				grounded = true;
 				normalVector = normal;
 				cancellingGrounded = false;
-				CancelInvoke("StopGrounded");
+				CancelInvoke(nameof(StopGrounded));
+
+				if (wallRunning)
+					wallRunning = false;
 			}
 
-			if (IsWall(normal) && layer == LayerMask.NameToLayer("Ground"))
+			// Wallrun check: only if layer is WallRunnable AND not floor
+			if (((1 << layer) & whatIsWallrunnable.value) != 0 && IsWall(normal) && !IsFloor(normal))
 			{
+				grounded = false;
 				StartWallRun(normal);
 				onWall = true;
 				cancellingWall = false;
-				CancelInvoke("StopWall");
+				CancelInvoke(nameof(StopWall));
 			}
 
+			// Surf check
 			if (IsSurf(normal))
 			{
 				surfing = true;
 				cancellingSurf = false;
-				CancelInvoke("StopSurf");
+				CancelInvoke(nameof(StopSurf));
 			}
-
-			IsRoof(normal);
 		}
 
 		float num = 3f;
+
 		if (!cancellingGrounded)
 		{
 			cancellingGrounded = true;
-			Invoke("StopGrounded", Time.deltaTime * num);
+			Invoke(nameof(StopGrounded), Time.deltaTime * num);
 		}
 
 		if (!cancellingWall)
 		{
 			cancellingWall = true;
-			Invoke("StopWall", Time.deltaTime * num);
+			Invoke(nameof(StopWall), Time.deltaTime * num);
 		}
 
 		if (!cancellingSurf)
 		{
 			cancellingSurf = true;
-			Invoke("StopSurf", Time.fixedDeltaTime * num);
+			Invoke(nameof(StopSurf), Time.fixedDeltaTime * num);
 		}
 	}
 
