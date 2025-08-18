@@ -15,11 +15,11 @@ public class Target : MonoBehaviour
     private void Start()
     {
         // Get the Animator component from the GameObject
-        animator = GetComponent<Animator>();
-        if (animator == null)
-        {
-            Debug.LogError("Animator component is missing on this GameObject.");
-        }
+        // animator = GetComponent<Animator>();
+        // if (animator == null)
+        // {
+        //     Debug.LogError("Animator component is missing on this GameObject.");
+        // }
     }
 
     // private void Update()
@@ -44,14 +44,14 @@ public class Target : MonoBehaviour
 
     private void Die()
     {
-        if (animator != null)
-        {
-            animator.SetBool("isDead", true); // Trigger the death animation
-        }   
-        else
-        {
-            Debug.LogError("Animator component not assigned.");
-        }
+        // if (animator != null)
+        // {
+        //     animator.SetBool("isDead", true); // Trigger the death animation
+        // }   
+        // else
+        // {
+        //     Debug.LogError("Animator component not assigned.");
+        // }
 
         // Destroy the object after the animation plays
         Destroy(gameObject, 1f); // Adjust delay if needed

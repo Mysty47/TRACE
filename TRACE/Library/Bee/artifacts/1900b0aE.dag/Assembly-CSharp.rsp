@@ -483,6 +483,7 @@
 "Assets/EZ Camera Shake/Scripts/CameraShakePresets.cs"
 "Assets/EZ Camera Shake/Scripts/CameraShaker.cs"
 "Assets/EZ Camera Shake/Scripts/Utilities/CameraUtilities.cs"
+"Assets/QuickOutline/Scripts/Outline.cs"
 "Assets/Script/CanBeDamaged/Target.cs"
 "Assets/Script/CanBeDamaged/Tries.cs"
 "Assets/Script/Enemy/EnemyAi.cs"
