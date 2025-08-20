@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.AI;
 using UnityEngine.TestTools;
 
@@ -21,7 +22,6 @@ public class WeaponScript : MonoBehaviour
     public GrapplingGun gg;
     public GunRecoil gr;
     public PlayerMovement pm;
-    public GameObject impactEffect;
     
     public Camera fpsCam;
 
@@ -32,7 +32,16 @@ public class WeaponScript : MonoBehaviour
     public Animator animatorPistol;
     
     private Image AmmoIcon;
+    
+    [Header("Impact Effects")]
+    
+    public GameObject impactEffect;
+    public GameObject enemyImpactEffectRedTriangles;
+    public GameObject enemyImpactEffectWhiteTriangles;
+    public GameObject impactEffectLongerVersion;
+    
     [Header("AudioSource")]
+    
     public AudioSource reloadSound;
     public AudioSource shootSound;
     void Start()
@@ -112,19 +121,38 @@ public class WeaponScript : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
-                // Handle other targets
-                Target target = hit.transform.GetComponent<Target>();
-                if (target != null)
+                if (hit.transform.CompareTag("Enemy"))
                 {
-                    target.TakeDamageTarget(damageFromPlayerGun);
+                    if (enemyImpactEffectRedTriangles != null)
+                    {
+                        GameObject impact = Instantiate(enemyImpactEffectRedTriangles, hit.point, Quaternion.LookRotation(hit.normal));
+                        Destroy(impact, 2f);
+                    }
+                    
+                    if (enemyImpactEffectWhiteTriangles != null)
+                    {
+                        GameObject impact = Instantiate(enemyImpactEffectWhiteTriangles, hit.point, Quaternion.LookRotation(hit.normal));
+                        Destroy(impact, 2f);
+                    }
+                    
+                    Target target = hit.transform.GetComponent<Target>();
+                    if (target != null)
+                    {
+                        target.TakeDamageTarget(damageFromPlayerGun);
+                    }
                 }
-            }
 
-            // Spawn impact effect
-            if (impactEffect != null)
-            {
-                GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(impact, 2f);
+                if (impactEffect == null) return;
+                {
+                    GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(impact, 2f);
+                }
+                
+                if (impactEffectLongerVersion == null) return;
+                {
+                    GameObject impact = Instantiate(impactEffectLongerVersion, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(impact, 2f);
+                }
             }
         }
     }

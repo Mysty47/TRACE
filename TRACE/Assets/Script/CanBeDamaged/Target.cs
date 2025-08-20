@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class Target : MonoBehaviour
 {
     [SerializeField] float health = 100f;
-    private Animator animator; // Reference to the Animator
+    public Animator animator; // Reference to the Animator
     private bool isDead = false;
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI playerTriesText;
+    // public TextMeshProUGUI healthText;
+    // public TextMeshProUGUI playerTriesText;
+    public EnemyAi enemyScript;
+    public Outline outlineScript;
 
     private void Start()
     {
@@ -53,7 +55,10 @@ public class Target : MonoBehaviour
         //     Debug.LogError("Animator component not assigned.");
         // }
 
-        // Destroy the object after the animation plays
-        Destroy(gameObject, 1f); // Adjust delay if needed
+        animator.enabled = false;
+        enemyScript.enabled = false;
+        outlineScript.enabled = false;
+
+        Destroy(gameObject, 2f); // Adjust delay if needed
     }
 }

@@ -10,6 +10,8 @@ public class EnemyAi : MonoBehaviour
     
     public Animator animator;
 
+    public float downforce = 10f;
+    
     // Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -37,7 +39,7 @@ public class EnemyAi : MonoBehaviour
 
     private void Start()
     {
-
+        animator.SetBool("Walking", true);
     }
 
     private void Update()
@@ -104,18 +106,26 @@ public class EnemyAi : MonoBehaviour
 
     private void ShootAtPlayer()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-        Vector3 spawnPos = transform.position + direction * 1.5f + Vector3.up * 1f;
+        Vector3 spawnPos = transform.position + (player.position - transform.position).normalized * 1.5f + Vector3.up * 2.5f;
+        Vector3 direction = (player.position - spawnPos).normalized;
+
+        // Add bloom / random spread
+        float bloomAmount = 0.2f; // tweak this for more or less inaccuracy
+        direction.x += Random.Range(-bloomAmount, bloomAmount);
+        direction.y += Random.Range(-bloomAmount, bloomAmount);
+        direction.z += Random.Range(-bloomAmount, bloomAmount);
+        direction.Normalize(); // normalize again to keep speed consistent
 
         GameObject bulletInstance = Instantiate(projectile, spawnPos, Quaternion.identity);
         Rigidbody rb = bulletInstance.GetComponent<Rigidbody>();
 
         if (rb != null)
         {
-            rb.useGravity = projectileUsesGravity;
+            rb.useGravity = false;
             rb.linearVelocity = direction * projectileSpeed;
         }
     }
+
 
 
     private void ResetAttack()

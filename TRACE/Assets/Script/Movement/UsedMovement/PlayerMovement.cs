@@ -72,8 +72,6 @@ public class PlayerMovement : MonoBehaviour
 	//Private int
 	private int nw;
 
-	private int sprintController = 0;
-
 	bool isCrouched = false;
 	float crouchSpeed = 2f; // Adjust this for desired crouch-walking speed
 	float normalSpeed = 5f; // Regular walking speed
