@@ -1,44 +1,46 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
-    [SerializeField] float health = 100f;
+    float health = 100f;
     public Animator animator; // Reference to the Animator
     private bool isDead = false;
     // public TextMeshProUGUI healthText;
     // public TextMeshProUGUI playerTriesText;
     public EnemyAi enemyScript;
     public Outline outlineScript;
+    
+    [Header("Player")]
+    public GameObject player;
+    public Image healthBar;
+    
 
-    private void Start()
+    private void Update()
     {
-        // Get the Animator component from the GameObject
-        // animator = GetComponent<Animator>();
-        // if (animator == null)
-        // {
-        //     Debug.LogError("Animator component is missing on this GameObject.");
-        // }
     }
-
-    // private void Update()
-    // {
-    // }
 
     public void TakeDamageTarget(float amount)
     {
-        if (isDead) return; // Prevent taking damage after death
-
+        if (isDead) return;
+        
         health -= amount;
+        
+        if (gameObject.name == "Player")
+        {
+            healthBar.fillAmount = health / 100f;
+        }
+        
         Debug.Log($"Current Health: {health}");
         
 
         if (health <= 0f)
         {
             isDead = true;
+            if (gameObject.name == "Player")
+            {
+                // TODO: Retry menu pop-up
+            }
             Die();
         }
     }
@@ -46,19 +48,10 @@ public class Target : MonoBehaviour
 
     private void Die()
     {
-        // if (animator != null)
-        // {
-        //     animator.SetBool("isDead", true); // Trigger the death animation
-        // }   
-        // else
-        // {
-        //     Debug.LogError("Animator component not assigned.");
-        // }
-
         animator.enabled = false;
         enemyScript.enabled = false;
         outlineScript.enabled = false;
 
-        Destroy(gameObject, 2f); // Adjust delay if needed
+        Destroy(gameObject, 2f);
     }
 }

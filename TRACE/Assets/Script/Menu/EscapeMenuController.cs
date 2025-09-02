@@ -1,18 +1,14 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EscapeMenuController : MonoBehaviour
 {
-    public GameObject pauseMenu;
+    [SerializeField] private GameObject pauseMenu;
     public static bool isPaused = false;
-    public Target target;
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Time.timeScale = 1f;
+        ResumeGame(); // Ensure game starts unpaused
     }
 
     void Update()
@@ -30,24 +26,39 @@ public class EscapeMenuController : MonoBehaviour
 
         if (isPaused)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0f; // Pause the game
+            PauseGame();
         }
-        else if(!isPaused)
+        else
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Time.timeScale = 1f; // Resume the game
+            ResumeGame();
         }
     }
 
-    public void restartLevel()
+    private void PauseGame()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        // Time.timeScale = 0f;
+    }
+
+    private void ResumeGame()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        // Time.timeScale = 1f;
+    }
+
+    public void RestartLevel()
     {
         isPaused = false;
-        Time.timeScale = 1f;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+        // ResumeGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void BackToMainMenu()
+    {
+        isPaused = false;
+        ResumeGame();
+        SceneManager.LoadScene(0);
     }
 }

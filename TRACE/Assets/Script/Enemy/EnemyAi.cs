@@ -28,6 +28,9 @@ public class EnemyAi : MonoBehaviour
     public float sightRange = 15f;
     public float attackRange = 10f;
     public bool playerInSightRange, playerInAttackRange;
+    
+    // Enemies
+    public Target playerTargetScript;
 
     private void Awake()
     {
@@ -109,7 +112,7 @@ public class EnemyAi : MonoBehaviour
         Vector3 spawnPos = transform.position + (player.position - transform.position).normalized * 1.5f + Vector3.up * 2.5f;
         Vector3 direction = (player.position - spawnPos).normalized;
 
-        // Add bloom / random spread
+        // Add bloom
         float bloomAmount = 0.2f; // tweak this for more or less inaccuracy
         direction.x += Random.Range(-bloomAmount, bloomAmount);
         direction.y += Random.Range(-bloomAmount, bloomAmount);

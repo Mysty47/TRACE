@@ -153,3 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 5
   hitEffect: {fileID: 0}
+  target: {fileID: 0}
+  damagePanel: {fileID: 7773538456766248045, guid: bbda569fb04f21e45aef23f019cf6a34, type: 3}
+  flashAlpha: 0.3
+  fadeSpeed: 2
