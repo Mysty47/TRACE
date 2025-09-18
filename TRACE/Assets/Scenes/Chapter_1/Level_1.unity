@@ -592,10 +592,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a656f3b163e76541ad36af533c6b7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
   animator: {fileID: 0}
   enemyScript: {fileID: 0}
   outlineScript: {fileID: 0}
+  player: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &9221073
 MonoBehaviour:
   m_ObjectHideFlags: 0

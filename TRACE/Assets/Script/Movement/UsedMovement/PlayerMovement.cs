@@ -30,6 +30,10 @@ public class PlayerMovement : MonoBehaviour
 	public bool grounded;
 	public bool onWall;
 
+	[Header("DashingSettings")]
+	public float dashSpeed;
+	public bool dashing;
+
 	//Private Floats
 	public float wallRunGravity = 0.3f;
 	public float maxSlopeAngle = 35f;
@@ -243,6 +247,11 @@ public class PlayerMovement : MonoBehaviour
 
 		sprinting = Input.GetKey(KeyCode.LeftShift);
 
+		if (dashing)
+		{
+			
+		}
+		
 		if (Input.GetKeyDown(KeyCode.LeftControl))
 		{
 			StartCrouch();
@@ -361,7 +370,6 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if ((grounded || wallRunning || surfing) && readyToJump)
 		{
-			MonoBehaviour.print("jumping");
 			Vector3 velocity = rb.linearVelocity;
 			readyToJump = false;
 			rb.AddForce(Vector2.up * jumpForce * 1.5f);
