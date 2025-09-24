@@ -9,13 +9,18 @@ public class BetaPlayerMovement : MonoBehaviour
     private float moveSpeed;
     public float runSpeed;
     public float slideSpeed;
+    public float wallRunSpeed;
+    public float climbingSpeed;
+    public float dashSpeed;
+    public float dashSpeedChangeFactor;
+    
+    public float maxYSpeed;
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
 
     public float speedIncreaseMultiplier;
     public float slopeIncreaseMultiplier;
-    
     public float groundDrag;
 
     [Header("Jumping")]
@@ -44,6 +49,8 @@ public class BetaPlayerMovement : MonoBehaviour
     private RaycastHit slopeHit;
     private bool exitingSlope;
     
+    [Header("References")]
+    public Climbing climbingScript;
 
     public Transform orientation;
 
@@ -59,11 +66,17 @@ public class BetaPlayerMovement : MonoBehaviour
     {
         running,
         crouching,
+        wallrunning,
+        climbing,
+        dashing,
         sliding,
         air
     }
 
     public bool sliding;
+    public bool wallrunning;
+    public bool climbing;
+    public bool dashing;
 
     private void Start()
     {
@@ -85,7 +98,7 @@ public class BetaPlayerMovement : MonoBehaviour
         StateHandler();
 
         // handle drag
-        if (grounded)
+        if (state == MovementState.running ||  state == MovementState.crouching)
             rb.linearDamping = groundDrag;
         else
             rb.linearDamping = 0;
@@ -127,9 +140,28 @@ public class BetaPlayerMovement : MonoBehaviour
         }
     }
 
+    private MovementState lastState;
+    private bool keepMomentum;
+    
     private void StateHandler()
     {
-        if (sliding)
+        if (dashing)
+        {
+            state = MovementState.dashing;
+            desiredMoveSpeed = dashSpeed;
+            speedChangeFactor = dashSpeedChangeFactor;
+        }
+        else if (climbing)
+        {
+            state = MovementState.climbing;
+            desiredMoveSpeed = climbingSpeed;
+        }
+        else if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            desiredMoveSpeed = wallRunSpeed;
+        }
+        else if (sliding)
         {
             state = MovementState.sliding;
 
@@ -177,18 +209,39 @@ public class BetaPlayerMovement : MonoBehaviour
         {
             moveSpeed = desiredMoveSpeed;
         }
+        bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
+        if (lastState == MovementState.dashing) keepMomentum = true;
+
+        if (desiredMoveSpeedHasChanged)
+        {
+            StopAllCoroutines();
+            StartCoroutine(SmoothlyLerpMoveSpeed());
+        }
+        else
+        {
+            StopAllCoroutines();
+            moveSpeed = desiredMoveSpeed;
+        }
         lastDesiredMoveSpeed = desiredMoveSpeed;
+        lastState = state;
     }
 
+    private float speedChangeFactor;
+    
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
         float time = 0;
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
+        
+        float boostFactor = speedChangeFactor;
 
         while (time < difference)
         {
             moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+            
+            time += Time.deltaTime * boostFactor;
+            
             if (OnSlope())
             {
                 float slopeAngle = Vector3.Angle(Vector3.up, slopeHit.normal);
@@ -204,17 +257,20 @@ public class BetaPlayerMovement : MonoBehaviour
         }
         
         moveSpeed = desiredMoveSpeed;
+        speedChangeFactor = 1f;
+        keepMomentum = false;
     }
 
     private void MovePlayer()
     {
+        if (state == MovementState.dashing) return;
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         // on slope
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 20f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection(moveDirection) * (moveSpeed * 20f), ForceMode.Force);
 
             if (rb.linearVelocity.y > 0)
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
@@ -222,14 +278,14 @@ public class BetaPlayerMovement : MonoBehaviour
 
         // on ground
         else if(grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
 
         // in air
         else if(!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
 
         // turn gravity off while on slope
-        rb.useGravity = !OnSlope();
+        if(!wallrunning) rb.useGravity = !OnSlope();
     }
 
     private void SpeedControl()
@@ -252,6 +308,12 @@ public class BetaPlayerMovement : MonoBehaviour
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
                 rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
+        }
+        
+        // limit y vel
+        if (maxYSpeed != 0 && rb.linearVelocity.y > maxYSpeed)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, maxYSpeed, rb.linearVelocity.z); 
         }
     }
 

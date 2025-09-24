@@ -949,8 +949,7 @@ namespace InternalRealtimeCSG
 							renderSurfaceType != RenderSurfaceType.ShadowOnly &&
 							renderSurfaceType != RenderSurfaceType.Culled &&
 							renderSurfaceType != RenderSurfaceType.Trigger;
-			if (!walkable)	meshStaticFlags = meshStaticFlags & ~StaticEditorFlags.NavigationStatic;
-
+			if (!walkable) { }
 
             // This fixes a bug in 2018.3 where it tries to generate lightmaps for ShadowOnly surfaces ..
             // .. but then rage quits because it doesn't have any normals

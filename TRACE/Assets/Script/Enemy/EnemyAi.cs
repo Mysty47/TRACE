@@ -3,34 +3,34 @@ using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour
 {
+    [Header("References")]
+    public Target playerTargetScript;
     public NavMeshAgent agent;
     public Transform player;
-
     public LayerMask whatIsGround;
-    
     public Animator animator;
-
+    
+    [Header("Gravity")]
     public float downforce = 10f;
     
-    // Patroling
+    [Header("Patroling")]
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
 
-    // Attacking
+    [Header("Attacking")]
     public float timeBetweenAttacks = 1f;
     bool alreadyAttacked;
     public GameObject projectile;
     public float projectileSpeed = 32f; 
     public bool projectileUsesGravity = false;
 
-    // States
+    [Header("States")]
     public float sightRange = 15f;
     public float attackRange = 10f;
     public bool playerInSightRange, playerInAttackRange;
     
-    // Enemies
-    public Target playerTargetScript;
+    
 
     private void Awake()
     {

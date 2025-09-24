@@ -132,8 +132,10 @@
 -define:RealtimeCSG_1
 -define:RealtimeCSG_1_5
 -define:RealtimeCSG_1_5_62
+-define:DOTWEEN
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/Plugins/Demigiant/DOTween/DOTween.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Managed/UnityEngine/UnityEditor.BuildProfileModule.dll"
@@ -496,8 +498,11 @@
 "Assets/Script/Menu/Sound/SoundPlay.cs"
 "Assets/Script/Movement/BetaMovement/BetaPlayerMovement.cs"
 "Assets/Script/Movement/BetaMovement/CameraMove.cs"
+"Assets/Script/Movement/BetaMovement/Climbing.cs"
+"Assets/Script/Movement/BetaMovement/Dashing.cs"
 "Assets/Script/Movement/BetaMovement/PlayerCam.cs"
 "Assets/Script/Movement/BetaMovement/Sliding.cs"
+"Assets/Script/Movement/BetaMovement/WallRunning.cs"
 "Assets/Script/Movement/UsedMovement/HeadBobController.cs"
 "Assets/Script/Movement/UsedMovement/MoveCamera.cs"
 "Assets/Script/Movement/UsedMovement/PlayerMovement.cs"

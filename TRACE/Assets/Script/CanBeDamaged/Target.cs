@@ -14,11 +14,6 @@ public class Target : MonoBehaviour
     [Header("Player")]
     public GameObject player;
     public Image healthBar;
-    
-
-    private void Update()
-    {
-    }
 
     public void TakeDamageTarget(float amount)
     {

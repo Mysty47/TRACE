@@ -132,8 +132,10 @@
 -define:RealtimeCSG_1
 -define:RealtimeCSG_1_5
 -define:RealtimeCSG_1_5_62
+-define:DOTWEEN
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/Plugins/Demigiant/DOTween/DOTween.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Managed/UnityEngine/UnityEditor.BuildProfileModule.dll"
@@ -436,6 +438,14 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.28f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
+"Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs"
+"Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleEPOOutline.cs"
+"Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs"
+"Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs"
+"Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs"
+"Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs"
+"Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs"
+"Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs"
 "Assets/Plugins/RealtimeCSG/API/Components/Runtime/CSGBrush.cs"
 "Assets/Plugins/RealtimeCSG/API/Components/Runtime/CSGModel.cs"
 "Assets/Plugins/RealtimeCSG/API/Components/Runtime/CSGNode.cs"
