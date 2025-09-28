@@ -3,12 +3,12 @@ using UnityEngine.UI; // Required for UI components
 using EZCameraShake;
 
 public class GrapplingGun : MonoBehaviour {
-    private Vector3 grapplePoint;
+    private Vector3 swingPoint;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, cameraPlayer, player;
     private float maxDistance = 100f;
     private SpringJoint joint;
-    public bool isGrappled = false;
+    public bool swinging = false;
     public float AimAssistSize = 1f;
     public WeaponSwap ws;
 
@@ -18,8 +18,12 @@ public class GrapplingGun : MonoBehaviour {
 
     private Vector3 currentGrapplePosition;
 
+    [Header("Input")]
+    public KeyCode swingKey = KeyCode.Mouse1;
+    
+    
     [Header("Audio Source")]
-    public AudioSource grapplingGunSound;
+    public AudioSource swingGunSound;
 
     void Awake() {
         if (grappleIndicator != null) grappleIndicator.SetActive(false); // Hide indicator initially
@@ -29,31 +33,31 @@ public class GrapplingGun : MonoBehaviour {
         UpdateCrosshairAndIndicator();
         if (ws.currentWeaponIndex != 0)
         {
-         StopGrapple();
+         StopSwing();
          Destroy(joint);
         }
-        if (Input.GetMouseButtonDown(1)) {
-            StartGrapple();
+        if (Input.GetKeyDown(swingKey)) {
+            StartSwing();
         }
-        else if (Input.GetMouseButtonUp(1)) {
-            StopGrapple();
+        else if (Input.GetKeyUp(swingKey)) {
+            StopSwing();
         }
     }
 
-    void StartGrapple()
+    void StartSwing()
     {
         RaycastHit hit;
         if (Physics.SphereCast(cameraPlayer.position, AimAssistSize ,cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable))
         {
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
-            grapplingGunSound.Play();
-            isGrappled = true;
-            grapplePoint = hit.point;
+            swingGunSound.Play();
+            swinging = true;
+            swingPoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = grapplePoint;
+            joint.connectedAnchor = swingPoint;
 
-            float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
+            float distanceFromPoint = Vector3.Distance(player.position, swingPoint);
 
             //The distance grapple will try to keep from grapple point. 
             joint.maxDistance = distanceFromPoint * 0.8f;
@@ -66,8 +70,9 @@ public class GrapplingGun : MonoBehaviour {
         }
     }
 
-    void StopGrapple() {
-        isGrappled = false;
+    void StopSwing() {
+        swinging = false;
+        
         Destroy(joint);
     }
 
@@ -76,7 +81,7 @@ public class GrapplingGun : MonoBehaviour {
     }
 
     public Vector3 GetGrapplePoint() {
-        return grapplePoint;
+        return swingPoint;
     }
 
     /// <summary>

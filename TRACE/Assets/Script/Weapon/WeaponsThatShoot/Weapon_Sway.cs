@@ -10,7 +10,7 @@ public class Weapon_Sway : MonoBehaviour {
 
     private void Update()
     {
-        if (!grapple.isGrappled)
+        if (!grapple.swinging)
         {
            // get mouse input
             float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;

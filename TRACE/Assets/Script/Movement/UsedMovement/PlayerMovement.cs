@@ -7,13 +7,13 @@ using EZCameraShake;
 public class PlayerMovement : MonoBehaviour
 {
 	[Header("Assignables")]
-	//Assignables
 	public Transform playerCam;
 	public Transform orientation;
 	private Collider playerCollider;
 	public Rigidbody rb;
 
-	[Space(10)] public LayerMask whatIsGround;
+	[Header("Layers")] 
+	public LayerMask whatIsGround;
 	public LayerMask whatIsWallrunnable;
 	
 	[Header("Particle Effects")]
@@ -21,20 +21,14 @@ public class PlayerMovement : MonoBehaviour
 	public float velocityThreshold = 20f; // Speed threshold to trigger particles
 
 	[Header("MovementSettings")]
-	//Movement Settings 
 	public float sensitivity = 50f;
 
 	public float moveSpeed = 450f;
-	public float walkSpeed = 10f;
 	public float runSpeed = 10f;
-	public bool grounded;
 	public bool onWall;
+	public float maxYSpeed;
 
-	[Header("DashingSettings")]
-	public float dashSpeed;
-	public bool dashing;
-
-	//Private Floats
+	[Header("Private Floats")]
 	public float wallRunGravity = 0.3f;
 	public float maxSlopeAngle = 35f;
 	private float wallRunRotation;
@@ -50,30 +44,31 @@ public class PlayerMovement : MonoBehaviour
 	private float y;
 	private float vel;
 
-	//Private bools
-	private bool readyToJump;
-	private bool jumping;
-	private bool sprinting;
-	private bool crouching;
-	private bool wallRunning;
+	[Header("State Bools")]
+	public bool surfing;
+	public bool jumping;
+	public bool crouching;
+	public bool wallRunning;
+	public bool grounded;
+	public bool dashing;
+	
+	[Header("Private Bools")]
 	private bool cancelling;
 	private bool readyToWallrun = true;
 	private bool airborne;
-	private bool onGround;
-	private bool surfing;
+	private bool readyToJump;
 	private bool cancellingGrounded;
 	private bool cancellingWall;
 	private bool cancellingSurf;
 
-
-	//Private Vector3's
+	[Header("Private Vector3's")]
 	private Vector3 grapplePoint;
 	private Vector3 normalVector;
 	private Vector3 wallNormalVector;
 	private Vector3 wallRunPos;
 	private Vector3 previousLookdir;
 
-	//Private int
+	[Header("Private ints")]
 	private int nw;
 
 	bool isCrouched = false;
@@ -82,12 +77,25 @@ public class PlayerMovement : MonoBehaviour
 	Vector3 originalScale;
 	Vector3 crouchScale;
 
-	//Instance
+	[Header("References")]
 	public static PlayerMovement Instance { get; private set; }
-
 	public EscapeMenuController escapeMenuController;
-
 	public WeaponScript weaponscript;
+	public GrapplingGun gg;
+	
+	[Header("States")]
+	public MovementState state;
+	public enum MovementState
+	{
+		running,
+		crouching,
+		wallrunning,
+		climbing,
+		dashing,
+		swinging,
+		sliding,
+		air
+	}
 
 	[Header("Audio Settings")]
 	public AudioSource runningSound;
@@ -144,39 +152,11 @@ public class PlayerMovement : MonoBehaviour
 		audioSource.Stop();
 		audioSource.volume = 0.5f; // Reset volume
 	}
-
-
-
-	void HandleRunningSound()
-	{
-    	// Check if any movement key is pressed and player is grounded
-    	bool isMoving = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && grounded;
-
-    	if (isMoving && !runningSound.isPlaying)
-    	{
-        	runningSound.Play();
-    	}
-    	else if (!isMoving && runningSound.isPlaying)
-    	{
-        	runningSound.Stop();
-    	}
-	}
-
-
-	void HandleWallRunningSound()
-	{
-		if (wallRunning && !wallrunSound.isPlaying)
-		{
-			wallrunSound.Play();
-		}
-		else if(!wallRunning && wallrunSound.isPlaying) wallrunSound.Stop();
-	}
-
-
+	
 	private void Update()
 	{
-		HandleRunningSound();
-		HandleWallRunningSound();
+		StateHandler();
+		Debug.Log(state);
 
 		if (rb.linearVelocity.magnitude > velocityThreshold || !grounded)
 		{
@@ -192,9 +172,7 @@ public class PlayerMovement : MonoBehaviour
 				fastMovementParticles.Stop();
 			}
 		}
-
 		
-
 		MyInput();
 
 		Look();
@@ -235,6 +213,38 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
+	private void StateHandler()
+	{
+		if (gg != null && gg.swinging)
+		{
+			state = MovementState.swinging;
+		}
+		else if (dashing)
+		{
+			state = MovementState.dashing;
+		}
+		else if (wallRunning)
+		{
+			state = MovementState.wallrunning;
+		}
+		else if (surfing)
+		{
+			state = MovementState.sliding;
+		}
+		else if (crouching)
+		{
+			state = MovementState.crouching;
+		}
+		else if (!grounded)
+		{
+			state = MovementState.air;
+		}
+		else if (grounded)
+		{
+			state = MovementState.running;
+		}
+	}
+
 	//Player input
 	public void MyInput()
 	{
@@ -244,8 +254,6 @@ public class PlayerMovement : MonoBehaviour
 		jumping = Input.GetButton("Jump");
 
 		crouching = Input.GetKey(KeyCode.LeftControl);
-
-		sprinting = Input.GetKey(KeyCode.LeftShift);
 
 		if (dashing)
 		{
@@ -298,11 +306,7 @@ public class PlayerMovement : MonoBehaviour
 			Jump();
 		}
 
-		float num3 = walkSpeed;
-		// if (sprinting)
-		// {
-		// 	num3 = runSpeed;
-		// }
+		float num3 = runSpeed;
 
 		if (crouching && grounded && readyToJump)
 		{
@@ -446,10 +450,10 @@ public class PlayerMovement : MonoBehaviour
 			rb.AddForce(moveSpeed * orientation.transform.forward * Time.fixedDeltaTime * (0f - mag.y) * num);
 		}
 
-		if (Mathf.Sqrt(Mathf.Pow(rb.linearVelocity.x, 2f) + Mathf.Pow(rb.linearVelocity.z, 2f)) > walkSpeed)
+		if (Mathf.Sqrt(Mathf.Pow(rb.linearVelocity.x, 2f) + Mathf.Pow(rb.linearVelocity.z, 2f)) > runSpeed)
 		{
 			float num3 = rb.linearVelocity.y;
-			Vector3 vector = rb.linearVelocity.normalized * walkSpeed;
+			Vector3 vector = rb.linearVelocity.normalized * runSpeed;
 			rb.linearVelocity = new Vector3(vector.x, num3, vector.z);
 		}
 	}

@@ -20393,6 +20393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0caa4f5413be1b43aa36632e8cc0363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTargetScript: {fileID: 0}
   agent: {fileID: 394815728}
   player: {fileID: 394815732}
   whatIsGround:
@@ -20410,7 +20411,6 @@ MonoBehaviour:
   attackRange: 15
   playerInSightRange: 0
   playerInAttackRange: 0
-  playerTargetScript: {fileID: 0}
 --- !u!95 &394815731 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: dec7f3e41b41399459e7583baae0e1e2, type: 3}
@@ -21127,6 +21127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0caa4f5413be1b43aa36632e8cc0363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTargetScript: {fileID: 0}
   agent: {fileID: 413864006}
   player: {fileID: 1097619551}
   whatIsGround:
@@ -21144,7 +21145,6 @@ MonoBehaviour:
   attackRange: 15
   playerInSightRange: 0
   playerInAttackRange: 0
-  playerTargetScript: {fileID: 0}
 --- !u!1 &415864427
 GameObject:
   m_ObjectHideFlags: 0
@@ -22524,12 +22524,13 @@ MonoBehaviour:
   gunTip: {fileID: 2111141612}
   cameraPlayer: {fileID: 1520055795}
   player: {fileID: 1114383604}
-  isGrappled: 0
+  swinging: 0
   AimAssistSize: 1
   ws: {fileID: 1447329295}
   grappleIndicator: {fileID: 204704830}
   crosshair: {fileID: 1604905931}
-  grapplingGunSound: {fileID: 1052319445}
+  swingKey: 324
+  swingGunSound: {fileID: 0}
 --- !u!114 &461907328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66209,11 +66210,15 @@ MonoBehaviour:
   runSpeed: 10
   grounded: 0
   onWall: 0
+  dashSpeed: 0
+  dashing: 0
   wallRunGravity: 0.2
   maxSlopeAngle: 35
   slideSlowdown: 0.1
   escapeMenuController: {fileID: 1891790325}
   weaponscript: {fileID: 1447329296}
+  gg: {fileID: 461907327}
+  state: 0
   runningSound: {fileID: 1440258796}
   wallrunSound: {fileID: 708008490}
   jumpSound: {fileID: 1552586990}
@@ -67933,6 +67938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0caa4f5413be1b43aa36632e8cc0363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTargetScript: {fileID: 0}
   agent: {fileID: 1169036003}
   player: {fileID: 820904272}
   whatIsGround:
@@ -67950,7 +67956,6 @@ MonoBehaviour:
   attackRange: 15
   playerInSightRange: 0
   playerInAttackRange: 0
-  playerTargetScript: {fileID: 0}
 --- !u!43 &1170197819
 Mesh:
   m_ObjectHideFlags: 0
@@ -87748,6 +87753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0caa4f5413be1b43aa36632e8cc0363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTargetScript: {fileID: 0}
   agent: {fileID: 1351626064}
   player: {fileID: 1549731367}
   whatIsGround:
@@ -87765,7 +87771,6 @@ MonoBehaviour:
   attackRange: 15
   playerInSightRange: 0
   playerInAttackRange: 0
-  playerTargetScript: {fileID: 0}
 --- !u!1001 &1359032917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89685,7 +89690,6 @@ MonoBehaviour:
   ws: {fileID: 1447329295}
   gg: {fileID: 461907327}
   gr: {fileID: 461907328}
-  pm: {fileID: 1114383599}
   fpsCam: {fileID: 1101689595}
   muzzleFlashPistol: {fileID: 1258665933}
   ammoText: {fileID: 787157819}

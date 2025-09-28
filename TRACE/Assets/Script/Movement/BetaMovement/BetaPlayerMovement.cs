@@ -13,6 +13,7 @@ public class BetaPlayerMovement : MonoBehaviour
     public float climbingSpeed;
     public float dashSpeed;
     public float dashSpeedChangeFactor;
+    public float swingSpeed;
     
     public float maxYSpeed;
 
@@ -69,6 +70,7 @@ public class BetaPlayerMovement : MonoBehaviour
         wallrunning,
         climbing,
         dashing,
+        swinging,
         sliding,
         air
     }
@@ -77,6 +79,7 @@ public class BetaPlayerMovement : MonoBehaviour
     public bool wallrunning;
     public bool climbing;
     public bool dashing;
+    public bool swinging;
 
     private void Start()
     {
@@ -145,7 +148,12 @@ public class BetaPlayerMovement : MonoBehaviour
     
     private void StateHandler()
     {
-        if (dashing)
+        if (swinging)
+        {
+           state = MovementState.swinging;
+           desiredMoveSpeed = swingSpeed;
+        }
+        else if (dashing)
         {
             state = MovementState.dashing;
             desiredMoveSpeed = dashSpeed;
@@ -266,6 +274,7 @@ public class BetaPlayerMovement : MonoBehaviour
         if (state == MovementState.dashing) return;
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        // if (swinging) return;
 
         // on slope
         if (OnSlope() && !exitingSlope)

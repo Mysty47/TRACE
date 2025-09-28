@@ -21,7 +21,7 @@ public class WeaponScript : MonoBehaviour
     public WeaponSwap ws;
     public GrapplingGun gg;
     public GunRecoil gr;
-    public PlayerMovement pm;
+    private PlayerMovement pm;
     
     public Camera fpsCam;
 
@@ -88,12 +88,12 @@ public class WeaponScript : MonoBehaviour
         {
             // nextTimeToFire = Time.time + fireRate;
 
-            if (!isReloading && CurrentAmmo1 > 0 && ws.currentWeaponIndex != 2 && !gg.isGrappled)
+            if (!isReloading && CurrentAmmo1 > 0 && ws.currentWeaponIndex != 2 && !gg.swinging)
             {
                 Shoot();
                 if(gr != null) gr.Recoil();
             }
-            else if ((CurrentAmmo1 <= 0) && !isReloading && !gg.isGrappled)
+            else if ((CurrentAmmo1 <= 0) && !isReloading && !gg.swinging)
             {
                 StartCoroutine(Reload());
             }
@@ -103,7 +103,7 @@ public class WeaponScript : MonoBehaviour
 
     void Shoot()
     {
-    if (gg.isGrappled == false)
+    if (gg.swinging == false)
     {
         // Handle ammo reduction and muzzle flash for current weapon
         if (ws.currentWeaponIndex == 0)
