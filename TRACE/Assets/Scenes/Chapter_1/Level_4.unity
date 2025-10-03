@@ -22530,7 +22530,7 @@ MonoBehaviour:
   grappleIndicator: {fileID: 204704830}
   crosshair: {fileID: 1604905931}
   swingKey: 324
-  swingGunSound: {fileID: 0}
+  swingGunSound: {fileID: 1052319445}
 --- !u!114 &461907328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66196,6 +66196,9 @@ MonoBehaviour:
   playerCam: {fileID: 1520055795}
   orientation: {fileID: 1451865179}
   rb: {fileID: 1114383600}
+  escapeMenuController: {fileID: 1891790325}
+  weaponscript: {fileID: 1447329296}
+  gg: {fileID: 461907327}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -66206,18 +66209,18 @@ MonoBehaviour:
   velocityThreshold: 20
   sensitivity: 50
   moveSpeed: 6000
-  walkSpeed: 21
-  runSpeed: 10
-  grounded: 0
+  runSpeed: 15
   onWall: 0
-  dashSpeed: 0
-  dashing: 0
+  maxYSpeed: 0
   wallRunGravity: 0.2
   maxSlopeAngle: 35
   slideSlowdown: 0.1
-  escapeMenuController: {fileID: 1891790325}
-  weaponscript: {fileID: 1447329296}
-  gg: {fileID: 461907327}
+  surfing: 0
+  jumping: 0
+  crouching: 0
+  wallRunning: 0
+  grounded: 0
+  dashing: 0
   state: 0
   runningSound: {fileID: 1440258796}
   wallrunSound: {fileID: 708008490}

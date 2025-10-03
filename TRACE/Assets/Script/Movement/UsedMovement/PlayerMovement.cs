@@ -6,12 +6,16 @@ using EZCameraShake;
 
 public class PlayerMovement : MonoBehaviour
 {
-	[Header("Assignables")]
+	[Header("References")]
 	public Transform playerCam;
 	public Transform orientation;
 	private Collider playerCollider;
 	public Rigidbody rb;
-
+	public EscapeMenuController escapeMenuController;
+	public WeaponScript weaponscript;
+	public GrapplingGun gg;
+	public static PlayerMovement Instance { get; private set; }
+	
 	[Header("Layers")] 
 	public LayerMask whatIsGround;
 	public LayerMask whatIsWallrunnable;
@@ -51,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
 	public bool wallRunning;
 	public bool grounded;
 	public bool dashing;
+	public bool climbing;
 	
 	[Header("Private Bools")]
 	private bool cancelling;
@@ -76,17 +81,12 @@ public class PlayerMovement : MonoBehaviour
 	float normalSpeed = 5f; // Regular walking speed
 	Vector3 originalScale;
 	Vector3 crouchScale;
-
-	[Header("References")]
-	public static PlayerMovement Instance { get; private set; }
-	public EscapeMenuController escapeMenuController;
-	public WeaponScript weaponscript;
-	public GrapplingGun gg;
 	
 	[Header("States")]
 	public MovementState state;
 	public enum MovementState
 	{
+		idle,
 		running,
 		crouching,
 		wallrunning,
@@ -213,37 +213,66 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
+	private MovementState lastState;
+
 	private void StateHandler()
 	{
-		if (gg != null && gg.swinging)
-		{
-			state = MovementState.swinging;
-		}
+		MovementState newState;
+
+		if (climbing)
+			newState =  MovementState.climbing;
+		else if (gg != null && gg.swinging)
+			newState = MovementState.swinging;
 		else if (dashing)
-		{
-			state = MovementState.dashing;
-		}
+			newState = MovementState.dashing;
 		else if (wallRunning)
-		{
-			state = MovementState.wallrunning;
-		}
+			newState = MovementState.wallrunning;
 		else if (surfing)
-		{
-			state = MovementState.sliding;
-		}
+			newState = MovementState.sliding;
 		else if (crouching)
-		{
-			state = MovementState.crouching;
-		}
+			newState = MovementState.crouching;
 		else if (!grounded)
+			newState = MovementState.air;
+		else
 		{
-			state = MovementState.air;
+			float horizontalSpeed = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
+
+			if (horizontalSpeed > 0.5f)
+				newState = MovementState.running;
+			else
+				newState = MovementState.idle;
 		}
-		else if (grounded)
+
+		if (newState != lastState)
 		{
-			state = MovementState.running;
+			StopAllMovementSounds();
+
+			switch (newState)
+			{
+				case MovementState.running:
+					if (!runningSound.isPlaying) runningSound.Play();
+					break;
+				case MovementState.wallrunning:
+					if (!wallrunSound.isPlaying) wallrunSound.Play();
+					break;
+				case MovementState.idle:
+					break;
+				case MovementState.air:
+					break;
+			}
+			lastState = newState;
 		}
+
+		state = newState;
 	}
+
+
+	private void StopAllMovementSounds()
+	{
+		if (runningSound.isPlaying) runningSound.Stop();
+		if (wallrunSound.isPlaying) wallrunSound.Stop();
+	}
+
 
 	//Player input
 	public void MyInput()
@@ -406,7 +435,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	//Looking around by using your mouse
-	public void Look()
+	private void Look()
 	{
 		if (EscapeMenuController.isPaused == false)
 		{
@@ -415,7 +444,7 @@ public class PlayerMovement : MonoBehaviour
 			desiredX = playerCam.transform.localRotation.eulerAngles.y + num;
 			xRotation -= num2;
 			xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-			FindWallRunRotation();
+			if(!climbing) FindWallRunRotation();
 			actualWallRotation = Mathf.SmoothDamp(actualWallRotation, wallRunRotation, ref wallRotationVel, 0.2f);
 			playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, actualWallRotation);
 			orientation.transform.localRotation = Quaternion.Euler(0f, desiredX, 0f);
@@ -538,7 +567,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void WallRunning()
 	{
-		if (wallRunning)
+		if (wallRunning && !climbing)
 		{
 			rb.AddForce(-wallNormalVector * Time.deltaTime * moveSpeed);
 			rb.AddForce(Vector3.up * Time.deltaTime * rb.mass * 100f * wallRunGravity);

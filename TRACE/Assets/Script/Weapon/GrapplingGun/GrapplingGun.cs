@@ -47,28 +47,32 @@ public class GrapplingGun : MonoBehaviour {
     void StartSwing()
     {
         RaycastHit hit;
-        if (Physics.SphereCast(cameraPlayer.position, AimAssistSize ,cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable))
+        if (Physics.SphereCast(cameraPlayer.position, AimAssistSize, cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable))
         {
-            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
-            swingGunSound.Play();
-            swinging = true;
-            swingPoint = hit.point;
-            joint = player.gameObject.AddComponent<SpringJoint>();
-            joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = swingPoint;
+            // Prevention of grappling through walls
+            if (!Physics.Linecast(cameraPlayer.position, hit.point, LayerMask.GetMask( "Ground", "Climbable"))) 
+            {
+                CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+                swingGunSound.Play();
+                swinging = true;
+                swingPoint = hit.point;
+                joint = player.gameObject.AddComponent<SpringJoint>();
+                joint.autoConfigureConnectedAnchor = false;
+                joint.connectedAnchor = swingPoint;
 
-            float distanceFromPoint = Vector3.Distance(player.position, swingPoint);
+                float distanceFromPoint = Vector3.Distance(player.position, swingPoint);
 
-            //The distance grapple will try to keep from grapple point. 
-            joint.maxDistance = distanceFromPoint * 0.8f;
-            joint.minDistance = distanceFromPoint * 0.25f;
+                // The distance grapple will try to keep from grapple point
+                joint.maxDistance = distanceFromPoint * 0.8f;
+                joint.minDistance = distanceFromPoint * 0.25f;
 
-            //Adjust these values to fit your game.
-            joint.spring = 4.5f;
-            joint.damper = 7f;
-            joint.massScale = 4.5f;
+                joint.spring = 4.5f;
+                joint.damper = 7f;
+                joint.massScale = 4.5f;
+            }
         }
     }
+
 
     void StopSwing() {
         swinging = false;

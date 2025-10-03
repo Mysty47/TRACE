@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Script.Weapon.GrapplingForNewMovement;
 using UnityEngine;
 
 public class Dashing : MonoBehaviour
@@ -9,6 +10,7 @@ public class Dashing : MonoBehaviour
     public Transform playerCam;
     private Rigidbody rb;
     private PlayerMovement pm;
+    public Transform weapon;
 
     [Header("Dashing")]
     public float dashForce;
@@ -41,7 +43,7 @@ public class Dashing : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(dashKey))
+        if (Input.GetKeyDown(dashKey) && pm.state != PlayerMovement.MovementState.swinging)
             Dash();
 
         if (dashCdTimer > 0)
@@ -96,6 +98,9 @@ public class Dashing : MonoBehaviour
 
         if (disableGravity)
             rb.useGravity = true;
+        
+        weapon.localPosition = Vector3.zero;
+        weapon.localRotation = Quaternion.identity;
     }
 
     private Vector3 GetDirection(Transform forwardT)

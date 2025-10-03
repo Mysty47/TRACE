@@ -25836,6 +25836,9 @@ MonoBehaviour:
   playerCam: {fileID: 1734875085}
   orientation: {fileID: 97886452}
   rb: {fileID: 1133084684}
+  escapeMenuController: {fileID: 2129483950}
+  weaponscript: {fileID: 0}
+  gg: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -25846,15 +25849,19 @@ MonoBehaviour:
   velocityThreshold: 20
   sensitivity: 50
   moveSpeed: 6000
-  walkSpeed: 21
   runSpeed: 10
-  grounded: 0
   onWall: 0
+  maxYSpeed: 0
   wallRunGravity: 0.2
   maxSlopeAngle: 35
   slideSlowdown: 0.1
-  escapeMenuController: {fileID: 2129483950}
-  weaponscript: {fileID: 0}
+  surfing: 0
+  jumping: 0
+  crouching: 0
+  wallRunning: 0
+  grounded: 0
+  dashing: 0
+  state: 0
   runningSound: {fileID: 2085770158}
   wallrunSound: {fileID: 549094185}
   jumpSound: {fileID: 1122332594}
