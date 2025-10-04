@@ -12,9 +12,10 @@ public class GrapplingGun : MonoBehaviour {
     public float AimAssistSize = 1f;
     public WeaponSwap ws;
 
-    // Grapple Indicator
+    [Header("UI")]
     public GameObject grappleIndicator; // A small red sphere to represent the grapple point
     public Image crosshair; // Canvas-based crosshair image
+    public Image dashBar;
 
     private Vector3 currentGrapplePosition;
 
@@ -87,21 +88,22 @@ public class GrapplingGun : MonoBehaviour {
     public Vector3 GetGrapplePoint() {
         return swingPoint;
     }
-
-    /// <summary>
-    /// Updates the crosshair visibility and grapple indicator.
-    /// </summary>
+    
+    // Updates the crosshair visibility and grapple indicator
     void UpdateCrosshairAndIndicator() {
         RaycastHit hit;
         // Use SphereCast with AimAssistSize radius like in StartGrapple
         if (Physics.SphereCast(cameraPlayer.position, AimAssistSize, cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable)) {
             if (crosshair != null) crosshair.enabled = false; // Hide crosshair
+            if (dashBar != null) dashBar.enabled = false; // Hide dashBar
+            
             if (grappleIndicator != null) {
                 grappleIndicator.SetActive(true);
                 grappleIndicator.transform.position = hit.point; // Move indicator to hit point
             }
         } else {
             if (crosshair != null) crosshair.enabled = true; // Show crosshair
+            if (dashBar != null) dashBar.enabled = true;
             if (grappleIndicator != null) grappleIndicator.SetActive(false);
         }
     }

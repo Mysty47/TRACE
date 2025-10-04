@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Script.Weapon.GrapplingForNewMovement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Dashing : MonoBehaviour
@@ -10,8 +8,12 @@ public class Dashing : MonoBehaviour
     public Transform playerCam;
     private Rigidbody rb;
     private PlayerMovement pm;
-    public Transform weapon;
 
+    [Header("UI")] 
+    public Image dashBar;
+    public Color readyColor = Color.cyan;
+    public Color cooldownColor = Color.white;
+    
     [Header("Dashing")]
     public float dashForce;
     public float dashUpwardForce;
@@ -39,6 +41,12 @@ public class Dashing : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovement>();
+
+        if (dashBar != null)
+        {
+            dashBar.fillAmount = 1f;
+            dashBar.color = readyColor;
+        }
     }
 
     private void Update()
@@ -47,7 +55,32 @@ public class Dashing : MonoBehaviour
             Dash();
 
         if (dashCdTimer > 0)
+        {
             dashCdTimer -= Time.deltaTime;
+
+            if (dashBar != null)
+            {
+                float fill = 1f - (dashCdTimer / dashCd);
+                dashBar.fillAmount = Mathf.Clamp01(fill);
+                            
+                dashBar.color = cooldownColor;
+            }
+        }
+        else
+        {
+            if (dashBar != null)
+            {
+                dashBar.fillAmount = 1f;
+                
+                Color baseColor = readyColor;
+                
+                float pulse = (Mathf.Sin(Time.time * 5f) + 1f) / 2f;
+                Color emissionColor = baseColor * Mathf.Lerp(1f, 2.5f, pulse);
+                emissionColor.a = 1f;
+
+                dashBar.color = emissionColor;
+            }
+        }
     }
 
     private void Dash()
@@ -98,9 +131,6 @@ public class Dashing : MonoBehaviour
 
         if (disableGravity)
             rb.useGravity = true;
-        
-        weapon.localPosition = Vector3.zero;
-        weapon.localRotation = Quaternion.identity;
     }
 
     private Vector3 GetDirection(Transform forwardT)
