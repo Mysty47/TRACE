@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Door
   - Enemy
+  - InteractionnalButton
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - NPCWalkable
   - Ragdoll
   - Climbable
-  - 
+  - InteractionnalButton
   - 
   - 
   - 

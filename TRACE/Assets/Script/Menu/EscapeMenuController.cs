@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class EscapeMenuController : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] 
+    private GameObject pauseMenu;
     public static bool isPaused = false;
 
     void Start()

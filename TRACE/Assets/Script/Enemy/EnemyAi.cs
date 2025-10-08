@@ -30,6 +30,10 @@ public class EnemyAi : MonoBehaviour
     public float attackRange = 10f;
     public bool playerInSightRange, playerInAttackRange;
     
+    [Header("Audio Settings")]
+    public AudioSource walkSound;
+    public AudioSource shootSound;
+    
     
 
     private void Awake()
@@ -43,6 +47,7 @@ public class EnemyAi : MonoBehaviour
     private void Start()
     {
         animator.SetBool("Walking", true);
+        walkSound.loop = true;
     }
 
     private void Update()
@@ -62,6 +67,9 @@ public class EnemyAi : MonoBehaviour
     private void Patrolling()
     {
         animator.SetBool("Walking", true);
+        
+        if(!walkSound.isPlaying && walkSound != null) walkSound.Play();
+        
         if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet)
@@ -86,6 +94,8 @@ public class EnemyAi : MonoBehaviour
     private void ChasePlayer()
     {
         animator.SetBool("Walking", true);
+        if(!walkSound.isPlaying && walkSound != null) walkSound.Play();
+        if(walkPointSet)
         agent.SetDestination(player.position);
     }
 
@@ -109,6 +119,7 @@ public class EnemyAi : MonoBehaviour
 
     private void ShootAtPlayer()
     {
+        if(walkSound.isPlaying && walkSound != null) walkSound.Stop();
         Vector3 spawnPos = transform.position + (player.position - transform.position).normalized * 1.5f + Vector3.up * 2.5f;
         Vector3 direction = (player.position - spawnPos).normalized;
 
@@ -122,6 +133,11 @@ public class EnemyAi : MonoBehaviour
         GameObject bulletInstance = Instantiate(projectile, spawnPos, Quaternion.identity);
         Rigidbody rb = bulletInstance.GetComponent<Rigidbody>();
 
+        if (shootSound != null)
+        {
+            shootSound.Play();
+        }
+        
         if (rb != null)
         {
             rb.useGravity = false;

@@ -46,6 +46,7 @@ public class Dashing : MonoBehaviour
         {
             dashBar.fillAmount = 1f;
             dashBar.color = readyColor;
+            dashBar.enabled = false;
         }
     }
 

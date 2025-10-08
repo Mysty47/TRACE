@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b9b7c2ce-26f6-4082-88e8-ec1f4fbf82d4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TRACE/Assets/Script/Menu/Button/Button3D.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TRACE/Assets/Script/Menu/Button/Button3D.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Fonts/Sans/BebasNeue-Regular SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Fonts/Sans/BebasNeue-Regular SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Materials/Decorations/Emmisive_Blue.mat" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Materials/Decorations/Emmisive_Blue.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Materials/New Material 3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Materials/New Material 3.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Materials/Red.mat" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Materials/Red.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Materials/WhiteGlow.mat" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Materials/WhiteGlow.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Prefabs/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Prefabs/Bullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/QuickOutline/Scripts/Outline.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/QuickOutline/Scripts/Outline.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/LightingData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/LightingData.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/LightingData.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/Lightmap-0_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/Lightmap-0_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/Lightmap-0_comp_dir.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/Lightmap-0_comp_dir.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/Lightmap-0_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/Lightmap-0_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/Lightmap-0_comp_light.exr.meta" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/Lightmap-0_comp_light.exr.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/ReflectionProbe-0.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/ReflectionProbe-0.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/ReflectionProbe-0.exr.meta" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1_Profiles/PP Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_1_Profiles/PP Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/LightingData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-0_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-0_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-0_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-0_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-10_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-10_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-10_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-10_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-11_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-11_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-11_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-11_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-12_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-12_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-12_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-12_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-13_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-13_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-13_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-13_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-14_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-14_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-14_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-14_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-1_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-1_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-1_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-1_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-2_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-2_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-2_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-2_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-3_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-3_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-3_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-3_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-4_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-4_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-4_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-4_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-5_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-5_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-5_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-5_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-6_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-6_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-6_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-6_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-7_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-7_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-7_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-7_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-8_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-8_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-8_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-8_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-9_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-9_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-9_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/Lightmap-9_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/ReflectionProbe-0.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_2/ReflectionProbe-0.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/LightingData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-0_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-0_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-0_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-0_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-10_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-10_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-10_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-10_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-11_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-11_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-11_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-11_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-12_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-12_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-12_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-12_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-13_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-13_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-13_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-13_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-14_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-14_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-14_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-14_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-15_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-15_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-15_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-15_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-16_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-16_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-16_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-16_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-17_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-17_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-17_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-17_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-18_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-18_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-18_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-18_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-19_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-19_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-19_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-19_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-1_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-1_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-1_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-1_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-20_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-20_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-20_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-20_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-21_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-21_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-21_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-21_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-22_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-22_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-22_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-22_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-23_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-23_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-23_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-23_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-24_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-24_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-24_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-24_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-25_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-25_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-25_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-25_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-26_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-26_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-26_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-26_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-27_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-27_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-27_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-27_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-28_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-28_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-28_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-28_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-29_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-29_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-29_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-29_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-2_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-2_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-2_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-2_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-30_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-30_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-30_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-30_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-31_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-31_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-31_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-31_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-32_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-32_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-32_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-32_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-33_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-33_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-33_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-33_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-3_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-3_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-3_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-3_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-4_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-4_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-4_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-4_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-5_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-5_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-5_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-5_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-6_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-6_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-6_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-6_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-7_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-7_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-7_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-7_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-8_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-8_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-8_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-8_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-9_comp_dir.png" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-9_comp_dir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-9_comp_light.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/Lightmap-9_comp_light.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/ReflectionProbe-0.exr" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Chapter_1/Level_4/ReflectionProbe-0.exr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Map5.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Menus/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Menus/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Scenes/Test_Maps/WeaponsBeta.unity" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Scenes/Test_Maps/WeaponsBeta.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Script/CanBeDamaged/Target.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Script/CanBeDamaged/Target.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Script/Enemy/EnemyAi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Script/Enemy/EnemyAi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Script/Menu/EscapeMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Script/Menu/EscapeMenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Script/Menu/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Script/Menu/MenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Script/Movement/UsedMovement/Dashing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Script/Movement/UsedMovement/Dashing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Assets/Script/Objects/Lava.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Assets/Script/Objects/Lava.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/ArtifactDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/01/01a2530782f8b8afe22dab9686547934" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/09/09f8988b64e82cd5e23dd05877492bcb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/09/09f8ecc86d0e2ad08921055b89a5ce1b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/0b/0bbbbfa065c5d8697569a97946260b91" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/10/10af95eaee03c7fbeb40209d550e67aa" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/11/11dfc8e55a4c68af0871a55c38e12ca3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/17/17c41ccefb885fd9ee0a1b5574e3d04a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/18/180b258c2eac98683c09659b4bef2a14" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/18/188dc4ad52a54d769344d3977f5faa1c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/1a/1a72ede0d039dec0bfd492366241e7bc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/1c/1cfa4212aaebffef90f74e275ec4a4c4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/1d/1d71837580ba9a807b47eda56621827f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/21/21990db467e116d4d621495ff76b974f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/21/21ffc401b0bb8a11bcb458261baf7612" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/24/248330c36c1bdf67079cc18cf6105b9d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/26/26a2fb8fbf7b10e4d316602ad68c19e6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/28/286cd3e48071b19b0a56a7b95193613e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/29/29c79f62284dd6fbc46f6fb6424b49e4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/29/29e1e8891be2e81db2162a827e5a761d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/2a/2aae09712bc089cea11d003efa41a190" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/2e/2ec98f0ad26f41ccd0e4fa58636b8ca4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/31/311e27c4e6d1b465d35836d7e9c41e2d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/34/341792607d629e6b9e87aadc0238baf6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/35/35264ef0fe1b5c4401d6a24ac976d673" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/35/35e85a7f60027b8b7bf899b5fc6e7cfc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/36/3626020b7850745e0e885954a44bfa8a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/37/37a8d5f516678101400ea20d67287b4b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/38/38b9693db26036850e3238dede235757" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/39/3980877a02cc62f3f959d62a72789c7e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/3a/3abd59167866536120f5e61311d73465" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/43/4329b0f292ee7bc08631a2b08924daf4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/44/44fbcd45903eb85297e350dd1f360248" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/45/452ca08eb9c08bc8cf1ff49a8c9bb9c8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/47/4706e5622dfe50b50acef5bb714e0c1a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/48/483d8a6b2e9fca1b9ac6bcf7be2560bb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/48/48eeec2579bcceb3ffd95296808398dc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/4a/4a756e209bc7b952d89dc59ced4b937c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/4c/4c12ea0b1854fb3838221ff005438c21" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/4d/4d564cc35237335f5529f3af4412ae02" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/53/53ae244a96973c286f2867ac8486e723" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/54/5421b14e7b1a5541fbf173a4a7f76796" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/55/55ac5206bb11577c5131608d79f0e05c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/55/55e3a12b14d9fabb504712e9ff8d99da" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/5c/5c007499fd42945c950652b92abe757d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/5d/5d855f7b7189c9d53dc692994cdc5081" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/5f/5ffcbf752fc5c085a82c5ce9679dc837" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/61/61c818dc4fddc8642fa2cc7d5362b185" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/63/63e58695208e4f68a54e540a4bd55e27" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/64/64fab58c62ef9384c4cda9cda4ce4c4e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/70/70282f376573fc216051dabb03bc315d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/70/70a6b991fb0dbd7a580875201a0fde63" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/72/728f674dfc7e8a866cad8eb9b491eb8d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/76/76d51b0658f7054995e6ba4ef8a59fb9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/79/796172f06b487e9cb8f46b881adb2882" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/7d/7d3116aac1aca51105f61f8e45092d98" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/7d/7dc6cf6d145e54cb99872c1480baa455" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/84/8467fbc5660bc0dd4f1200af0e95dfe1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/85/8551db8ff235e107a8331e03079dd080" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/87/87bb319cdabebacc7d921a23cd1d7b06" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/89/89f653444f3196c4da8f99ac4ec20e45" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/94/942f4124dc64793a781e3f6fd0b8c56d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/97/9727db007c12c1b1808085484b649c9b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/9b/9b0aab93e2152656d5cac8b24e469000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/a0/a05ad0131ce956d498abfdd4a15df1aa" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/a1/a1ce548bb798d21a217cb93dd8dda266" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/a3/a3242e1efd5c6d74cb73b59a631e2157" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/a5/a52a075c50cd47acba577e322b6b3749" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/a9/a909dca1ebae8b041dbe274408cd6f2c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/ab/abf83f4847bf0ead2b4e32c978d7e74e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/ac/ac83939b412b6857b9eeb32f6e5010b9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/ae/ae2675b87ff7e1d2fb4b6112b1049109" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/af/af44dd8d1226cc16449849374478d916" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/af/af8a2f85ecfaaf8ba0c0ef62c4cb6264" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/b4/b41dd19df0922fcebfe2111a3052803f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/b6/b67b5dec8ae1fbd12d2f2a4829e6075b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/b7/b7ad6e233de303d61b2170dce3949505" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/b8/b817078eff01c3a14ec3f8ceb556d0e5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/bb/bbdb1a4fa0d46d48a9789bf7d675e976" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/c2/c2d4efb4b48f9c592d02db12f54a9052" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/c4/c45b042d65701cd539e3b12dddffa8bc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/c6/c6d92d6ec72ba3d400cecdf4a4610c26" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/c6/c6f7e280326055ad87f4a36aa7ac7a4e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/c7/c7da09707a2c71f484d4a74a0182b5dc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/c7/c7dd82f74cff3daee4333b95b1fd5a8a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/ca/caf1d8679827e0582d3e200d2ad12880" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/ca/caf8485dcfa430ff120db07625332b12" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/cb/cb1a71b82c95ffa63b83fec7d800d577" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/cb/cb8d08075fd756578c7026feab3f538d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/cf/cf7b8f4e19c121ab2c7c74459aa54d38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/d0/d0060d374ba7ded9d92bd0ac11d2c306" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/db/db53d1b5a20021451e196793889dc89b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/dc/dc26c9ff342e3d1a0bc198ac3426592f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/dd/dd19e788dfcdc98b9990a545766eef59" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/de/defa4da7fca40f4f7bce7c6219c05f70" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/df/df06c1c4e3c99b8b9a968b5de2dc3170" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/df/df8c6855c48d63afc27141d33e3781d8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/e0/e05f6b864a3a82431b5123a7ddae4f94" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/e2/e2b250a37207a2fbf82ca625d8a272f2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/e6/e6dbc5153c19138be9915e9736e0e023" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/e9/e9749dc0e310e98ea02384df776007bb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/ed/edf7bbbee8a08cff03cac5f7d079d558" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/ee/eeb40107a0b87efd72674f53774aa29d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/f4/f44353f8d6b42b245fae185915f6dba0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/f4/f487bce4cbfa5ba9453688fe5128e093" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/f5/f5f4a59ca2b171ff4d821364197da52f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/f6/f65655c1189335fbe671f4eb27077c52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/f6/f6eba4c4c9fc671e7a5c3187982f61ab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/f7/f7cc426e479aeec13fb05a656f1dda48" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/f9/f9fcb5b31a40dd9ab544fc9fc4f09e89" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Artifacts/fd/fd4a0155311154df36e3b7c9234040cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE-inputdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE-inputdata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE.dag" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE.dag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE.dag.json" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE.dag.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE.dag.payloads" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE.dag.payloads" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE.dag_derived" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/1900b0aE.dag_derived" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/TundraBuildState.state" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/TundraBuildState.state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/TundraBuildState.state.map" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/TundraBuildState.state.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.ref.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.ref.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/backend1.traceevents" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/backend1.traceevents" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/backend2.traceevents" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/backend2.traceevents" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/buildprogram0.traceevents" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/buildprogram0.traceevents" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/fullprofile.json" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/fullprofile.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/tundra.digestcache" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/tundra.digestcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Bee/tundra.log.json" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Bee/tundra.log.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/BurstCache/JIT/Hashes/a110ffe6b760e4b56cb86ae44bc7857d.bhc" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/BurstCache/JIT/Hashes/a110ffe6b760e4b56cb86ae44bc7857d.bhc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/InspectorExpandedItems.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/PreviousActionData.bin" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/PreviousActionData.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/PreviousActionStack.bin" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/PreviousActionStack.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/SceneVisibilityState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/SceneVisibilityState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ScriptMapper" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/ScriptMapper" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/Search/transactions.db" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/Search/transactions.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache.db" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/ShaderCache.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/EditorEncounteredVariants" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/ShaderCache/EditorEncounteredVariants" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/CoreBlit9344/01/1d60d2b7f76666233697238dc40a95ba.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/CoreBlit9344/01/47b12d2a6bef136eb881cf2019f24dd8.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/CoreBlit9344/01/51a94d3496b0365f38ff575822ddf633.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/CoreBlit9344/01/d1a881cccae095d3e7d25b059790ae7a.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/FinalPostc49e/01/06680a33977502ee3d7c8f34a66ae12c.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/FinalPostc49e/01/3ea746618984515ea4b62d1d17fb7ae5.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/005257aa8c154c50d702b72b6b37241b.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/05283482e76cafd11fd17727d5a56825.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/0e5cee254fcebfc02b6b119159693be7.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/0e858a33795fcfbfd87db9921ac08946.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/0f6c8d880bdeb172d0a8d39d9238b181.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/13149a91734b20640ca693051ea7f5d0.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/278e723d25bc829c0a8445686375fd0b.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/2efac406d5e769c0235d02ea8540ff70.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/352e19b11e6e0330699f6421ebff7863.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/3f57cc530d3c91110e48b64012ec30d9.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/6670ebd56591c08970a32085024d1782.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/70dfed29506ff60f8019ee2f6d8a8c84.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/82b8f225b0ff2c3eaeaaf5c2de9c492e.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/968108c9e6c89ca731e3d8443171f856.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/9e381ca2491c0276590e559aaca6b15c.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/aa6cce7f701c7a7188de620eeca8a61e.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/ae3e7d3fd811280931f1ae506380cbdf.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/b56d66274434a48f551d29f1ab6b9030.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/b729c9232c304681a16fcf8994e8920e.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/b963c722267d112950d2ca8127543883.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/bc8b2f1971886525d5496c9653532864.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/c066c36c9ca522c50a553fe8b6aa3a5f.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/c8e222a1b54a89930a9580262360e997.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/01/fdc6ffaa4ffd4ebb25fd49855c03f873.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/02/42a5a0aca7d3eeb81338fec63877e218.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/02/a160cb8962cebce46c1dbb55387a0ac0.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/Lit9335/02/f0c1956d2eafad4f261a25c1ddb89f09.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/2111d47f4024435bcc396b5a938e5c8b.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/31941130c6fb404fedba521183fe5284.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/57a28b04f97e47efd1c93f099b66a7ab.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/6df590faf5b00aa478307928a62a3d88.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/78a4e2a0ce5718b03a214a5cb256066e.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/9514b255d2932198d2f2fba9aa35e66b.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/b67065ad29309e5961487754e47a4e46.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/e4513221faf89376c8833f04113c4598.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/e79aa5f9b0ab785eb6efb56e860a1a2e.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shader/ParticlesUnlit0406/01/ef8ad9d814284983f2e20fa655e8a33b.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ShaderCache/shadergraph/Standard Vertex Color8547/01/004e3c60b97122230b0375ffb2067a26.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/StateCache/SceneView/8c/8cd7c613bf844de3b80696e27a479d5e.json" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/StateCache/SceneView/8c/8cd7c613bf844de3b80696e27a479d5e.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/StateCache/SceneView/f0/f0b2d4dcd1596cb62baf8ff2d534d26b.json" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/StateCache/SceneView/f0/f0b2d4dcd1596cb62baf8ff2d534d26b.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/UIElements/EditorWindows/UnityEditor.Build.Profile.BuildProfileWindow.pref" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/UIElements/EditorWindows/UnityEditor.Build.Profile.BuildProfileWindow.pref" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/UndoData.bin" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/UndoData.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/UndoStack.bin" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/UndoStack.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/com.unity.ide.rider/PersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/com.unity.ide.rider/PersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Library/ilpp.pid" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Library/ilpp.pid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Logs/AssetImportWorker0-prev.log" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Logs/AssetImportWorker0-prev.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Logs/AssetImportWorker0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Logs/AssetImportWorker1-prev.log" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Logs/AssetImportWorker1-prev.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/Logs/AssetImportWorker1.log" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/Logs/AssetImportWorker1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRACE/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/TRACE/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="33nt1mF4VoxVLxR52r4x7Tthr9A" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9b7c2ce-26f6-4082-88e8-ec1f4fbf82d4" name="Changes" comment="" />
+      <created>1759964451831</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759964451831</updated>
+      <workItem from="1759964452981" duration="24000" />
+    </task>
+    <servers />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

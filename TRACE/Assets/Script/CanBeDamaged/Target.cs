@@ -3,13 +3,15 @@ using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
-    float health = 100f;
-    public Animator animator; // Reference to the Animator
-    private bool isDead = false;
-    // public TextMeshProUGUI healthText;
-    // public TextMeshProUGUI playerTriesText;
+    [Header("References")]
+    public Animator animator;
     public EnemyAi enemyScript;
     public Outline outlineScript;
+    public GameObject retryCanvas;
+    
+    [Header("Settings")]
+    float health = 100f;
+    private bool isDead = false;
     
     [Header("Player")]
     public GameObject player;
@@ -34,7 +36,10 @@ public class Target : MonoBehaviour
             isDead = true;
             if (gameObject.name == "Player")
             {
-                // TODO: Retry menu pop-up
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                Time.timeScale = 0f;
+                retryCanvas.SetActive(true);
             }
             Die();
         }
@@ -46,6 +51,8 @@ public class Target : MonoBehaviour
         animator.enabled = false;
         enemyScript.enabled = false;
         outlineScript.enabled = false;
+        enemyScript.shootSound.Stop();
+        enemyScript.walkSound.Stop();
 
         Destroy(gameObject, 2f);
     }

@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour
     public string _newGameLevel;
     private string levelToLoad;
 
-    public void NewGameDialogYes()
+    public void StartLevel()
     {
         EscapeMenuController.isPaused = false;
         Time.timeScale = 1f;
@@ -24,7 +24,7 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(SelectLevelName);
     }
 
-    public void ExitButton()
+    public void Exit()
     {
         Application.Quit();
     }
