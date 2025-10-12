@@ -28,10 +28,16 @@ public class WeaponScript : MonoBehaviour
     public ParticleSystem muzzleFlashPistol;
     
     public TextMeshProUGUI ammoText;
+
+    [Header("Muzzle Flash Light")]
+    public Light muzzleFlashLight;
+
+    [Header("Images")]
+    public Image ReloadCrosshair;
+    public Image NormalCrosshair;
+    private Image AmmoIcon;
     
     public Animator animatorPistol;
-    
-    private Image AmmoIcon;
     
     [Header("Impact Effects")]
     
@@ -44,10 +50,13 @@ public class WeaponScript : MonoBehaviour
     
     public AudioSource reloadSound;
     public AudioSource shootSound;
+    public AudioSource reloadFinishSound;
     void Start()
     {
         CurrentAmmo1 = 7;
         animatorPistol = GetComponentInChildren<Animator>();
+        if (muzzleFlashLight != null)
+            muzzleFlashLight.enabled = false;
     }
     
     void Update()
@@ -59,7 +68,7 @@ public class WeaponScript : MonoBehaviour
         }
         else trail.SetActive(false);
 
-        if (ws.currentWeaponIndex == 0)
+        if (ws.currentWeaponIndex == 0 && !EscapeMenuController.isPaused)
         {
             if (AmmoIcon != null && AmmoIcon.enabled == false)
             {
@@ -88,7 +97,7 @@ public class WeaponScript : MonoBehaviour
         {
             // nextTimeToFire = Time.time + fireRate;
 
-            if (!isReloading && CurrentAmmo1 > 0 && ws.currentWeaponIndex != 2 && !gg.swinging)
+            if (!isReloading && CurrentAmmo1 > 0 && ws.currentWeaponIndex != 2 && !gg.swinging && !EscapeMenuController.isPaused)
             {
                 Shoot();
                 if(gr != null) gr.Recoil();
@@ -103,8 +112,12 @@ public class WeaponScript : MonoBehaviour
 
     void Shoot()
     {
-    if (gg.swinging == false)
+    if (!gg.swinging)
     {
+        if (muzzleFlashLight != null)
+        {
+            StartCoroutine(MuzzleFlashLightEffect());
+        }
         // Handle ammo reduction and muzzle flash for current weapon
         if (ws.currentWeaponIndex == 0)
         {
@@ -112,10 +125,6 @@ public class WeaponScript : MonoBehaviour
             CurrentAmmo1 -= 1;
             if (muzzleFlashPistol != null) muzzleFlashPistol.Play();
             if (CurrentAmmo1 <= 0) StartCoroutine(Reload());
-        }
-        else if (ws.currentWeaponIndex == 1)
-        {
-
         }
 
         RaycastHit hit;
@@ -160,38 +169,57 @@ public class WeaponScript : MonoBehaviour
 
 
     private IEnumerator Reload()
-{
-    if (isReloading) yield break;
-
-    isReloading = true;
-
-    yield return null;
-
-    animatorPistol.SetTrigger("ReloadAnimation");
-
-    trail.SetActive(true);
-
-    reloadSound.Play();
-
-    AnimatorClipInfo[] clipInfo = animatorPistol.GetCurrentAnimatorClipInfo(0);
-
-    float reloadTime = clipInfo.Length > 0 ? clipInfo[0].clip.length : 0.8f;
-
-    yield return new WaitForSeconds(reloadTime);
-
-    if (ws.currentWeaponIndex == 0)
     {
+        if (isReloading) yield break;
+
+        isReloading = true;
+
+        // 🔹 Скриваме нормалния crosshair, показваме кръглия
+        NormalCrosshair.gameObject.SetActive(false);
+        ReloadCrosshair.fillAmount = 0f;
+        ReloadCrosshair.gameObject.SetActive(true);
+
+        animatorPistol.SetTrigger("ReloadAnimation");
+        trail.SetActive(true);
+
+        float reloadTime = 0.8f;
+        float elapsed = 0f;
+
+        reloadSound.Play();
+
+        while (elapsed < reloadTime)
+        {
+            elapsed += Time.deltaTime;
+            ReloadCrosshair.fillAmount = Mathf.Clamp01(elapsed / reloadTime);
+
+            if (elapsed >= reloadTime - 0.3f && !reloadFinishSound.isPlaying)
+            {
+                reloadFinishSound.Play();
+            }
+
+            yield return null;
+        }
+
+        ReloadCrosshair.fillAmount = 1f;
+        yield return new WaitForSeconds(0.1f);
+
+        ReloadCrosshair.gameObject.SetActive(false);
+        NormalCrosshair.gameObject.SetActive(true);
+
         CurrentAmmo1 = 7;
+        isReloading = false;
     }
-
-    isReloading = false;
-}
-
-
-
 
     private void ChangeTrigger(bool change)
     {
         animatorPistol.SetBool("ReloadAnimation", change);
     }
+    
+    private IEnumerator MuzzleFlashLightEffect()
+    {
+        muzzleFlashLight.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        muzzleFlashLight.enabled = false;
+    }
+
 }

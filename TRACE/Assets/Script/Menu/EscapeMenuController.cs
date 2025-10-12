@@ -1,11 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using System.Collections;
 
 public class EscapeMenuController : MonoBehaviour
 {
     [SerializeField] 
     private GameObject pauseMenu;
     public static bool isPaused = false;
+    private EventSystem myEventSystem;
+    public Target playerTarget;
+
+    void Awake()
+    {
+        myEventSystem = EventSystem.current;
+    }
 
     void Start()
     {
@@ -14,7 +23,7 @@ public class EscapeMenuController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerTarget.isDead)
         {
             TogglePause();
         }
@@ -28,10 +37,24 @@ public class EscapeMenuController : MonoBehaviour
         if (isPaused)
         {
             PauseGame();
+            StartCoroutine(DeselectAfterFrame());
         }
         else
         {
             ResumeGame();
+            StartCoroutine(DeselectAfterFrame());
+        }
+    }
+
+    /* Deselects every object in EventSystem at the end of the frame
+     so Unity doesn't have time to select them again
+     */
+    private IEnumerator DeselectAfterFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        if (myEventSystem != null)
+        {
+            myEventSystem.SetSelectedGameObject(null);
         }
     }
 
@@ -39,27 +62,28 @@ public class EscapeMenuController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        // Time.timeScale = 0f;
+        Time.timeScale = 0f;
     }
 
     private void ResumeGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        // Time.timeScale = 1f;
+        Time.timeScale = 1f;
     }
 
     public void RestartLevel()
     {
         isPaused = false;
-        // ResumeGame();
+        ResumeGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void BackToMainMenu()
     {
-        isPaused = false;
-        ResumeGame();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 }

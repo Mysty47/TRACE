@@ -11,7 +11,7 @@ public class Target : MonoBehaviour
     
     [Header("Settings")]
     float health = 100f;
-    private bool isDead = false;
+    public bool isDead = false;
     
     [Header("Player")]
     public GameObject player;

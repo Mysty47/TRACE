@@ -21,7 +21,7 @@ public class GrapplingBow : MonoBehaviour
     [Header("Input")]
     public KeyCode grappleKey = KeyCode.Mouse0;
     
-    private bool grappling;
+    private bool  grappling;
     
     
     void Start()

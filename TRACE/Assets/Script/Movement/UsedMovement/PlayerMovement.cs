@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 	public float velocityThreshold = 20f; // Speed threshold to trigger particles
 
 	[Header("MovementSettings")]
-	public float sensitivity = 50f;
+	public static float sensitivity = 50f;
 
 	public float moveSpeed = 450f;
 	public float runSpeed = 10f;
