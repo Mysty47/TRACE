@@ -76,3 +76,6 @@ crashlytics-build.properties
 # Ignore Unity lighting data
 LightingData.asset
 */LightingData.asset
+
+[Ll]ibrary/
+*.resS
