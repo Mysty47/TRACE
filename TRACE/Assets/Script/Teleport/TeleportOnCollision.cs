@@ -1,3 +1,4 @@
+using Script.Texts;
 using UnityEngine;
 
 public class TeleportOnCollision : MonoBehaviour

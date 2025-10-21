@@ -1,3 +1,4 @@
+using Script.Texts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

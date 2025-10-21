@@ -8,6 +8,7 @@ using UnityEngine.TestTools;
 
 public class WeaponScript : MonoBehaviour
 {
+    public bool areYouAimedAtRobot = false;
     public float damageFromPlayerGun = 30f;
     public float range = 100f;
     public int maxAmmo;
@@ -166,8 +167,6 @@ public class WeaponScript : MonoBehaviour
         }
     }
 
-
-
     private IEnumerator Reload()
     {
         if (isReloading) yield break;
@@ -209,7 +208,6 @@ public class WeaponScript : MonoBehaviour
         CurrentAmmo1 = 7;
         isReloading = false;
     }
-
     private void ChangeTrigger(bool change)
     {
         animatorPistol.SetBool("ReloadAnimation", change);

@@ -22,6 +22,20 @@ public class SettingsMenu : MonoBehaviour
     void Start()
     {
         // --- AUDIO ---
+        if (backGroundMusic == null)
+        {
+            GameObject musicObj = GameObject.Find("BackgroundMusic");
+            if (musicObj != null)
+            {
+                backGroundMusic = musicObj.GetComponent<AudioSource>();
+                DontDestroyOnLoad(musicObj);
+            }
+            else
+            {
+                Debug.LogWarning("⚠️ Не е намерен обект с име 'BackgroundMusic'!");
+            }
+        }
+
         float savedVolume = PlayerPrefs.GetFloat(volumeKey, 0.75f);
         backGroundMusicSlider.value = savedVolume;
         SetVolume(savedVolume);
@@ -48,9 +62,16 @@ public class SettingsMenu : MonoBehaviour
     public void SetVolume(float volume)
     {
         if (backGroundMusic != null)
+        {
             backGroundMusic.volume = volume;
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ BackgroundMusic е NULL – звукът няма да се промени!");
+        }
 
         PlayerPrefs.SetFloat(volumeKey, volume);
+        PlayerPrefs.Save();
     }
 
     // --- GRAPHICS ---

@@ -17,6 +17,20 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(_newGameLevel);
     }
 
+    public void StartGame()
+    {
+        EscapeMenuController.isPaused = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+    }
+
+    public void StartEndless()
+    {
+        EscapeMenuController.isPaused = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(5);
+    }
+
     public void SelectLevel(string SelectLevelName)
     {
         EscapeMenuController.isPaused = false;

@@ -4,7 +4,9 @@ public class Button3D : MonoBehaviour
 {
     public enum ButtonAction
     {
+        RevealGameModes,
         Start,
+        Endless,
         SelectLevel,
         Settings,
         Quit
@@ -13,6 +15,9 @@ public class Button3D : MonoBehaviour
     public ButtonAction action;
     public MenuController menuController;
     public MoveCameraForLevels moveCamera;
+    public GameObject PlayText;
+    public GameObject StartText;
+    public GameObject EndlessText;
 
     public void OnClick()
     {
@@ -24,8 +29,16 @@ public class Button3D : MonoBehaviour
 
         switch (action)
         {
+            case ButtonAction.RevealGameModes:
+                PlayText.SetActive(false);
+                StartText.SetActive(true);
+                EndlessText.SetActive(true);
+                break;
             case ButtonAction.Start:
                 menuController.StartLevel();
+                break;
+            case ButtonAction.Endless:
+                menuController.StartEndless();
                 break;
             case ButtonAction.SelectLevel:
                 moveCamera.MoveCameraForLevelSection();

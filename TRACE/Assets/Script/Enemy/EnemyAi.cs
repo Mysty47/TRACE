@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor;
+
 
 public class EnemyAi : MonoBehaviour
 {
@@ -8,53 +10,70 @@ public class EnemyAi : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround;
-    public Animator animator;
-    
-    [Header("Gravity")]
-    public float downforce = 10f;
-    
-    [Header("Patroling")]
+    public WeaponScript ws;
+    public Outline outline;
+    public Camera fpsCam;
+
+    [Header("Shooting")]
+    public Transform gunTip; // 👈 ново — позицията, от която ще се spawn-ва куршумът
+    public GameObject projectile;
+    public float projectileSpeed = 32f;
+    public bool projectileUsesGravity = false;
+    public float timeBetweenAttacks = 1f;
+
+    [Header("Patrolling")]
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
-
-    [Header("Attacking")]
-    public float timeBetweenAttacks = 1f;
-    bool alreadyAttacked;
-    public GameObject projectile;
-    public float projectileSpeed = 32f; 
-    public bool projectileUsesGravity = false;
 
     [Header("States")]
     public float sightRange = 15f;
     public float attackRange = 10f;
     public bool playerInSightRange, playerInAttackRange;
-    
+
     [Header("Audio Settings")]
     public AudioSource walkSound;
     public AudioSource shootSound;
-    
-    
+
+    private bool alreadyAttacked;
+    [SerializeField] private bool isPlayerAimedAtYou;
 
     private void Awake()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        outline =  GetComponent<Outline>();
+        outline.enabled = false;
     }
 
     private void Start()
     {
-        animator.SetBool("Walking", true);
-        walkSound.loop = true;
+        if (walkSound != null) walkSound.loop = true;
     }
 
     private void Update()
     {
+        RaycastHit hit;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 100f))
+        {
+            if (hit.transform.gameObject == gameObject)
+                isPlayerAimedAtYou = true;
+            else
+                isPlayerAimedAtYou = false;
+        }
+        else
+        {
+            isPlayerAimedAtYou = false;
+        }
+
+        if (isPlayerAimedAtYou)
+            outline.enabled = true;
+        else 
+            outline.enabled = false;
+        
         if (!player) return;
 
-        // Detect player by distance only (tag-based)
         float distance = Vector3.Distance(transform.position, player.position);
         playerInSightRange = distance <= sightRange;
         playerInAttackRange = distance <= attackRange;
@@ -66,14 +85,11 @@ public class EnemyAi : MonoBehaviour
 
     private void Patrolling()
     {
-        animator.SetBool("Walking", true);
-        
-        if(!walkSound.isPlaying && walkSound != null) walkSound.Play();
-        
+        if (walkSound != null && !walkSound.isPlaying) walkSound.Play();
+
         if (!walkPointSet) SearchWalkPoint();
 
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
+        if (walkPointSet) agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         if (distanceToWalkPoint.magnitude < 1f)
@@ -93,9 +109,7 @@ public class EnemyAi : MonoBehaviour
 
     private void ChasePlayer()
     {
-        animator.SetBool("Walking", true);
-        if(!walkSound.isPlaying && walkSound != null) walkSound.Play();
-        if(walkPointSet)
+        if (walkSound != null && !walkSound.isPlaying) walkSound.Play();
         agent.SetDestination(player.position);
     }
 
@@ -107,10 +121,9 @@ public class EnemyAi : MonoBehaviour
         Vector3 lookDir = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(lookDir.x, 0, lookDir.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-        
+
         if (!alreadyAttacked)
         {
-            animator.SetBool("Walking", false);
             ShootAtPlayer();
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -119,33 +132,46 @@ public class EnemyAi : MonoBehaviour
 
     private void ShootAtPlayer()
     {
-        if(walkSound.isPlaying && walkSound != null) walkSound.Stop();
-        Vector3 spawnPos = transform.position + (player.position - transform.position).normalized * 1.5f + Vector3.up * 2.5f;
+        if (walkSound != null && walkSound.isPlaying) walkSound.Stop();
+
+        if (shootSound != null) shootSound.Play();
+
+        // Ако имаме зададен shootPoint → използваме него
+        Vector3 spawnPos;
+        Quaternion spawnRot;
+
+        if (gunTip != null)
+        {
+            spawnPos = gunTip.position;
+            spawnRot = gunTip.rotation;
+        }
+        else
+        {
+            // fallback — ако не е зададен shootPoint
+            spawnPos = transform.position + Vector3.up * 2f;
+            spawnRot = transform.rotation;
+        }
+
+        // Изчисляваме посоката към играча
         Vector3 direction = (player.position - spawnPos).normalized;
 
-        // Add bloom
-        float bloomAmount = 0.2f; // tweak this for more or less inaccuracy
-        direction.x += Random.Range(-bloomAmount, bloomAmount);
-        direction.y += Random.Range(-bloomAmount, bloomAmount);
-        direction.z += Random.Range(-bloomAmount, bloomAmount);
-        direction.Normalize(); // normalize again to keep speed consistent
+        // Добавяме малък bloom за неточност
+        float bloom = 0.2f;
+        direction.x += Random.Range(-bloom, bloom);
+        direction.y += Random.Range(-bloom, bloom);
+        direction.z += Random.Range(-bloom, bloom);
+        direction.Normalize();
 
-        GameObject bulletInstance = Instantiate(projectile, spawnPos, Quaternion.identity);
+        // Създаваме куршума
+        GameObject bulletInstance = Instantiate(projectile, spawnPos, Quaternion.LookRotation(direction));
         Rigidbody rb = bulletInstance.GetComponent<Rigidbody>();
 
-        if (shootSound != null)
-        {
-            shootSound.Play();
-        }
-        
         if (rb != null)
         {
-            rb.useGravity = false;
+            rb.useGravity = projectileUsesGravity;
             rb.linearVelocity = direction * projectileSpeed;
         }
     }
-
-
 
     private void ResetAttack()
     {

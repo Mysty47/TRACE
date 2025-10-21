@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class FallingDoors : MonoBehaviour
@@ -25,8 +23,8 @@ public class FallingDoors : MonoBehaviour
         {
             rsc.hasStarted = true;
         }
-        if (!rsc.robotSound.isPlaying && rsc.hasStarted) rsc.called = true;
-        if (rsc.called)
+        if (!rsc.robotSound.isPlaying && rsc.hasStarted) rsc.finished = true;
+        if (rsc.finished)
         {
             if (openningDoorSound != null && !soundPlayed)
             {

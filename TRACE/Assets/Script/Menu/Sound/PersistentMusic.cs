@@ -1,7 +1,19 @@
-namespace Script.Menu.Sound
+using UnityEngine;
+
+public class PersistentMusic : MonoBehaviour
 {
-    public class PersistentMusic
+    private static PersistentMusic instance;
+
+    void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

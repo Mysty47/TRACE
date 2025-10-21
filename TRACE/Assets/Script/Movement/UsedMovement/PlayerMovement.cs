@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
+using UnityEditor;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,8 +14,7 @@ public class PlayerMovement : MonoBehaviour
 	private Collider playerCollider;
 	public Rigidbody rb;
 	public EscapeMenuController escapeMenuController;
-	public WeaponScript weaponscript;
-	public GrapplingGun gg;
+	[NonSerialized] public GrapplingGun gg;
 	public static PlayerMovement Instance { get; private set; }
 	
 	[Header("Layers")] 
@@ -613,8 +614,60 @@ public class PlayerMovement : MonoBehaviour
 			}
 
 			wallRunning = true;
+			
+			TryVaultOverWall(normal);
 		}
 	}
+	
+	private void TryVaultOverWall(Vector3 normal)
+	{
+		// посоката, в която се движи играчът
+		Vector3 dir = rb.linearVelocity.normalized;
+
+		// максималната височина, на която може да се качи
+		Vector3 maxVaultPos = transform.position + Vector3.up * 1.5f;
+
+		// проверка дали има място нагоре (да не е покрит с таван)
+		if (Physics.Raycast(maxVaultPos, dir, out RaycastHit forwardHit, 2f, whatIsGround))
+		{
+			// има нещо отпред, не може да vault-не
+			return;
+		}
+
+		// правим raycast надолу от позицията над стената, за да намерим земята
+		if (Physics.Raycast(maxVaultPos + dir * 1.5f, Vector3.down, out RaycastHit downHit, 3f, whatIsGround))
+		{
+			// позицията, където да се качи
+			Vector3 landPos = downHit.point + Vector3.up * 0.5f;
+
+			// преместваме играча към горната точка плавно
+			StartCoroutine(VaultToPosition(landPos));
+		}
+	}
+
+	private IEnumerator VaultToPosition(Vector3 targetPos)
+	{
+		float duration = 0.15f;
+		Vector3 startPos = transform.position;
+		float elapsed = 0f;
+
+		Vector3 storedVelocity = rb.linearVelocity;
+
+		// временно изключваме гравитацията, за да не падне
+		rb.useGravity = false;
+
+		while (elapsed < duration)
+		{
+			transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
+			elapsed += Time.deltaTime;
+			yield return null;
+		}
+
+		transform.position = targetPos;
+		rb.useGravity = true;
+		rb.linearVelocity = storedVelocity;
+	}
+
 
 	private void OnCollisionStay(Collision other)
 	{

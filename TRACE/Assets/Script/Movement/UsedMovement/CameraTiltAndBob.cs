@@ -1,76 +1,53 @@
 using UnityEngine;
+using UnityEditor;
+
 
 public class CameraTiltAndBob : MonoBehaviour
 {
     [Header("References")]
-    public Rigidbody playerRb; // Player Rigidbody
-    public PlayerMovement playerMovement; // твоят PlayerMovement
+    public Rigidbody playerRb;      // Влачиш Rigidbody-то на Player
+    public bool isGrounded = true;  // Може да идва от твоя ground check
 
     [Header("Tilt Settings")]
-    public float tiltAmount = 10f; // колко се накланя камерата
-    public float tiltSpeed = 8f;   // колко бързо се накланя
+    public float tiltAmount = 4f;
+    public float tiltSpeed = 6f;
+    private float currentTilt = 0f;
 
     [Header("Headbob Settings")]
-    public float bobFrequency = 6f;    // честота на боба
-    public float bobAmplitude = 0.05f; // колко силен да е
-    public float bobSmoothing = 8f;    // изглаждане
-
-    private Vector3 initialLocalPos;
-    private float bobTimer;
-    private float currentTilt;
+    public float bobSpeed = 6f;
+    public float bobAmount = 0.05f;
+    private float bobTimer = 0f;
+    private Vector3 startLocalPos;
 
     void Start()
     {
-        // запомняме началната позиция на камерата спрямо holder-а
-        initialLocalPos = transform.localPosition;
+        startLocalPos = transform.localPosition;
     }
 
     void Update()
     {
-        HandleTilt();
-        HandleHeadbob();
-    }
-
-    void HandleTilt()
-    {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        // target tilt (въртим само около Z оста)
-        float targetTilt = -horizontalInput * tiltAmount;
-
-        // плавно стигаме до target
+        // --- 1️⃣ TILT ---
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float targetTilt = -horizontal * tiltAmount;
         currentTilt = Mathf.Lerp(currentTilt, targetTilt, Time.deltaTime * tiltSpeed);
 
-        // прилагаме само въртене по Z, без да пипаме останалите ротации
-        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, currentTilt);
-    }
-
-    void HandleHeadbob()
-    {
-        // ако не сме на земята — няма headbob
-        if (!playerMovement.grounded)
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, initialLocalPos, Time.deltaTime * bobSmoothing);
-            return;
-        }
-
+        // --- 2️⃣ HEADBOB ---
         Vector3 velocity = playerRb.linearVelocity;
-        Vector3 flatVel = new Vector3(velocity.x, 0, velocity.z);
+        Vector3 newLocalPos = startLocalPos;
 
-        if (flatVel.magnitude > 0.1f)
+        if (isGrounded && velocity.magnitude > 0.1f)
         {
-            // движение => bob effect
-            bobTimer += Time.deltaTime * bobFrequency;
-            float bobOffset = Mathf.Sin(bobTimer) * bobAmplitude;
-
-            Vector3 targetPos = initialLocalPos + new Vector3(0f, bobOffset, 0f);
-            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, Time.deltaTime * bobSmoothing);
+            bobTimer += Time.deltaTime * bobSpeed;
+            newLocalPos.y = startLocalPos.y + Mathf.Sin(bobTimer) * bobAmount;
         }
         else
         {
-            // стоим на място => плавно се връща
-            bobTimer = 0;
-            transform.localPosition = Vector3.Lerp(transform.localPosition, initialLocalPos, Time.deltaTime * bobSmoothing);
+            bobTimer = 0f;
         }
+
+        transform.localPosition = newLocalPos;
+
+        // --- 3️⃣ APPLY TILT ---
+        transform.localRotation = Quaternion.Euler(0f, 0f, currentTilt);
     }
 }

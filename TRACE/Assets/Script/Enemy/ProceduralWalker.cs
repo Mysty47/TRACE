@@ -1,74 +1,77 @@
 using UnityEngine;
-using System.Collections;
 
 public class ProceduralWalker : MonoBehaviour
 {
     [Header("References")]
     public Transform body;
-    public Transform leftFootTarget;
-    public Transform rightFootTarget;
+    public ProceduralWalker otherLeg;
 
     [Header("Step Settings")]
-    public float stepDistance = 0.5f;
+    public float footSpacing = 0.5f;
+    public float stepDistance = 0.4f;
     public float stepHeight = 0.2f;
     public float stepSpeed = 4f;
-    public float moveSpeed = 1.5f;
+    public LayerMask terrainLayer;
 
-    private bool leftMoving = false;
-    private bool rightMoving = false;
+    private Vector3 oldPosition, newPosition, currentPosition;
+    private Vector3 previousBodyPosition;
+    private bool isMoving = false;
+    private float lerp = 1f;
+
+    void Start()
+    {
+        oldPosition = newPosition = currentPosition = transform.position;
+        previousBodyPosition = body.position;
+    }
 
     void Update()
     {
-        // Движи тялото напред
-        body.position += body.forward * moveSpeed * Time.deltaTime;
+        transform.position = currentPosition;
 
-        // Проверка кога да се направи стъпка
-        if (!leftMoving && Vector3.Distance(leftFootTarget.position, body.position - body.right * 0.2f) > stepDistance)
+        // Скорост на движение на тялото
+        Vector3 bodyVelocity = (body.position - previousBodyPosition) / Time.deltaTime;
+        previousBodyPosition = body.position;
+
+        // Направление и позиция на стъпката
+        float forwardOffset = Mathf.Clamp(bodyVelocity.magnitude * 0.3f, 0.25f, 0.6f);
+        Vector3 rayOrigin = body.position + (body.right * footSpacing) + (body.forward * forwardOffset);
+
+        // Raycast към земята
+        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit info, 10f, terrainLayer))
         {
-            StartCoroutine(StepLeftFoot(body.position - body.right * 0.2f));
+            // Стъпваме само ако другият крак не се движи
+            if (!isMoving && (!otherLeg || !otherLeg.isMoving))
+            {
+                float distance = Vector3.Distance(newPosition, info.point);
+                if (distance > stepDistance)
+                {
+                    newPosition = info.point;
+                    lerp = 0f;
+                    isMoving = true;
+                }
+            }
         }
 
-        if (!rightMoving && Vector3.Distance(rightFootTarget.position, body.position + body.right * 0.2f) > stepDistance)
+        // Движение на крака
+        if (isMoving)
         {
-            StartCoroutine(StepRightFoot(body.position + body.right * 0.2f));
+            lerp += Time.deltaTime * stepSpeed;
+
+            Vector3 footPosition = Vector3.Lerp(oldPosition, newPosition, lerp);
+            footPosition.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
+            currentPosition = footPosition;
+
+            if (lerp >= 1f)
+            {
+                isMoving = false;
+                oldPosition = newPosition;
+            }
         }
     }
 
-    IEnumerator StepLeftFoot(Vector3 newHome)
+    private void OnDrawGizmos()
     {
-        leftMoving = true;
-        Vector3 startPos = leftFootTarget.position;
-        float t = 0f;
-
-        while (t < 1f)
-        {
-            t += Time.deltaTime * stepSpeed;
-            Vector3 pos = Vector3.Lerp(startPos, newHome, t);
-            pos.y += Mathf.Sin(t * Mathf.PI) * stepHeight;
-            leftFootTarget.position = pos;
-            yield return null;
-        }
-
-        leftFootTarget.position = newHome;
-        leftMoving = false;
-    }
-
-    IEnumerator StepRightFoot(Vector3 newHome)
-    {
-        rightMoving = true;
-        Vector3 startPos = rightFootTarget.position;
-        float t = 0f;
-
-        while (t < 1f)
-        {
-            t += Time.deltaTime * stepSpeed;
-            Vector3 pos = Vector3.Lerp(startPos, newHome, t);
-            pos.y += Mathf.Sin(t * Mathf.PI) * stepHeight;
-            rightFootTarget.position = pos;
-            yield return null;
-        }
-
-        rightFootTarget.position = newHome;
-        rightMoving = false;
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(newPosition, 0.05f);
     }
 }

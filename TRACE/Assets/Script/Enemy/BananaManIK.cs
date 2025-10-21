@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEditor;
+
 
 public class BananaManIK : MonoBehaviour
 {
@@ -15,29 +17,39 @@ public class BananaManIK : MonoBehaviour
 
     void OnAnimatorIK(int layerIndex)
     {
-        if(animator)
+        if(animator && ikActive)
         {
-            if(ikActive)
-            {
-                // LEFT FOOT
-                animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
-                animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
-                animator.SetIKPosition(AvatarIKGoal.LeftFoot, leftFootTarget.position);
-                animator.SetIKRotation(AvatarIKGoal.LeftFoot, leftFootTarget.rotation);
+            // LEFT FOOT
+            Vector3 leftFootPos = GetFootPosition(leftFootTarget);
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
+            animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
+            animator.SetIKPosition(AvatarIKGoal.LeftFoot, leftFootPos);
+            animator.SetIKRotation(AvatarIKGoal.LeftFoot, leftFootTarget.rotation);
 
-                // RIGHT FOOT
-                animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
-                animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
-                animator.SetIKPosition(AvatarIKGoal.RightFoot, rightFootTarget.position);
-                animator.SetIKRotation(AvatarIKGoal.RightFoot, rightFootTarget.rotation);
-            }
-            else
-            {
-                animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 0);
-                animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 0);
-                animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 0);
-                animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 0);
-            }
+            // RIGHT FOOT
+            Vector3 rightFootPos = GetFootPosition(rightFootTarget);
+            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
+            animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
+            animator.SetIKPosition(AvatarIKGoal.RightFoot, rightFootPos);
+            animator.SetIKRotation(AvatarIKGoal.RightFoot, rightFootTarget.rotation);
         }
     }
+
+    
+    Vector3 GetFootPosition(Transform footTarget)
+    {
+        RaycastHit hit;
+        Vector3 origin = footTarget.position + Vector3.up * 0.5f; // започваме малко над крака
+        if(Physics.Raycast(origin, Vector3.down, out hit, 2f))
+        {
+            // Връщаме точката на терена
+            return hit.point;
+        }
+        else
+        {
+            // Ако няма терен под крака, връщаме текущата позиция
+            return footTarget.position;
+        }
+    }
+
 }
