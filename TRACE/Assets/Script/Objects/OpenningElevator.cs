@@ -6,15 +6,22 @@ public class OpenningElevator : MonoBehaviour
     public Transform movingObject;
     public Transform startPoint;
     public Transform endPoint;
+    private PickUpItem currentItem;
 
     [Header("Settings")]
     public float speed = 2f;
-
+    public bool isItFromPickingWeapon = false;
+    
     private bool isMoving = false;
+    
 
     void Start()
     {
-        if (movingObject != null && startPoint != null)
+        if (isItFromPickingWeapon)
+        {
+            currentItem = GetComponent<PickUpItem>();
+        }
+        if (movingObject != null && startPoint != null) 
             movingObject.position = startPoint.position;
     }
 
@@ -23,11 +30,11 @@ public class OpenningElevator : MonoBehaviour
         if (isMoving && movingObject != null)
         {
             // Move smoothly towards endPoint
-            movingObject.position = Vector3.MoveTowards(
-                movingObject.position,
-                endPoint.position,
-                speed * Time.deltaTime
-            );
+            Moving();
+        }
+        else if (isItFromPickingWeapon && currentItem.PickedUp)
+        {
+            Moving();
         }
     }
 
@@ -37,5 +44,14 @@ public class OpenningElevator : MonoBehaviour
         {
             isMoving = true;
         }
+    }
+
+    public void Moving()
+    {
+        movingObject.position = Vector3.MoveTowards(
+            movingObject.position,
+            endPoint.position,
+            speed * Time.deltaTime
+        );
     }
 }

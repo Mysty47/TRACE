@@ -2,35 +2,44 @@ using UnityEngine;
 
 public class DoorDestruction : MonoBehaviour
 {
+    [Header("References")]
     public GameObject Cover;
-    public bool isGlass = false;
+    public Transform player;
     
-    public void DestroyWall()
+    [Header("Settings")]
+    public float explosionForce = 5f;
+    public float explosionRadius = 2f;
+        
+    [Header("Audio")]
+    public AudioSource doorDestruction;
+
+    void OnTriggerEnter(Collider other)
     {
-        // Loop through all child objects
-        foreach (Transform piece in transform)
+        if (other.CompareTag("Player"))
         {
-            // Get the Rigidbody component of each child
-            Rigidbody rb = piece.GetComponent<Rigidbody>();
-            
-            if (rb != null)
+            Destroy(Cover);
+            doorDestruction.Play();
+
+            Collider col = GetComponent<Collider>();
+            if (col != null) col.enabled = false;
+
+            foreach (Transform child in transform)
             {
-                if (isGlass)
+                if (child.gameObject != Cover)
                 {
-                    rb.isKinematic = false;
-                    Destroy(Cover, 0);
-                    rb.AddExplosionForce(200f, transform.position, 5f); // Optional: Add an explosion effect
-                }
-                else
-                {
-                    rb.isKinematic = false; // Enable physics
-                    Destroy(Cover, 0);
-                    rb.AddExplosionForce(500f, transform.position, 5f); // Optional: Add an explosion effect
+                    Rigidbody rb = child.GetComponent<Rigidbody>();
+
+                    if (rb != null)
+                    {
+                        rb.isKinematic = false;
+
+                        Vector3 direction = (child.position - player.position).normalized;
+                        rb.AddForce(direction * explosionForce, ForceMode.Impulse);
+                    }
                 }
             }
-        }
 
-        // Optional: Destroy the parent after a delay to clean up
-        Destroy(gameObject, 1f);
+            Destroy(gameObject, 3f);
+        }
     }
 }

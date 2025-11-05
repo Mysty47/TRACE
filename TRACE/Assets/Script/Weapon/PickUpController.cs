@@ -2,56 +2,75 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
-    public WeaponScript gunScript;
-    public BoxCollider coll;
-    public Transform player, gunContainer, fpsCam;
-    public Outline outline;
+    [Header("References")]
+    public Transform player;
+    public Transform gunContainer;
+    public Camera fpsCam;
 
-    public float pickUpRange;
-    public float dropForwardForce, dropUpWardForce;
+    [Header("Settings")]
+    public float pickUpRange = 3f;
+    public LayerMask pickableLayer;
 
-    public bool equipped;
-    public static bool slotFull;
+    private Outline currentOutline;
+    private PickUpItem currentItem;
 
-    void Start()
-    {
-       // Setup
-       if (!equipped)
-       {
-           gunScript.enabled = false;
-           coll.isTrigger = false;
-       }
-
-       if (equipped)
-       {
-           gunScript.enabled = true;
-           coll.isTrigger = true;
-           slotFull =  true;
-       }
-           
-    }
+    private bool slotFull = false;
+    
     void Update()
     {
-        Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull)
+        HandleRaycast();
+    }
+
+    void HandleRaycast()
+    {
+        RaycastHit hit;
+        if (Physics.SphereCast(fpsCam.transform.position, 0.3f, fpsCam.transform.forward, out hit, pickUpRange, pickableLayer))
         {
-            PickUp();
+            PickUpItem item = hit.transform.GetComponent<PickUpItem>();
+
+            if (item != null)
+            {
+                if (currentItem != item)
+                {
+                    ClearOutline();
+                    currentItem = item;
+                    currentOutline = item.GetComponent<Outline>();
+                    if (currentOutline != null)
+                        currentOutline.enabled = true;
+                }
+                
+                if (Input.GetKeyDown(KeyCode.E) && !slotFull)
+                {
+                    PickUp(item);
+                }
+            }
+        }
+        else
+        {
+            // Ако не гледаме към оръжие — изключваме outline
+            ClearOutline();
         }
     }
 
-    private void PickUp()
+    void ClearOutline()
     {
-        outline.enabled = false;
-        equipped = true;
+        if (currentOutline != null)
+        {
+            currentOutline.enabled = false;
+            currentOutline = null;
+        }
+        currentItem = null;
+    }
+
+    void PickUp(PickUpItem item)
+    {
         slotFull = true;
-        
-        transform.SetParent(gunContainer);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector3.one;
-        
-        coll.isTrigger = true;
-        
-        gunScript.enabled = true;
+        item.OnPickUp(gunContainer);
+        ClearOutline();
+    }
+
+    public void DropCurrent()
+    {
+        slotFull = false;
     }
 }

@@ -81,4 +81,11 @@ public class GunRecoil : MonoBehaviour
 
         muzzlePoint.localRotation = muzzleOriginalRotation;
     }
+    
+    public void ResetRecoilOrigin()
+    {
+        gunOriginalPosition = gunTransform.localPosition;
+        gunOriginalRotation = gunTransform.localRotation;
+        muzzleOriginalRotation = muzzlePoint.localRotation;
+    }
 }

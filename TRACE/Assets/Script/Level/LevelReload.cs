@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LevelReload : MonoBehaviour
 {
-    public Target t;
+    public HealthBase t;
     public string newGameLevelWhenDead;
     
     void OnTriggerEnter(Collider ChangeScene)

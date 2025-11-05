@@ -5,15 +5,16 @@ public class Projectile : MonoBehaviour
 {
     public float lifeTime = 2f; // auto-destroy after time
     public GameObject hitEffect; // optional particle effect
+    public PlayerHealth playerHealth;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("Hit");
-            Target target =  other.GetComponent<Target>();
+            HealthBase healthBase =  other.GetComponent<HealthBase>();
             OnHit();
-            target.TakeDamageTarget(50);
+            playerHealth.TakeDamage(50);
         }
 
         if (hitEffect != null)

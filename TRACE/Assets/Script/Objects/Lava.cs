@@ -12,6 +12,8 @@ public class Lava : MonoBehaviour
             Cursor.visible = true;
             Time.timeScale = 0f;
             RetryCanvas.SetActive(true);
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            playerHealth.isDead = true;
         }
     }
 }

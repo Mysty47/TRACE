@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using System.Collections;
+using UnityEngine.Serialization;
 
 public class EscapeMenuController : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class EscapeMenuController : MonoBehaviour
     private GameObject pauseMenu;
     public static bool isPaused = false;
     private EventSystem myEventSystem;
-    public Target playerTarget;
+    
+    [Header("References")]
+    public PlayerHealth playerHealth;
 
     void Awake()
     {
@@ -23,7 +26,7 @@ public class EscapeMenuController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !playerTarget.isDead)
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerHealth.isDead)
         {
             TogglePause();
         }

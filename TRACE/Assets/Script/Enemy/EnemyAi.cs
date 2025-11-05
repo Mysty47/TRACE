@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor;
+using UnityEngine.Serialization;
 
 
 public class EnemyAi : MonoBehaviour
 {
-    [Header("References")]
-    public Target playerTargetScript;
+    [FormerlySerializedAs("playerTargetScript")] [Header("References")]
+    public HealthBase playerHealthBaseScript;
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround;

@@ -19,6 +19,7 @@ public class WeaponScript : MonoBehaviour
 
     // public float fireRate = 0.1f; // Time between shots (e.g. 0.3s)
     // private float nextTimeToFire = 0f;
+    [Header("References")]
     public WeaponSwap ws;
     public GrapplingGun gg;
     public GunRecoil gr;
@@ -145,10 +146,10 @@ public class WeaponScript : MonoBehaviour
                         Destroy(impact, 2f);
                     }
                     
-                    Target target = hit.transform.GetComponent<Target>();
-                    if (target != null)
+                    EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+                    if (enemyHealth != null)
                     {
-                        target.TakeDamageTarget(damageFromPlayerGun);
+                        enemyHealth.TakeDamage(damageFromPlayerGun);
                     }
                 }
 
