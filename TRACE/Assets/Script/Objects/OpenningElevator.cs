@@ -11,7 +11,6 @@ public class OpenningElevator : MonoBehaviour
     [Header("Settings")]
     public float speed = 2f;
     public bool isItFromPickingWeapon = false;
-    
     private bool isMoving = false;
     
 

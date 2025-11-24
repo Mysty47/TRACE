@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class WeaponSwap : MonoBehaviour
 {
-    // Array to hold weapon GameObjects
+    [Header("Settings")]
     public GameObject[] weapons;
-
-    // Index of the currently selected weapon
     public int currentWeaponIndex = 0;
+    
+    [Header("References")]
     public WeaponScript ws;
 
     void Start()

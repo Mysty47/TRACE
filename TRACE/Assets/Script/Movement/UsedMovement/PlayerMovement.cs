@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
 	public LayerMask whatIsWallrunnable;
 	
 	[Header("Particle Effects")]
-	public ParticleSystem fastMovementParticles; // Assign this in the Inspector
-	public float velocityThreshold = 20f; // Speed threshold to trigger particles
+	public ParticleSystem fastMovementParticles;
+	public float velocityThreshold = 20f;
 
 	[Header("MovementSettings")]
 	public static float sensitivity = 50f;
@@ -45,8 +45,8 @@ public class PlayerMovement : MonoBehaviour
 	private float sensMultiplier = 1f;
 	private float jumpCooldown = 0.25f;
 	private float jumpForce = 700f;
-	private float x;
-	private float y;
+	private float inputX;
+	private float inputY;
 	private float vel;
 
 	[Header("State Bools")]
@@ -78,8 +78,8 @@ public class PlayerMovement : MonoBehaviour
 	private int nw;
 
 	bool isCrouched = false;
-	float crouchSpeed = 2f; // Adjust this for desired crouch-walking speed
-	float normalSpeed = 5f; // Regular walking speed
+	float crouchSpeed = 2f;
+	float normalSpeed = 5f;
 	Vector3 originalScale;
 	Vector3 crouchScale;
 	
@@ -157,7 +157,6 @@ public class PlayerMovement : MonoBehaviour
 	private void Update()
 	{
 		StateHandler();
-		Debug.Log(state);
 
 		if (rb.linearVelocity.magnitude > velocityThreshold || !grounded)
 		{
@@ -278,17 +277,12 @@ public class PlayerMovement : MonoBehaviour
 	//Player input
 	public void MyInput()
 	{
-		x = Input.GetAxisRaw("Horizontal");
-		y = Input.GetAxisRaw("Vertical");
+		inputX = Input.GetAxisRaw("Horizontal");
+		inputY = Input.GetAxisRaw("Vertical");
 
 		jumping = Input.GetButton("Jump");
 
 		crouching = Input.GetKey(KeyCode.LeftControl);
-
-		if (dashing)
-		{
-			
-		}
 		
 		if (Input.GetKeyDown(KeyCode.LeftControl))
 		{
@@ -327,70 +321,78 @@ public class PlayerMovement : MonoBehaviour
 	private void Movement()
 	{
 		rb.AddForce(Vector3.down * Time.fixedDeltaTime * 10f);
-		Vector2 mag = FindVelRelativeToLook();
-		float num = mag.x;
-		float num2 = mag.y;
-		CounterMovement(x, y, mag);
+		
+		// We get the speed of the player in the direction he is moving
+		Vector2 relativeVelocity = FindVelRelativeToLook();
+		
+		float lateralVelocity = relativeVelocity.x; // side speed
+		float forwardVelocity = relativeVelocity.y; // forward and backward speed
+		
+		CounterMovement(inputX, inputY, relativeVelocity);
+		
 		if (readyToJump && jumping)
 		{
 			Jump();
 		}
 
-		float num3 = runSpeed;
+		float currentRunSpeed = runSpeed;
 
+		// Applying force on the player so he can stick to the ground
 		if (crouching && grounded && readyToJump)
 		{
 			rb.AddForce(Vector3.down * Time.fixedDeltaTime * 3000f);
 			return;
 		}
-
-		if (x > 0f && num > num3)
+		
+		// All of these limit the player from going over the maxSpeed
+		if (inputX > 0f && lateralVelocity > currentRunSpeed)
 		{
-			x = 0f;
+			inputX = 0f;
 		}
 
-		if (x < 0f && num < 0f - num3)
+		if (inputX < 0f && lateralVelocity < 0f - currentRunSpeed)
 		{
-			x = 0f;
+			inputX = 0f;
 		}
 
-		if (y > 0f && num2 > num3)
+		if (inputY > 0f && forwardVelocity > currentRunSpeed)
 		{
-			y = 0f;
+			inputY = 0f;
 		}
 
-		if (y < 0f && num2 < 0f - num3)
+		if (inputY < 0f && forwardVelocity < 0f - currentRunSpeed)
 		{
-			y = 0f;
+			inputY = 0f;
 		}
 
-		float num4 = 1f;
-		float num5 = 1f;
+		float airControlMultiplier = 1f;
+		float movementMultiplier = 1f;
+		
 		if (!grounded)
 		{
-			num4 = 0.5f;
-			num5 = 0.5f;
+			airControlMultiplier = 0.5f;
+			movementMultiplier = 0.5f;
 		}
 
 		if (grounded && crouching)
 		{
-			num5 = 0f;
+			movementMultiplier = 0f;
 		}
 
 		if (wallRunning)
 		{
-			num5 = 0.3f;
-			num4 = 0.3f;
+			movementMultiplier = 0.3f;
+			airControlMultiplier = 0.3f;
 		}
 
 		if (surfing)
 		{
-			num4 = 0.7f;
-			num5 = 0.3f;
+			airControlMultiplier = 0.7f;
+			movementMultiplier = 0.3f;
 		}
 
-		rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.fixedDeltaTime * num4 * num5);
-		rb.AddForce(orientation.transform.right * x * moveSpeed * Time.fixedDeltaTime * num4);
+		rb.AddForce(orientation.transform.forward * inputY * moveSpeed * Time.fixedDeltaTime * airControlMultiplier * movementMultiplier); // forward and backward movement
+		rb.AddForce(orientation.transform.right * inputX * moveSpeed * Time.fixedDeltaTime * airControlMultiplier); // side movement
 	}
 
 	//Ready to jump again
@@ -453,50 +455,63 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	//Make the player movement feel good 
-	private void CounterMovement(float x, float y, Vector2 mag)
+	private void CounterMovement(float inputX, float inputY, Vector2 mag)
 	{
 		if (!grounded || jumping)
 		{
 			return;
 		}
 
-		float num = 0.16f;
-		float num2 = 0.01f;
+		float counterStrength = 0.16f;
+		float stopThreshold = 0.01f;
+		
+		// applies force while crouching
 		if (crouching)
 		{
 			rb.AddForce(moveSpeed * Time.fixedDeltaTime * -rb.linearVelocity.normalized * slideSlowdown);
 			return;
 		}
 
-		if ((Math.Abs(mag.x) > num2 && Math.Abs(x) < 0.05f) || (mag.x < 0f - num2 && x > 0f) ||
-		    (mag.x > num2 && x < 0f))
+		// side movement counter force
+		if ((Math.Abs(mag.x) > stopThreshold && Math.Abs(inputX) < 0.05f) || (mag.x < 0f - stopThreshold && inputX > 0f) ||
+		    (mag.x > stopThreshold && inputX < 0f))
 		{
-			rb.AddForce(moveSpeed * orientation.transform.right * Time.fixedDeltaTime * (0f - mag.x) * num);
+			rb.AddForce(moveSpeed * orientation.transform.right * Time.fixedDeltaTime * (0f - mag.x) * counterStrength);
 		}
 
-		if ((Math.Abs(mag.y) > num2 && Math.Abs(y) < 0.05f) || (mag.y < 0f - num2 && y > 0f) ||
-		    (mag.y > num2 && y < 0f))
+		// front and back movement counter force
+		if ((Math.Abs(mag.y) > stopThreshold && Math.Abs(inputY) < 0.05f) || (mag.y < 0f - stopThreshold && inputY > 0f) ||
+		    (mag.y > stopThreshold && inputY < 0f))
 		{
-			rb.AddForce(moveSpeed * orientation.transform.forward * Time.fixedDeltaTime * (0f - mag.y) * num);
+			rb.AddForce(moveSpeed * orientation.transform.forward * Time.fixedDeltaTime * (0f - mag.y) * counterStrength);
 		}
 
+		// limits max speed
 		if (Mathf.Sqrt(Mathf.Pow(rb.linearVelocity.x, 2f) + Mathf.Pow(rb.linearVelocity.z, 2f)) > runSpeed)
 		{
-			float num3 = rb.linearVelocity.y;
-			Vector3 vector = rb.linearVelocity.normalized * runSpeed;
-			rb.linearVelocity = new Vector3(vector.x, num3, vector.z);
+			float originalYVelocity = rb.linearVelocity.y;
+			Vector3 limitedVelocity = rb.linearVelocity.normalized * runSpeed;
+			rb.linearVelocity = new Vector3(limitedVelocity.x, originalYVelocity, limitedVelocity.z);
 		}
 	}
 
 	public Vector2 FindVelRelativeToLook()
 	{
-		float current = orientation.transform.eulerAngles.y;
-		float target = Mathf.Atan2(rb.linearVelocity.x, rb.linearVelocity.z) * 57.29578f;
-		float num = Mathf.DeltaAngle(current, target);
-		float num2 = 90f - num;
-		float magnitude = rb.linearVelocity.magnitude;
-		return new Vector2(y: magnitude * Mathf.Cos(num * ((float)Math.PI / 180f)),
-			x: magnitude * Mathf.Cos(num2 * ((float)Math.PI / 180f)));
+		// where the player looks
+		float playerYaw = orientation.transform.eulerAngles.y;
+		
+		// where the player goes
+		float velocityYaw = Mathf.Atan2(rb.linearVelocity.x, rb.linearVelocity.z) * Mathf.Rad2Deg;
+		
+		// the difference between where the player looks and where the player goes
+		float deltaYaw = Mathf.DeltaAngle(playerYaw, velocityYaw);
+		float sideAngle = 90f - deltaYaw; // if deltaYaw = 0 -> front; if deltaYaw = 90 -> sideways; if deltaYaw = 180 -> back
+		
+		float speed = rb.linearVelocity.magnitude;
+		
+		// speed relative to the direction the player is looking
+		return new Vector2(y: speed * Mathf.Cos(deltaYaw * ((float)Math.PI / 180f)),
+			x: speed * Mathf.Cos(sideAngle * ((float)Math.PI / 180f)));
 	}
 
 	private void FindWallRunRotation()
@@ -506,44 +521,52 @@ public class PlayerMovement : MonoBehaviour
 			wallRunRotation = 0f;
 			return;
 		}
-
-		_ = new Vector3(0f, playerCam.transform.rotation.y, 0f).normalized;
-		new Vector3(0f, 0f, 1f);
-		float num = 0f;
-		float current = playerCam.transform.rotation.eulerAngles.y;
+		// the angle of the wall
+		float wallAngle = 0f;
+		
+		// rotation of the playerCam
+		float camYaw = playerCam.transform.rotation.eulerAngles.y;
+		
+		// finds the approximate angle
 		if (Math.Abs(wallNormalVector.x - 1f) < 0.1f)
 		{
-			num = 90f;
+			wallAngle = 90f;
 		}
 		else if (Math.Abs(wallNormalVector.x - -1f) < 0.1f)
 		{
-			num = 270f;
+			wallAngle = 270f;
 		}
 		else if (Math.Abs(wallNormalVector.z - 1f) < 0.1f)
 		{
-			num = 0f;
+			wallAngle = 0f;
 		}
 		else if (Math.Abs(wallNormalVector.z - -1f) < 0.1f)
 		{
-			num = 180f;
+			wallAngle = 180f;
 		}
 
-		num = Vector3.SignedAngle(new Vector3(0f, 0f, 1f), wallNormalVector, Vector3.up);
-		float num2 = Mathf.DeltaAngle(current, num);
-		wallRunRotation = (0f - num2 / 90f) * 15f;
+		wallAngle = Vector3.SignedAngle(new Vector3(0f, 0f, 1f), wallNormalVector, Vector3.up);
+		
+		// the difference between the camera and the wall
+		float deltaAngle = Mathf.DeltaAngle(camYaw, wallAngle);
+		
+		// calculates how much should the camera rotate for the wallrun
+		wallRunRotation = (0f - deltaAngle / 90f) * 15f;
+		
 		if (!readyToWallrun)
 		{
 			return;
 		}
 
-		if ((Mathf.Abs(wallRunRotation) < 4f && y > 0f && Math.Abs(x) < 0.1f) ||
-		    (Mathf.Abs(wallRunRotation) > 22f && y < 0f && Math.Abs(x) < 0.1f))
+		//  Automatically ends wallRun in certain conditions
+		if ((Mathf.Abs(wallRunRotation) < 4f && inputY > 0f && Math.Abs(inputX) < 0.1f) ||
+		    (Mathf.Abs(wallRunRotation) > 22f && inputY < 0f && Math.Abs(inputX) < 0.1f))
 		{
 			if (!cancelling)
 			{
 				cancelling = true;
 				CancelInvoke("CancelWallrun");
-				Invoke("CancelWallrun", 0.2f);
+				Invoke("CancelWallrun", 0.2f); // little delay before ending wallRun
 			}
 		}
 		else
@@ -582,10 +605,10 @@ public class PlayerMovement : MonoBehaviour
 
 	private bool IsSurf(Vector3 v)
 	{
-		float num = Vector3.Angle(Vector3.up, v);
-		if (num < 89f)
+		float surfaceAngle = Vector3.Angle(Vector3.up, v);
+		if (surfaceAngle < 89f)
 		{
-			return num > maxSlopeAngle;
+			return surfaceAngle > maxSlopeAngle;
 		}
 
 		return false;
@@ -605,12 +628,15 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (!grounded && readyToWallrun)
 		{
+			// used for camera control and canceling wallRun
 			wallNormalVector = normal;
-			float num = 20f;
+			float initialVerticalBoost = 20f;
+			
+			// small boost if the wallRun just starts
 			if (!wallRunning)
 			{
 				rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-				rb.AddForce(Vector3.up * num, ForceMode.Impulse);
+				rb.AddForce(Vector3.up * initialVerticalBoost, ForceMode.Impulse);
 			}
 
 			wallRunning = true;
@@ -621,26 +647,23 @@ public class PlayerMovement : MonoBehaviour
 	
 	private void TryVaultOverWall(Vector3 normal)
 	{
-		// посоката, в която се движи играчът
+		// direction of the player
 		Vector3 dir = rb.linearVelocity.normalized;
-
-		// максималната височина, на която може да се качи
+		
 		Vector3 maxVaultPos = transform.position + Vector3.up * 1.5f;
 
-		// проверка дали има място нагоре (да не е покрит с таван)
+		// checks if there is space above
 		if (Physics.Raycast(maxVaultPos, dir, out RaycastHit forwardHit, 2f, whatIsGround))
 		{
-			// има нещо отпред, не може да vault-не
 			return;
 		}
 
-		// правим raycast надолу от позицията над стената, за да намерим земята
+		// finding the ground under the player
 		if (Physics.Raycast(maxVaultPos + dir * 1.5f, Vector3.down, out RaycastHit downHit, 3f, whatIsGround))
 		{
-			// позицията, където да се качи
 			Vector3 landPos = downHit.point + Vector3.up * 0.5f;
 
-			// преместваме играча към горната точка плавно
+			// we move the player smoothly
 			StartCoroutine(VaultToPosition(landPos));
 		}
 	}
@@ -653,7 +676,7 @@ public class PlayerMovement : MonoBehaviour
 
 		Vector3 storedVelocity = rb.linearVelocity;
 
-		// временно изключваме гравитацията, за да не падне
+		// temporal
 		rb.useGravity = false;
 
 		while (elapsed < duration)
@@ -708,24 +731,24 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-		float num = 3f;
+		float delayMultiplier = 3f;
 
 		if (!cancellingGrounded)
 		{
 			cancellingGrounded = true;
-			Invoke(nameof(StopGrounded), Time.deltaTime * num);
+			Invoke(nameof(StopGrounded), Time.deltaTime * delayMultiplier);
 		}
 
 		if (!cancellingWall)
 		{
 			cancellingWall = true;
-			Invoke(nameof(StopWall), Time.deltaTime * num);
+			Invoke(nameof(StopWall), Time.deltaTime * delayMultiplier);
 		}
 
 		if (!cancellingSurf)
 		{
 			cancellingSurf = true;
-			Invoke(nameof(StopSurf), Time.fixedDeltaTime * num);
+			Invoke(nameof(StopSurf), Time.fixedDeltaTime * delayMultiplier);
 		}
 	}
 

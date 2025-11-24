@@ -1,6 +1,7 @@
 using UnityEngine;
  
 public class Spring {
+    [Header("Settings")]
     private float strength;
     private float damper;
     private float target;

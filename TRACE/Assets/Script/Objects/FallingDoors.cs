@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class FallingDoors : MonoBehaviour
 {
+    [Header("Settings")]
     public float speed = 0.1f;
     public Vector3 startPoint;
     public Vector3 endPoint;
     public bool called = false;
-
-    public AudioSource openningDoorSound;
-
-    public RobotSpeechController rsc;
     public bool soundPlayed = false;
+    
+    [Header("References")]
+    public AudioSource openningDoorSound;
+    public RobotSpeechController rsc;
 
     void Start()
     {

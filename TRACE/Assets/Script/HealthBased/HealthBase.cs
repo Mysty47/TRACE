@@ -12,7 +12,6 @@ public abstract class HealthBase : MonoBehaviour
         if (isDead) return;
         
         health -= amount;
-        Debug.Log($"{gameObject.name} Health: {health}");
 
         if (health <= 0f)
         {

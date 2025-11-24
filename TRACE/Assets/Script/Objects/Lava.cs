@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
+    [Header("References")]
     public GameObject RetryCanvas;
 
     private void OnCollisionEnter(Collision collision)

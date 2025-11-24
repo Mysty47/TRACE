@@ -11,7 +11,7 @@ public class PickUpItem : MonoBehaviour
     public PickUpController puc;
     public InstructionsController ic;
     
-    
+    [Header("Settings")]
     public bool PickedUp = false;
 
     void Awake()

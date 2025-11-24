@@ -1,9 +1,11 @@
 using UnityEngine;
 
-public class RotateGun : MonoBehaviour {
-
+public class RotateGun : MonoBehaviour 
+{
+    [Header("References")]
     public GrapplingGun grappling;
 
+    [Header("Settings")]
     private Quaternion desiredRotation;
     private float rotationSpeed = 5f;
 

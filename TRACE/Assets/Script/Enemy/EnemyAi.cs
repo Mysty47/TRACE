@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class EnemyAi : MonoBehaviour
 {
-    [FormerlySerializedAs("playerTargetScript")] [Header("References")]
+    [Header("References")]
     public HealthBase playerHealthBaseScript;
     public NavMeshAgent agent;
     public Transform player;
@@ -16,7 +16,7 @@ public class EnemyAi : MonoBehaviour
     public Camera fpsCam;
 
     [Header("Shooting")]
-    public Transform gunTip; // 👈 ново — позицията, от която ще се spawn-ва куршумът
+    public Transform gunTip;
     public GameObject projectile;
     public float projectileSpeed = 32f;
     public bool projectileUsesGravity = false;
@@ -137,7 +137,7 @@ public class EnemyAi : MonoBehaviour
 
         if (shootSound != null) shootSound.Play();
 
-        // Ако имаме зададен shootPoint → използваме него
+        // if we have shootPoint we use it
         Vector3 spawnPos;
         Quaternion spawnRot;
 
@@ -148,22 +148,21 @@ public class EnemyAi : MonoBehaviour
         }
         else
         {
-            // fallback — ако не е зададен shootPoint
             spawnPos = transform.position + Vector3.up * 2f;
             spawnRot = transform.rotation;
         }
 
-        // Изчисляваме посоката към играча
+        // direction to the player
         Vector3 direction = (player.position - spawnPos).normalized;
 
-        // Добавяме малък bloom за неточност
+        // bloom
         float bloom = 0.2f;
         direction.x += Random.Range(-bloom, bloom);
         direction.y += Random.Range(-bloom, bloom);
         direction.z += Random.Range(-bloom, bloom);
         direction.Normalize();
 
-        // Създаваме куршума
+        // bullet instance
         GameObject bulletInstance = Instantiate(projectile, spawnPos, Quaternion.LookRotation(direction));
         Rigidbody rb = bulletInstance.GetComponent<Rigidbody>();
 

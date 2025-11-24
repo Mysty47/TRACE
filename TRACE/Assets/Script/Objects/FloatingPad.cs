@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FloatingPad : MonoBehaviour
 {
+    [Header("Settings")]
     public float amplitude = 0.1f;
     public float frequency = 2f;
 

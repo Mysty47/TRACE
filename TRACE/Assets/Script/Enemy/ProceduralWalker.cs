@@ -28,18 +28,17 @@ public class ProceduralWalker : MonoBehaviour
     {
         transform.position = currentPosition;
 
-        // Скорост на движение на тялото
+        // body movement speed
         Vector3 bodyVelocity = (body.position - previousBodyPosition) / Time.deltaTime;
         previousBodyPosition = body.position;
 
-        // Направление и позиция на стъпката
+        // position of the foot
         float forwardOffset = Mathf.Clamp(bodyVelocity.magnitude * 0.3f, 0.25f, 0.6f);
         Vector3 rayOrigin = body.position + (body.right * footSpacing) + (body.forward * forwardOffset);
 
-        // Raycast към земята
+        // Raycast to ground
         if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit info, 10f, terrainLayer))
         {
-            // Стъпваме само ако другият крак не се движи
             if (!isMoving && (!otherLeg || !otherLeg.isMoving))
             {
                 float distance = Vector3.Distance(newPosition, info.point);
@@ -52,7 +51,7 @@ public class ProceduralWalker : MonoBehaviour
             }
         }
 
-        // Движение на крака
+        // leg movement
         if (isMoving)
         {
             lerp += Time.deltaTime * stepSpeed;

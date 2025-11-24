@@ -5,6 +5,10 @@ public class InstructionsController : MonoBehaviour
 {
     [Header("Animator")]
     private Animator textAnimator;
+    
+    [Header("Constants")]
+    private const String animationNameShowText = "ShowText";
+    private const String animationNameHideText = "HideText";
 
     private void Start()
     {
@@ -13,11 +17,11 @@ public class InstructionsController : MonoBehaviour
 
     public void ShowText()
     {
-        textAnimator.SetTrigger("ShowText");
+        textAnimator.SetTrigger(animationNameShowText);
     }
 
     public void HideText()
     {
-        textAnimator.SetTrigger("HideText");
+        textAnimator.SetTrigger(animationNameHideText);
     }
 }

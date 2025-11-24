@@ -3,10 +3,13 @@ using UnityEngine.UI;
 
 public class Projectile : MonoBehaviour
 {
-    public float lifeTime = 2f; // auto-destroy after time
-    public GameObject hitEffect; // optional particle effect
+    [Header("References")]
+    public GameObject hitEffect;
     public PlayerHealth playerHealth;
-
+    
+    [Header("Settings")]
+    public float lifeTime = 2f;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

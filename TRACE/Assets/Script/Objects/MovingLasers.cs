@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MovingLaser : MonoBehaviour
 {
+    [Header("Settings")]
     public float speed = 5f;
     public Vector3 startPoint;
     public Vector3 endPoint;

@@ -3,15 +3,18 @@ using UnityEngine.UI; // Required for UI components
 using EZCameraShake;
 
 public class GrapplingGun : MonoBehaviour {
+    [Header("Settings")]
     private Vector3 swingPoint;
-    public LayerMask whatIsGrappleable;
-    public Transform gunTip, cameraPlayer, player;
     private float maxDistance = 100f;
-    private SpringJoint joint;
     public bool swinging = false;
     public float AimAssistSize = 1f;
+    
+    [Header("References")]
     public WeaponSwap ws;
-
+    private SpringJoint joint;
+    public LayerMask whatIsGrappleable;
+    public Transform gunTip, cameraPlayer, player;
+    
     [Header("UI")]
     public GameObject grappleIndicator; // A small red sphere to represent the grapple point
     public Image crosshair; // Canvas-based crosshair image

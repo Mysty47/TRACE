@@ -10,12 +10,12 @@ public class EnemyMovement : MonoBehaviour
     public Transform player;
 
     [Header("Ranges")]
-    public float detectRange = 5f;  // range за да започне да следва
-    public float stopRange = 2f;    // range за да спре до player
-    public float randomWalkRadius = 3f; // когато няма player
+    public float detectRange = 5f;
+    public float stopRange = 2f;
+    public float randomWalkRadius = 3f;
 
     [Header("Step Settings")]
-    public float randomMoveCooldown = 2f; // колко често да сменя random позиция
+    public float randomMoveCooldown = 2f;
 
     private Vector3 randomTarget;
     private float timer;
@@ -31,23 +31,21 @@ public class EnemyMovement : MonoBehaviour
         if (!player) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        // Решаваме target позицията
+        
         Vector3 targetPosition;
 
+        // Stopping
         if (distanceToPlayer <= stopRange)
         {
-            // Спира на място
             targetPosition = transform.position;
         }
+        // Following Player
         else if (distanceToPlayer <= detectRange)
         {
-            // Следва player
             targetPosition = player.position;
         }
         else
         {
-            // Random движение
             timer -= Time.deltaTime;
             if (timer <= 0f || Vector3.Distance(transform.position, randomTarget) < 0.2f)
             {
@@ -57,11 +55,11 @@ public class EnemyMovement : MonoBehaviour
             targetPosition = randomTarget;
         }
 
-        // Задаваме target за двата крака
+        // Targets for both legs
         if (leftLeg) leftLeg.transform.position = targetPosition;
         if (rightLeg) rightLeg.transform.position = targetPosition;
 
-        // Въртене към player, ако е в detect range
+        // rotation to the player if in distance
         if (distanceToPlayer <= detectRange && distanceToPlayer > stopRange)
         {
             Vector3 lookDir = (player.position - transform.position);
@@ -75,8 +73,7 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector2 randomCircle = Random.insideUnitCircle * randomWalkRadius;
         Vector3 randomPos = transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
-
-        // Optional: Raycast, за да стъпи на земята
+        
         if (Physics.Raycast(randomPos + Vector3.up * 2f, Vector3.down, out RaycastHit hit, 5f))
         {
             randomPos.y = hit.point.y;

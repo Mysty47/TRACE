@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class Weapon_Sway : MonoBehaviour {
 
-    [Header("Sway Settings")]
+    [Header("Settings")]
     [SerializeField] private float smooth;
     [SerializeField] private float multiplier;
+    
+    [Header("References")]
     public GrapplingGun grapple;
 
     private void Update()

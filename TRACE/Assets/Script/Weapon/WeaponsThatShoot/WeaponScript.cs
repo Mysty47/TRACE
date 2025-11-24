@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,29 +9,24 @@ using UnityEngine.TestTools;
 
 public class WeaponScript : MonoBehaviour
 {
+    [Header("Settings")]
     public bool areYouAimedAtRobot = false;
     public float damageFromPlayerGun = 30f;
     public float range = 100f;
     public int maxAmmo;
     public bool isReloading = false;
     public int CurrentAmmo1;
-
-    public GameObject trail;
-
-    // public float fireRate = 0.1f; // Time between shots (e.g. 0.3s)
-    // private float nextTimeToFire = 0f;
+    
     [Header("References")]
     public WeaponSwap ws;
     public GrapplingGun gg;
     public GunRecoil gr;
     private PlayerMovement pm;
-    
     public Camera fpsCam;
-
     public ParticleSystem muzzleFlashPistol;
-    
     public TextMeshProUGUI ammoText;
-
+    public GameObject trail;
+    
     [Header("Muzzle Flash Light")]
     public Light muzzleFlashLight;
 
@@ -39,20 +35,21 @@ public class WeaponScript : MonoBehaviour
     public Image NormalCrosshair;
     private Image AmmoIcon;
     
-    public Animator animatorPistol;
-    
     [Header("Impact Effects")]
-    
     public GameObject impactEffect;
     public GameObject enemyImpactEffectRedTriangles;
     public GameObject enemyImpactEffectWhiteTriangles;
     public GameObject impactEffectLongerVersion;
     
     [Header("AudioSource")]
-    
     public AudioSource reloadSound;
     public AudioSource shootSound;
     public AudioSource reloadFinishSound;
+    
+    [Header("Animator")]
+    public Animator animatorPistol;
+    private const String pistolAnimationName = "ReloadAnimation";
+    
     void Start()
     {
         CurrentAmmo1 = 7;
@@ -72,7 +69,7 @@ public class WeaponScript : MonoBehaviour
 
         if (ws.currentWeaponIndex == 0 && !EscapeMenuController.isPaused)
         {
-            if (AmmoIcon != null && AmmoIcon.enabled == false)
+            if (AmmoIcon != null && !AmmoIcon.enabled)
             {
                 AmmoIcon.enabled = true;
             }
@@ -179,7 +176,7 @@ public class WeaponScript : MonoBehaviour
         ReloadCrosshair.fillAmount = 0f;
         ReloadCrosshair.gameObject.SetActive(true);
 
-        animatorPistol.SetTrigger("ReloadAnimation");
+        animatorPistol.SetTrigger(pistolAnimationName);
         trail.SetActive(true);
 
         float reloadTime = 0.8f;

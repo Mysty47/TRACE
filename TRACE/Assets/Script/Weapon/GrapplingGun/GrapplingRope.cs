@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrapplingRope : MonoBehaviour {
-    private Spring spring;
-    private LineRenderer lr;
+public class GrapplingRope : MonoBehaviour 
+{
+    [Header("Settings")]
     private Vector3 currentGrapplePosition;
-    public GrapplingGun grapplingGun;
     public int quality;
     public float damper;
     public float strength;
     public float velocity;
     public float waveCount;
     public float waveHeight;
+    
+    [Header("References")]
     public AnimationCurve affectCurve;
+    private Spring spring;
+    private LineRenderer lr;
+    public GrapplingGun grapplingGun;
     
     void Awake() {
         lr = GetComponent<LineRenderer>();
@@ -53,8 +57,7 @@ public class GrapplingRope : MonoBehaviour {
 
         for (var i = 0; i < quality + 1; i++) {
             var delta = i / (float) quality;
-            var offset = up * waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * spring.Value *
-                         affectCurve.Evaluate(delta);
+            var offset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * spring.Value * affectCurve.Evaluate(delta));
             
             lr.SetPosition(i, Vector3.Lerp(gunTipPosition, currentGrapplePosition, delta) + offset);
         }

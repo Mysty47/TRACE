@@ -7,7 +7,10 @@ namespace Script.Texts
 {
     public class StartingTimer : MonoBehaviour
     {
+        [Header("References")]
         public TextMeshProUGUI timerText;
+        
+        [Header("Settings")]
         public float timer;
         
         void Start()

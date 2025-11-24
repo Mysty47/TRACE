@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class AmmoSelection : MonoBehaviour
 {
+    [Header("Settings")]
     public int ammo1 = 12;
     public int ammo2 = 30;
+    
+    [Header("References")]
     public WeaponScript ws;
     public WeaponSwap wsw;
 

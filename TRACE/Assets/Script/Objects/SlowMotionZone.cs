@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class SlowMotionZone : MonoBehaviour
 {
+    [Header("Settings")]
     [Range(0.01f, 1f)]
     public float slowMotionScale = 0.1f; // Super slow motion
     public float transitionSpeed = 2f;  // Speed of transition to slow motion
-    public float slowMotionDuration = 2f; // Duration for slow-motion effect
+    public float slowMotionDuration = 2f; // Duration for slow-motion effect]
+    
+    [Header("References")]
     public GameObject SlowMotionEffect; // Assign a visual effect if needed
 
     private Coroutine timeScaleCoroutine;

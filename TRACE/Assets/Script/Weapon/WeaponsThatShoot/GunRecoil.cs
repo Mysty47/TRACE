@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class GunRecoil : MonoBehaviour
 {
+    [Header("References")]
     public Transform gunTransform;      // The gun's transform
     public Transform muzzlePoint;       // The muzzle point (gun tip)
+    
+    [Header("Settings")]
     public Vector3 gunRecoilOffset = new Vector3(0, 0, -0.05f); // Small backward gun movement
     public float gunRecoilSpeed = 10f;  // Speed of gun position recovery
     public float muzzleRecoilAngle = -10f; // How far the muzzle rotates upward (X rotation)

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TeleportOnCollision : MonoBehaviour
 {
+    [Header("Settings")]
     public Vector3 teleportPosition;
 
     private void OnTriggerEnter(Collider other)
@@ -10,7 +11,6 @@ public class TeleportOnCollision : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.transform.position = teleportPosition;
-            Debug.Log("Player teleported to: " + teleportPosition);
         }
     }
 }

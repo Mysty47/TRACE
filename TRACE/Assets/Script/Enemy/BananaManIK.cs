@@ -4,8 +4,10 @@ using UnityEditor;
 
 public class BananaManIK : MonoBehaviour
 {
+    [Header("References")]
     protected Animator animator;
 
+    [Header("Settings")]
     public bool ikActive = true;
     public Transform leftFootTarget;
     public Transform rightFootTarget;
@@ -39,15 +41,13 @@ public class BananaManIK : MonoBehaviour
     Vector3 GetFootPosition(Transform footTarget)
     {
         RaycastHit hit;
-        Vector3 origin = footTarget.position + Vector3.up * 0.5f; // започваме малко над крака
+        Vector3 origin = footTarget.position + Vector3.up * 0.5f; // we start a bit over the leg
         if(Physics.Raycast(origin, Vector3.down, out hit, 2f))
         {
-            // Връщаме точката на терена
             return hit.point;
         }
         else
         {
-            // Ако няма терен под крака, връщаме текущата позиция
             return footTarget.position;
         }
     }

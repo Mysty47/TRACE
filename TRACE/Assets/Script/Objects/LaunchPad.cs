@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LaunchPad : MonoBehaviour
 {
-    // Adjust this to control the launch force
+    [Header("Settings")]
     public float launchForce = 10f;
 
     private void OnCollisionEnter(Collision collision)

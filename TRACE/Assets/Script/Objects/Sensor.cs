@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Sensor : MonoBehaviour
 {
+    [Header("References")]
     public GameObject[] objectsToDelete;
 
     private void OnCollisionEnter(Collision collision)

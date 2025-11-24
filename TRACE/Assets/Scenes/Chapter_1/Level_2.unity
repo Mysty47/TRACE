@@ -68764,7 +68764,7 @@ MonoBehaviour:
   movingObject: {fileID: 1354323457}
   startPoint: {fileID: 1354323457}
   endPoint: {fileID: 959091683}
-  speed: 2
+  speed: 4
   isItFromPickingWeapon: 0
 --- !u!64 &1816907452
 MeshCollider:
@@ -70091,7 +70091,7 @@ MonoBehaviour:
   movingObject: {fileID: 767240399}
   startPoint: {fileID: 767240399}
   endPoint: {fileID: 1088620218}
-  speed: 2
+  speed: 4
   isItFromPickingWeapon: 0
 --- !u!64 &1914249220
 MeshCollider:
