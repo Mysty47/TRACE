@@ -5,8 +5,8 @@ using UnityEditor;
 public class CameraTiltAndBob : MonoBehaviour
 {
     [Header("References")]
-    public Rigidbody playerRb;      // Влачиш Rigidbody-то на Player
-    public bool isGrounded = true;  // Може да идва от твоя ground check
+    public Rigidbody playerRb;
+    public bool isGrounded = true;
 
     [Header("Tilt Settings")]
     public float tiltAmount = 4f;
@@ -26,12 +26,10 @@ public class CameraTiltAndBob : MonoBehaviour
 
     void Update()
     {
-        // --- 1️⃣ TILT ---
         float horizontal = Input.GetAxisRaw("Horizontal");
         float targetTilt = -horizontal * tiltAmount;
         currentTilt = Mathf.Lerp(currentTilt, targetTilt, Time.deltaTime * tiltSpeed);
 
-        // --- 2️⃣ HEADBOB ---
         Vector3 velocity = playerRb.linearVelocity;
         Vector3 newLocalPos = startLocalPos;
 
@@ -47,7 +45,6 @@ public class CameraTiltAndBob : MonoBehaviour
 
         transform.localPosition = newLocalPos;
 
-        // --- 3️⃣ APPLY TILT ---
         transform.localRotation = Quaternion.Euler(0f, 0f, currentTilt);
     }
 }

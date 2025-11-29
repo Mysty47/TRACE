@@ -19,14 +19,13 @@ public class HeadBobController : MonoBehaviour
     private void Awake()
     {
         _startPos = _camera.localPosition;
-        _lastPos = transform.position; // запомняме първа позиция
+        _lastPos = transform.position;
     }
 
     void Update()
     {
         if (!_enabled) return;
 
-        // смятаме скоростта ръчно
         _velocity = (transform.position - _lastPos) / Time.deltaTime;
         _lastPos = transform.position;
 
@@ -73,7 +72,6 @@ public class HeadBobController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        // проста проверка дали player-а е на земята
         return Physics.Raycast(transform.position, Vector3.down, 1.2f);
     }
 }

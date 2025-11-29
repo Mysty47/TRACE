@@ -114,12 +114,16 @@ public class PlayerMovement : MonoBehaviour
 	private void Start()
 	{
 		playerCollider = GetComponent<Collider>();
+		
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
+		
 		readyToJump = true;
+		
 		wallNormalVector = Vector3.up;
 		originalScale = transform.localScale;
 		crouchScale = new Vector3(originalScale.x, originalScale.y * 0.5f, originalScale.z);
+		
 		wallrunSound.Stop();
 		
 		// Ensure the particle system is disabled at the start
@@ -131,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		//For wallrunning
+		//For wallRunning
 		WallRunning();
 	}
 
@@ -442,13 +446,18 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (EscapeMenuController.isPaused == false)
 		{
-			float num = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
-			float num2 = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
-			desiredX = playerCam.transform.localRotation.eulerAngles.y + num;
-			xRotation -= num2;
+			float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+			float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+			
+			desiredX = playerCam.transform.localRotation.eulerAngles.y + mouseX;
+			
+			xRotation -= mouseY;
 			xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+			
 			if(!climbing) FindWallRunRotation();
+			
 			actualWallRotation = Mathf.SmoothDamp(actualWallRotation, wallRunRotation, ref wallRotationVel, 0.2f);
+			
 			playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, actualWallRotation);
 			orientation.transform.localRotation = Quaternion.Euler(0f, desiredX, 0f);
 		}
@@ -495,7 +504,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	public Vector2 FindVelRelativeToLook()
+	private Vector2 FindVelRelativeToLook()
 	{
 		// where the player looks
 		float playerYaw = orientation.transform.eulerAngles.y;

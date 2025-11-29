@@ -31,7 +31,7 @@ public class GrapplingRope : MonoBehaviour
     }
 
     void DrawRope() {
-        //If not grappling, don't draw rope
+        
         if (!grapplingGun.IsGrappling()) {
             currentGrapplePosition = grapplingGun.gunTip.position;
             spring.Reset();
@@ -40,6 +40,7 @@ public class GrapplingRope : MonoBehaviour
             return;
         }
 
+        
         if (lr.positionCount == 0) {
             spring.SetVelocity(velocity);
             lr.positionCount = quality + 1;
