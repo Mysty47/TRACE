@@ -21832,6 +21832,8 @@ MonoBehaviour:
   - {fileID: 1154171324}
   currentWeaponIndex: 0
   ws: {fileID: 167693856}
+  shotgun: {fileID: 0}
+  weaponScript: {fileID: 0}
 --- !u!114 &167693856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21850,6 +21852,8 @@ MonoBehaviour:
   maxAmmo: 12
   isReloading: 0
   CurrentAmmo1: 12
+  readyToShoot: 1
+  pistolShootDelay: 0.25
   ws: {fileID: 167693855}
   gg: {fileID: 1154171326}
   gr: {fileID: 1154171325}
@@ -41318,7 +41322,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 120
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208
@@ -83575,7 +83579,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.629717, g: 0.8396226, b: 0.8396226, a: 1}
-  m_Intensity: 500
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208
@@ -84976,7 +84980,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.629717, g: 0.8396226, b: 0.8396226, a: 1}
-  m_Intensity: 500
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208
@@ -114973,7 +114977,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 500
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208
@@ -120043,7 +120047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3648874027859118887, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
       propertyPath: m_Name
-      value: Glock17
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 3648874027859118887, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
       propertyPath: m_Layer
@@ -120095,6 +120099,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4942605452412996334, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
       propertyPath: ws
+      value: 
+      objectReference: {fileID: 167693855}
+    - target: {fileID: 4942605452412996334, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
+      propertyPath: wsp
       value: 
       objectReference: {fileID: 167693855}
     - target: {fileID: 4942605452412996334, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
@@ -149044,7 +149052,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.629717, g: 0.8396226, b: 0.8396226, a: 1}
-  m_Intensity: 500
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208
@@ -156422,7 +156430,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 500
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208
@@ -179242,6 +179250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 1
+  objectName: Player
 --- !u!64 &1837553933
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -199842,7 +199851,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.629717, g: 0.8396226, b: 0.8396226, a: 1}
-  m_Intensity: 500
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208
@@ -207051,7 +207060,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 500
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208
@@ -207178,7 +207187,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 500
+  m_Intensity: 100
   m_Range: 26.659452
   m_SpotAngle: 176.99467
   m_InnerSpotAngle: 21.80208

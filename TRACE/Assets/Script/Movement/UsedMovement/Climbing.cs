@@ -12,7 +12,6 @@ public class Climbing : MonoBehaviour
     public float climbSpeed;
     public float maxClimbTime;
     private float climbTimer;
-    
     private bool climbing;
 
     [Header("ClimbJump")] 

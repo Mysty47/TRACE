@@ -4,14 +4,15 @@ public class WeaponSwap : MonoBehaviour
 {
     [Header("Settings")]
     public GameObject[] weapons;
-    public int currentWeaponIndex = 0;
+    public static int currentWeaponIndex = 0;
     
     [Header("References")]
     public WeaponScript ws;
+    public Shotgun shotgun;
+    public WeaponScript weaponScript;
 
     void Start()
     {
-        // Ensure only the selected weapon is active at the start
         SelectWeapon(currentWeaponIndex);
     }
 
@@ -27,26 +28,38 @@ public class WeaponSwap : MonoBehaviour
         {
             if (Input.GetKeyDown((i + 1).ToString()))
             {
-                    SelectWeapon(i);
+                SelectWeapon(i);
             }
         }
     }
 
-    void SelectWeapon(int index)
+    public void SelectWeapon(int index)
     {
-        if (!ws.isReloading)
+        if (weaponScript != null)
         {
+            if (weaponScript.isReloading || shotgun.isReloading) return;
             if (index < 0 || index >= weapons.Length) return;
-            
+
+            // check which weapons are picked
+            PickUpItem pickUp = weapons[index].GetComponent<PickUpItem>();
+            if (pickUp != null && !pickUp.PickedUp)
+            {
+                return;
+            }
+
             currentWeaponIndex = index;
-            
-            // Activate the selected weapon and deactivate others
-            for (int i = 0; i < weapons.Length; i++) {
-                weapons[i].SetActive(i == currentWeaponIndex);
+
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                PickUpItem p = weapons[i].GetComponent<PickUpItem>();
+                if (p != null && p.PickedUp)
+                {
+                    weapons[i].SetActive(i == currentWeaponIndex);
+                }
             }
         }
-        
     }
+
 
     void SelectNextWeapon()
     {

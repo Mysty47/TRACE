@@ -3,6 +3,7 @@ using UnityEngine.UI; // Required for UI components
 using EZCameraShake;
 
 public class GrapplingGun : MonoBehaviour {
+    
     [Header("Settings")]
     private Vector3 swingPoint;
     private float maxDistance = 100f;
@@ -14,6 +15,7 @@ public class GrapplingGun : MonoBehaviour {
     private SpringJoint joint;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, cameraPlayer, player;
+    public WeaponSwap wsp;
     
     [Header("UI")]
     public GameObject grappleIndicator; // A small red sphere to represent the grapple point
@@ -22,9 +24,13 @@ public class GrapplingGun : MonoBehaviour {
 
     private Vector3 currentGrapplePosition;
 
+    [Header("Constants")] 
+    private const float GrapplingSpringFactor = 4.5f;
+    private const float GrapplingDampeningFactor = 7f;
+    private const float GrapplingMassScaleFactor = 4.5f;
+
     [Header("Input")]
     public KeyCode swingKey = KeyCode.Mouse1;
-    
     
     [Header("Audio Source")]
     public AudioSource swingGunSound;
@@ -35,12 +41,12 @@ public class GrapplingGun : MonoBehaviour {
 
     void Update() {
         UpdateCrosshairAndIndicator();
-        if (ws.currentWeaponIndex != 0)
+        if (WeaponSwap.currentWeaponIndex != 0)
         {
          StopSwing();
          Destroy(joint);
         }
-        if (Input.GetKeyDown(swingKey)) {
+        if (Input.GetKeyDown(swingKey) ) {
             StartSwing();
         }
         else if (Input.GetKeyUp(swingKey)) {
@@ -57,9 +63,11 @@ public class GrapplingGun : MonoBehaviour {
             if (!Physics.Linecast(cameraPlayer.position, hit.point, LayerMask.GetMask( "Ground", "Climbable"))) 
             {
                 CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+                
                 swingGunSound.Play();
                 swinging = true;
                 swingPoint = hit.point;
+                
                 joint = player.gameObject.AddComponent<SpringJoint>();
                 joint.autoConfigureConnectedAnchor = false;
                 joint.connectedAnchor = swingPoint;
@@ -70,9 +78,9 @@ public class GrapplingGun : MonoBehaviour {
                 joint.maxDistance = distanceFromPoint * 0.8f;
                 joint.minDistance = distanceFromPoint * 0.25f;
 
-                joint.spring = 4.5f;
-                joint.damper = 7f;
-                joint.massScale = 4.5f;
+                joint.spring = GrapplingSpringFactor;
+                joint.damper = GrapplingDampeningFactor;
+                joint.massScale = GrapplingMassScaleFactor;
             }
         }
     }
@@ -93,7 +101,9 @@ public class GrapplingGun : MonoBehaviour {
     }
     
     // Updates the crosshair visibility and grapple indicator
-    void UpdateCrosshairAndIndicator() {
+    void UpdateCrosshairAndIndicator()
+    {
+        if (WeaponSwap.currentWeaponIndex != 0) return;
         RaycastHit hit;
         // Use SphereCast with AimAssistSize radius like in StartGrapple
         if (Physics.SphereCast(cameraPlayer.position, AimAssistSize, cameraPlayer.forward, out hit, maxDistance, whatIsGrappleable)) {

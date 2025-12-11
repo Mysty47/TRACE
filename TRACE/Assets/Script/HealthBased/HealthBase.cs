@@ -5,7 +5,7 @@ public abstract class HealthBase : MonoBehaviour
 {
     [Header("Health Settings")]
     public float health = 100f;
-    protected bool isDead = false;
+    private bool isDead = false;
 
     public virtual void TakeDamage(float amount)
     {

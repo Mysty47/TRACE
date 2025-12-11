@@ -11,11 +11,13 @@ public class WeaponScript : MonoBehaviour
 {
     [Header("Settings")]
     public bool areYouAimedAtRobot = false;
-    public float damageFromPlayerGun = 30f;
+    public float damageFromPlayerGun = 1f;
     public float range = 100f;
     public int maxAmmo;
     public bool isReloading = false;
     public int CurrentAmmo1;
+    public bool readyToShoot = true;
+    public float pistolShootDelay = 0.25f;
     
     [Header("References")]
     public WeaponSwap ws;
@@ -40,6 +42,10 @@ public class WeaponScript : MonoBehaviour
     public GameObject enemyImpactEffectRedTriangles;
     public GameObject enemyImpactEffectWhiteTriangles;
     public GameObject impactEffectLongerVersion;
+
+    [Header("Constants")] 
+    private const int WeaponIndexPistol = 0;
+    private const string enemyTag = "Enemy";
     
     [Header("AudioSource")]
     public AudioSource reloadSound;
@@ -67,7 +73,7 @@ public class WeaponScript : MonoBehaviour
         }
         else trail.SetActive(false);
 
-        if (ws.currentWeaponIndex == 0 && !EscapeMenuController.isPaused)
+        if (WeaponSwap.currentWeaponIndex == WeaponIndexPistol && !EscapeMenuController.isPaused)
         {
             if (AmmoIcon != null && !AmmoIcon.enabled)
             {
@@ -80,28 +86,16 @@ public class WeaponScript : MonoBehaviour
             ammoText.text = CurrentAmmo1.ToString();
         }
 
-        if (ws.currentWeaponIndex == 1)
-        {
-
-        }
-
-        if (ws.currentWeaponIndex == 2)
-        {
-            
-        }
-
         if (isReloading) return;
 
         if (Input.GetMouseButtonDown(0))
         {
-            // nextTimeToFire = Time.time + fireRate;
-
-            if (!isReloading && CurrentAmmo1 > 0 && ws.currentWeaponIndex != 2 && !gg.swinging && !EscapeMenuController.isPaused)
+            if (!isReloading && CurrentAmmo1 > 0 && !gg.swinging && !EscapeMenuController.isPaused && readyToShoot && WeaponSwap.currentWeaponIndex == WeaponIndexPistol)
             {
-                Shoot();
+                PistolShoot();
                 if(gr != null) gr.Recoil();
             }
-            else if ((CurrentAmmo1 <= 0) && !isReloading && !gg.swinging)
+            else if ((CurrentAmmo1 <= 0 && !isReloading && !gg.swinging) && WeaponSwap.currentWeaponIndex == WeaponIndexPistol)
             {
                 StartCoroutine(Reload());
             }
@@ -109,7 +103,7 @@ public class WeaponScript : MonoBehaviour
 
     }
 
-    void Shoot()
+    void PistolShoot()
     {
     if (!gg.swinging)
     {
@@ -118,8 +112,9 @@ public class WeaponScript : MonoBehaviour
             StartCoroutine(MuzzleFlashLightEffect());
         }
         // Handle ammo reduction and muzzle flash for current weapon
-        if (ws.currentWeaponIndex == 0)
+        if (WeaponSwap.currentWeaponIndex == WeaponIndexPistol)
         {
+            readyToShoot = false;
             shootSound.Play();
             CurrentAmmo1 -= 1;
             if (muzzleFlashPistol != null) muzzleFlashPistol.Play();
@@ -128,41 +123,47 @@ public class WeaponScript : MonoBehaviour
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        {
+            if (hit.transform.CompareTag(enemyTag))
             {
-                if (hit.transform.CompareTag("Enemy"))
+                if (enemyImpactEffectRedTriangles != null)
                 {
-                    if (enemyImpactEffectRedTriangles != null)
-                    {
-                        GameObject impact = Instantiate(enemyImpactEffectRedTriangles, hit.point, Quaternion.LookRotation(hit.normal));
-                        Destroy(impact, 2f);
-                    }
-                    
-                    if (enemyImpactEffectWhiteTriangles != null)
-                    {
-                        GameObject impact = Instantiate(enemyImpactEffectWhiteTriangles, hit.point, Quaternion.LookRotation(hit.normal));
-                        Destroy(impact, 2f);
-                    }
-                    
-                    EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
-                    if (enemyHealth != null)
-                    {
-                        enemyHealth.TakeDamage(damageFromPlayerGun);
-                    }
-                }
-
-                if (impactEffect == null) return;
-                {
-                    GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    GameObject impact = Instantiate(enemyImpactEffectRedTriangles, hit.point, Quaternion.LookRotation(hit.normal));
                     Destroy(impact, 2f);
                 }
-                
-                if (impactEffectLongerVersion == null) return;
+                    
+                if (enemyImpactEffectWhiteTriangles != null)
                 {
-                    GameObject impact = Instantiate(impactEffectLongerVersion, hit.point, Quaternion.LookRotation(hit.normal));
+                    GameObject impact = Instantiate(enemyImpactEffectWhiteTriangles, hit.point, Quaternion.LookRotation(hit.normal));
                     Destroy(impact, 2f);
+                }
+                    
+                EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damageFromPlayerGun);
                 }
             }
+
+            if (impactEffect == null) return;
+            {
+                GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impact, 2f);
+            }
+                
+            if (impactEffectLongerVersion == null) return;
+            {
+                GameObject impact = Instantiate(impactEffectLongerVersion, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impact, 2f);
+            }
         }
+    }
+    Invoke(nameof(ResetShoot), pistolShootDelay);
+    }
+
+    private void ResetShoot()
+    {
+        readyToShoot = true;
     }
 
     private IEnumerator Reload()
@@ -208,7 +209,7 @@ public class WeaponScript : MonoBehaviour
     }
     private void ChangeTrigger(bool change)
     {
-        animatorPistol.SetBool("ReloadAnimation", change);
+        animatorPistol.SetBool(pistolAnimationName, change);
     }
     
     private IEnumerator MuzzleFlashLightEffect()

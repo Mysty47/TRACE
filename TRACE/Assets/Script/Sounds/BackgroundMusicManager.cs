@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BackgroundMusicManager : MonoBehaviour
 {
+    [Header("References")]
     private static BackgroundMusicManager instance;
 
     void Awake()

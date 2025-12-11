@@ -7,8 +7,8 @@ public class InstructionsController : MonoBehaviour
     private Animator textAnimator;
     
     [Header("Constants")]
-    private const String animationNameShowText = "ShowText";
-    private const String animationNameHideText = "HideText";
+    private const string animationNameShowText = "ShowText";
+    private const string animationNameHideText = "HideText";
 
     private void Start()
     {

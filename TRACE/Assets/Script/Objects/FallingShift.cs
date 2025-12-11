@@ -6,13 +6,14 @@ public class FallingShift : MonoBehaviour
     [Header("Settings")]
     public GameObject Holder;
     public Rigidbody rb;
+    public float disableDelay = 2f;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             rb.isKinematic = false;
-            StartCoroutine(DisableAfterDelay(2f));
+            StartCoroutine(DisableAfterDelay(disableDelay));
         }
     }
     

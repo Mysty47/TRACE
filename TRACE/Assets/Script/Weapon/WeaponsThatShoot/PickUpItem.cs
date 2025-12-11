@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -5,6 +6,7 @@ public class PickUpItem : MonoBehaviour
 {
     [Header("References")]
     public WeaponScript ws;
+    public WeaponSwap weaponSwap;
     private GrapplingGun gg;
     private Collider coll;
     private Outline outline;
@@ -13,29 +15,57 @@ public class PickUpItem : MonoBehaviour
     
     [Header("Settings")]
     public bool PickedUp = false;
+    public WeaponSelection weapon;
+    
+    public enum WeaponSelection
+    {
+        Pistol, 
+        Shotgun
+    }
 
     void Awake()
     {
-        coll = GetComponent<Collider>();
-        outline = GetComponent<Outline>();
-        gg = GetComponent<GrapplingGun>();
-        if (outline != null)
-            outline.enabled = false;
-
-        ws.enabled = false;
-        gg.enabled = false;
-        coll.isTrigger = false;
+        if (!PickedUp)
+        {
+            coll = GetComponent<Collider>();
+            outline = GetComponent<Outline>();
+            gg = GetComponent<GrapplingGun>();
+            if (outline != null) outline.enabled = false;
+            
+            ws.enabled = false;
+            gg.enabled = false;
+            coll.isTrigger = false;
+        }
+        else
+        {
+            ws.enabled = true;
+            gg.enabled = true;
+            coll.isTrigger = false;
+            
+            if (outline != null) outline.enabled = false;
+        }
     }
 
     public void OnPickUp(Transform parent)
     {
         PickedUp = true;
         ManageInstructions();
+        
         transform.SetParent(parent, false);
         transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(0, 90, 0);
-        transform.localScale = new Vector3(0.03f,0.03f, 0.03f);
-
+        
+        if (weapon == WeaponSelection.Pistol)
+        {
+            transform.localRotation = Quaternion.Euler(0, 90, 0);
+            transform.localScale = new Vector3(0.03f,0.03f, 0.03f);
+        }
+        else if(weapon == WeaponSelection.Shotgun)
+        {
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+            transform.localScale = Vector3.one;
+            SwapToTheWeaponOnPickup(1);
+        }
+        
         coll.isTrigger = true;
         ws.enabled = true;
         gg.enabled = true;
@@ -61,5 +91,12 @@ public class PickUpItem : MonoBehaviour
     private void HideInstructionText()
     {
         ic.HideText();
+    }
+
+    private void SwapToTheWeaponOnPickup(int index)
+    {
+        weaponSwap.weapons[index] = gameObject;
+        WeaponSwap.currentWeaponIndex = index;
+        weaponSwap.SelectWeapon(index);
     }
 }

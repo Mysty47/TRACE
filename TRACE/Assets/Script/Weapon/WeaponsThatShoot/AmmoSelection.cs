@@ -12,7 +12,7 @@ public class AmmoSelection : MonoBehaviour
 
     void Update()
     {
-        if (wsw.currentWeaponIndex == 0)
+        if (WeaponSwap.currentWeaponIndex == 0)
         {
             ws.maxAmmo = ammo1;
         }

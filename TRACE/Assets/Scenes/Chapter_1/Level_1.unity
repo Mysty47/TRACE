@@ -9579,9 +9579,9 @@ MonoBehaviour:
   startPoint: {x: 30.24163, y: -4.752459, z: 178.4616}
   endPoint: {x: 30.24163, y: -2.9, z: 178.4616}
   called: 0
+  soundPlayed: 0
   openningDoorSound: {fileID: 327108189}
   rsc: {fileID: 9212352}
-  soundPlayed: 0
 --- !u!1 &336293772
 GameObject:
   m_ObjectHideFlags: 0
@@ -25484,9 +25484,9 @@ MonoBehaviour:
   startPoint: {x: 30.24163, y: -4.752459, z: 173.9337}
   endPoint: {x: 30.24163, y: -2.9, z: 173.9337}
   called: 0
+  soundPlayed: 0
   openningDoorSound: {fileID: 0}
   rsc: {fileID: 9212352}
-  soundPlayed: 0
 --- !u!1 &880223513
 GameObject:
   m_ObjectHideFlags: 0

@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 		
-		MyInput();
+		HandleInput();
 
 		Look();
 		if (Input.GetKeyDown(KeyCode.C))
@@ -279,7 +279,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 	//Player input
-	public void MyInput()
+	public void HandleInput()
 	{
 		inputX = Input.GetAxisRaw("Horizontal");
 		inputY = Input.GetAxisRaw("Vertical");
@@ -444,7 +444,7 @@ public class PlayerMovement : MonoBehaviour
 	//Looking around by using your mouse
 	private void Look()
 	{
-		if (EscapeMenuController.isPaused == false)
+		if (!EscapeMenuController.isPaused)
 		{
 			float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 			float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
@@ -541,7 +541,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			wallAngle = 90f;
 		}
-		else if (Math.Abs(wallNormalVector.x - -1f) < 0.1f)
+		else if (Math.Abs(wallNormalVector.x + 1f) < 0.1f)
 		{
 			wallAngle = 270f;
 		}
@@ -549,7 +549,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			wallAngle = 0f;
 		}
-		else if (Math.Abs(wallNormalVector.z - -1f) < 0.1f)
+		else if (Math.Abs(wallNormalVector.z + 1f) < 0.1f)
 		{
 			wallAngle = 180f;
 		}
@@ -574,7 +574,7 @@ public class PlayerMovement : MonoBehaviour
 			if (!cancelling)
 			{
 				cancelling = true;
-				CancelInvoke("CancelWallrun");
+				// CancelInvoke("CancelWallrun");
 				Invoke("CancelWallrun", 0.2f); // little delay before ending wallRun
 			}
 		}

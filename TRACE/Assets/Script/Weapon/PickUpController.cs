@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PickUpController : MonoBehaviour
@@ -5,12 +6,13 @@ public class PickUpController : MonoBehaviour
     [Header("References")]
     public Transform player;
     public Transform gunContainer;
+    public Transform shotgunContainer;
     public Camera fpsCam;
+    public WeaponSwap ws;
 
     [Header("Settings")]
     public float pickUpRange = 3f;
     public LayerMask pickableLayer;
-
     private Outline currentOutline;
     private PickUpItem currentItem;
 
@@ -47,7 +49,6 @@ public class PickUpController : MonoBehaviour
         }
         else
         {
-            // Ако не гледаме към оръжие — изключваме outline
             ClearOutline();
         }
     }
@@ -65,7 +66,17 @@ public class PickUpController : MonoBehaviour
     void PickUp(PickUpItem item)
     {
         slotFull = true;
-        item.OnPickUp(gunContainer);
+        switch (item.weapon)
+        {
+            case PickUpItem.WeaponSelection.Pistol:
+               item.OnPickUp(gunContainer);
+               break;
+            case PickUpItem.WeaponSelection.Shotgun:
+                item.OnPickUp(shotgunContainer);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
         ClearOutline();
     }
 

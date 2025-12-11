@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 5
+  objectName: Player
 --- !u!65 &8973696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11587,7 +11588,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3648874027859118887, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
       propertyPath: m_Name
-      value: Glock17
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 4172786489228349853, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11631,6 +11632,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4942605452412996334, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
       propertyPath: ws
+      value: 
+      objectReference: {fileID: 2146267489}
+    - target: {fileID: 4942605452412996334, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
+      propertyPath: wsp
       value: 
       objectReference: {fileID: 2146267489}
     - target: {fileID: 4942605452412996334, guid: a01456c7cd2d2684c9904e38c93918e7, type: 3}
@@ -24186,7 +24191,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aad2119fa011e4c46af2d2e22ae4384a, type: 2}
+  - {fileID: 2100000, guid: 5e25e6db3219fb745ab88b492541caf1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -43171,7 +43176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aad2119fa011e4c46af2d2e22ae4384a, type: 2}
+  - {fileID: 2100000, guid: 5e25e6db3219fb745ab88b492541caf1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -43762,8 +43767,8 @@ Transform:
   m_GameObject: {fileID: 1548986259}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000000018521051, y: -2.9906251e-12, z: 0.0016147147, w: 0.9999987}
-  m_LocalPosition: {x: -0.8584595, y: -40.026703, z: 126.92561}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.86, y: -38.98, z: 126.92561}
+  m_LocalScale: {x: 1, y: 173.1593, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 223980771}
@@ -50869,17 +50874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a656f3b163e76541ad36af533c6b7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  enemyScript: {fileID: 0}
-  outlineScript: {fileID: 0}
-  robotDeathParticles: {fileID: 0}
-  enemyGun: {fileID: 0}
-  health: 100
-  isDead: 0
-  isEnemyDead: 0
-  player: {fileID: 1799584932}
-  healthBar: {fileID: 1482892609}
-  retryCanvas: {fileID: 1314847576}
 --- !u!114 &1799584937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54272,6 +54266,8 @@ MonoBehaviour:
   - {fileID: 1093798198}
   currentWeaponIndex: 0
   ws: {fileID: 2146267490}
+  shotgun: {fileID: 0}
+  weaponScript: {fileID: 2146267490}
 --- !u!114 &2146267490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54290,6 +54286,8 @@ MonoBehaviour:
   maxAmmo: 12
   isReloading: 0
   CurrentAmmo1: 12
+  readyToShoot: 1
+  pistolShootDelay: 0.25
   ws: {fileID: 2146267489}
   gg: {fileID: 1093798202}
   gr: {fileID: 1093798200}
