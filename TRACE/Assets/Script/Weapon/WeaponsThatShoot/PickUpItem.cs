@@ -31,16 +31,21 @@ public class PickUpItem : MonoBehaviour
             outline = GetComponent<Outline>();
             gg = GetComponent<GrapplingGun>();
             if (outline != null) outline.enabled = false;
-            
-            ws.enabled = false;
-            gg.enabled = false;
-            coll.isTrigger = false;
+            if(ws != null)
+                ws.enabled = false;
+            if(gg != null)
+                gg.enabled = false;
+            if(coll != null)
+                coll.isTrigger = false;
         }
         else
         {
-            ws.enabled = true;
-            gg.enabled = true;
-            coll.isTrigger = false;
+            if(ws != null)
+                ws.enabled = true;
+            if(gg != null)
+                gg.enabled = true;
+            if(coll != null)
+                coll.isTrigger = false;
             
             if (outline != null) outline.enabled = false;
         }
@@ -49,6 +54,7 @@ public class PickUpItem : MonoBehaviour
     public void OnPickUp(Transform parent)
     {
         PickedUp = true;
+        if (outline != null) Destroy(outline);
         ManageInstructions();
         
         transform.SetParent(parent, false);
@@ -56,7 +62,7 @@ public class PickUpItem : MonoBehaviour
         
         if (weapon == WeaponSelection.Pistol)
         {
-            transform.localRotation = Quaternion.Euler(0, 90, 0);
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
             transform.localScale = new Vector3(0.03f,0.03f, 0.03f);
         }
         else if(weapon == WeaponSelection.Shotgun)
@@ -70,11 +76,11 @@ public class PickUpItem : MonoBehaviour
         ws.enabled = true;
         gg.enabled = true;
 
-        GunRecoil recoil = GetComponent<GunRecoil>();
-        if (recoil != null)
-        {
-            recoil.ResetRecoilOrigin();
-        }
+        // GunRecoil recoil = GetComponent<GunRecoil>();
+        // if (recoil != null)
+        // {
+        //     recoil.ResetRecoilOrigin();
+        // }
         
         if (outline != null)
             outline.enabled = false;

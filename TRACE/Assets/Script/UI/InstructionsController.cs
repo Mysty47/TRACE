@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class InstructionsController : MonoBehaviour
 {
+    [Header("Settings")]
+    public bool shouldShowAtStart = false;
+    
     [Header("Animator")]
     private Animator textAnimator;
     
@@ -13,15 +16,22 @@ public class InstructionsController : MonoBehaviour
     private void Start()
     {
         textAnimator = GetComponent<Animator>();
+        if (textAnimator != null && shouldShowAtStart)
+        {
+            ShowText();
+            Invoke(nameof(HideText), 5f);
+        }
     }
 
     public void ShowText()
     {
-        textAnimator.SetTrigger(animationNameShowText);
+        if(textAnimator != null)
+            textAnimator.SetTrigger(animationNameShowText);
     }
 
     public void HideText()
     {
-        textAnimator.SetTrigger(animationNameHideText);
+        if(textAnimator != null)
+            textAnimator.SetTrigger(animationNameHideText);
     }
 }

@@ -27,8 +27,8 @@ public class GunRecoil : MonoBehaviour
             return;
         }
 
-        gunOriginalPosition = gunTransform.localPosition;
-        gunOriginalRotation = gunTransform.localRotation;
+        gunOriginalPosition = Vector3.zero;
+        gunOriginalRotation = Quaternion.Euler(0, 0, 0);
         muzzleOriginalRotation = muzzlePoint.localRotation;
     }
 

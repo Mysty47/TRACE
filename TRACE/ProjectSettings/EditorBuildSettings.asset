@@ -23,24 +23,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chapter_1/Level_5.unity
     guid: ecc738cd69c640545b98d689990ec0d9
-  - enabled: 0
-    path: Assets/Scenes/Map1.unity
-    guid: 5770f830faa1d0742b2d2bc6f4671243
-  - enabled: 0
-    path: Assets/Scenes/Map2.unity
-    guid: f9abc0478fc669440812a5f9f01e06e8
-  - enabled: 0
-    path: Assets/Scenes/Map3.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/Map4.unity
-    guid: 8c8b43ba42761d04192c5c930ba057fe
-  - enabled: 0
-    path: Assets/Scenes/Map5.unity
-    guid: 7e7c4b3ce1051e4458808676ce96d5d1
-  - enabled: 0
-    path: Assets/Scenes/EntryMap.unity
-    guid: 7b533dfe561bc47c8975c955fe4ef3d3
+  - enabled: 1
+    path: Assets/Scenes/Chapter_1/Level_6.unity
+    guid: e43e5ff852341a44a8ac09d0c5c5f901
+  - enabled: 1
+    path: Assets/Scenes/Chapter_1/Level_7.unity
+    guid: 1534c2fbc2bef4d4db4bbf7c72630a4b
+  - enabled: 1
+    path: Assets/Scenes/Chapter_1/Level_8.unity
+    guid: a8589f4bdddb6ad488f05ec95a216e2b
   - enabled: 1
     path: Assets/Scenes/Test_Maps/WeaponsBeta.unity
     guid: 64f3ee260a6641a46aa5b08681680def

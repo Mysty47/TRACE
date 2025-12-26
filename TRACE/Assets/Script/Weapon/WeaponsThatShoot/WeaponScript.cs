@@ -67,6 +67,7 @@ public class WeaponScript : MonoBehaviour
     void Update()
     {
         AnimatorStateInfo state = animatorPistol.GetCurrentAnimatorStateInfo(0);
+        
         if (state.IsName("PistolReloadAnimation"))
         {
             trail.SetActive(true);
@@ -92,7 +93,7 @@ public class WeaponScript : MonoBehaviour
         {
             if (!isReloading && CurrentAmmo1 > 0 && !gg.swinging && !EscapeMenuController.isPaused && readyToShoot && WeaponSwap.currentWeaponIndex == WeaponIndexPistol)
             {
-                PistolShoot();
+                Shoot();
                 if(gr != null) gr.Recoil();
             }
             else if ((CurrentAmmo1 <= 0 && !isReloading && !gg.swinging) && WeaponSwap.currentWeaponIndex == WeaponIndexPistol)
@@ -100,10 +101,9 @@ public class WeaponScript : MonoBehaviour
                 StartCoroutine(Reload());
             }
         }
-
     }
 
-    void PistolShoot()
+    void Shoot()
     {
     if (!gg.swinging)
     {
@@ -121,6 +121,8 @@ public class WeaponScript : MonoBehaviour
             if (CurrentAmmo1 <= 0) StartCoroutine(Reload());
         }
 
+        Invoke(nameof(ResetShoot), pistolShootDelay);
+        
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
@@ -158,7 +160,6 @@ public class WeaponScript : MonoBehaviour
             }
         }
     }
-    Invoke(nameof(ResetShoot), pistolShootDelay);
     }
 
     private void ResetShoot()
@@ -171,8 +172,7 @@ public class WeaponScript : MonoBehaviour
         if (isReloading) yield break;
 
         isReloading = true;
-
-        // 🔹 Скриваме нормалния crosshair, показваме кръглия
+        
         NormalCrosshair.gameObject.SetActive(false);
         ReloadCrosshair.fillAmount = 0f;
         ReloadCrosshair.gameObject.SetActive(true);

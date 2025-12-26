@@ -10,6 +10,7 @@ public class WeaponSwap : MonoBehaviour
     public WeaponScript ws;
     public Shotgun shotgun;
     public WeaponScript weaponScript;
+    public GrapplingGun gg;
 
     void Start()
     {
@@ -18,7 +19,8 @@ public class WeaponSwap : MonoBehaviour
 
     void Update()
     {
-        HandleWeaponSwitchInput();
+        if(!gg.IsGrappling())
+            HandleWeaponSwitchInput();
     }
 
     void HandleWeaponSwitchInput()
@@ -54,6 +56,14 @@ public class WeaponSwap : MonoBehaviour
                 PickUpItem p = weapons[i].GetComponent<PickUpItem>();
                 if (p != null && p.PickedUp)
                 {
+                    if (currentWeaponIndex == 0)
+                    {
+                        weapons[i].transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                    }
+                    else
+                    {
+                        weapons[i].transform.localRotation = Quaternion.Euler(Vector3.zero);
+                    }
                     weapons[i].SetActive(i == currentWeaponIndex);
                 }
             }
