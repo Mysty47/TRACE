@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LevelReload : MonoBehaviour
 {
-    public HealthBase t;
-    public string newGameLevelWhenDead;
-    
     void OnTriggerEnter(Collider ChangeScene)
     {
         if(ChangeScene.gameObject.CompareTag("Player"))

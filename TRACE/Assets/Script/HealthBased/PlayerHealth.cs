@@ -7,6 +7,7 @@ public class PlayerHealth : HealthBase
     public Image healthBar;
     public GameObject retryCanvas;
     
+    [Header("Settings")]
     public bool isDead = false;
 
     public override void TakeDamage(float amount)

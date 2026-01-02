@@ -4,7 +4,6 @@ using EZCameraShake;
 public class BladeAttack : MonoBehaviour
 {
     [Header("References")] 
-    public Camera fpsCam;
     public Animator animator;
     public TrailRenderer trailRenderer;
     

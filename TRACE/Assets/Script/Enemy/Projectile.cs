@@ -7,15 +7,12 @@ public class Projectile : MonoBehaviour
     public GameObject hitEffect;
     public PlayerHealth playerHealth;
     
-    [Header("Settings")]
-    public float lifeTime = 2f;
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("Hit");
-            HealthBase healthBase =  other.GetComponent<HealthBase>();
+            PlayerHealth playerHealth =  other.GetComponent<PlayerHealth>();
             OnHit();
             playerHealth.TakeDamage(50);
         }

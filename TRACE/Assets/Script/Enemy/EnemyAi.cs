@@ -7,11 +7,9 @@ using UnityEngine.Serialization;
 public class EnemyAi : MonoBehaviour
 {
     [Header("References")]
-    public HealthBase playerHealthBaseScript;
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround;
-    public WeaponScript ws;
     public Outline outline;
     public Camera fpsCam;
 

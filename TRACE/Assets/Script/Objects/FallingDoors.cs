@@ -6,7 +6,6 @@ public class FallingDoors : MonoBehaviour
     public float speed = 0.1f;
     public Vector3 startPoint;
     public Vector3 endPoint;
-    public bool called = false;
     public bool soundPlayed = false;
     
     [Header("References")]

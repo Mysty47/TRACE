@@ -4,11 +4,8 @@ using UnityEngine;
 public class PickUpController : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;
     public Transform gunContainer;
-    public Transform shotgunContainer;
     public Camera fpsCam;
-    public WeaponSwap ws;
 
     [Header("Settings")]
     public float pickUpRange = 3f;
@@ -66,17 +63,9 @@ public class PickUpController : MonoBehaviour
     void PickUp(PickUpItem item)
     {
         slotFull = true;
-        switch (item.weapon)
-        {
-            case PickUpItem.WeaponSelection.Pistol:
-               item.OnPickUp(gunContainer);
-               break;
-            case PickUpItem.WeaponSelection.Shotgun:
-                item.OnPickUp(shotgunContainer);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        
+        item.OnPickUp(gunContainer);
+        
         ClearOutline();
     }
 

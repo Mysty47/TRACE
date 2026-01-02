@@ -11,11 +11,9 @@ public class GrapplingGun : MonoBehaviour {
     public float AimAssistSize = 1f;
     
     [Header("References")]
-    public WeaponSwap ws;
     private SpringJoint joint;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, cameraPlayer, player;
-    public WeaponSwap wsp;
     
     [Header("UI")]
     public GameObject grappleIndicator; // A small red sphere to represent the grapple point

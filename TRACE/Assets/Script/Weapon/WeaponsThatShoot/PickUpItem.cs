@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
     [Header("References")]
-    public WeaponScript ws;
+    public WeaponBase ws;
     public WeaponSwap weaponSwap;
     private GrapplingGun gg;
     private Collider coll;
@@ -36,7 +36,7 @@ public class PickUpItem : MonoBehaviour
             if(gg != null)
                 gg.enabled = false;
             if(coll != null)
-                coll.isTrigger = false;
+                coll.enabled = true;
         }
         else
         {
@@ -45,7 +45,7 @@ public class PickUpItem : MonoBehaviour
             if(gg != null)
                 gg.enabled = true;
             if(coll != null)
-                coll.isTrigger = false;
+                coll.enabled = false;
             
             if (outline != null) outline.enabled = false;
         }
@@ -54,6 +54,7 @@ public class PickUpItem : MonoBehaviour
     public void OnPickUp(Transform parent)
     {
         PickedUp = true;
+        ws.enabled = true;
         if (outline != null) Destroy(outline);
         ManageInstructions();
         
@@ -62,14 +63,14 @@ public class PickUpItem : MonoBehaviour
         
         if (weapon == WeaponSelection.Pistol)
         {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-            transform.localScale = new Vector3(0.03f,0.03f, 0.03f);
+            transform.localRotation = Quaternion.Euler(0, 90, 0);
+            transform.localScale = new Vector3(0.04f,0.04f, 0.04f);
         }
         else if(weapon == WeaponSelection.Shotgun)
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
-            transform.localScale = Vector3.one;
-            SwapToTheWeaponOnPickup(1);
+            transform.localScale = new Vector3(13f, 13f, 13f);
+            if(ws != null) SwapToTheWeaponOnPickup(1);
         }
         
         coll.isTrigger = true;

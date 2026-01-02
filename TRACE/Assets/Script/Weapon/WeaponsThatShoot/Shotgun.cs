@@ -1,156 +1,105 @@
+using UnityEngine;
 using System.Collections;
 using TMPro;
-using UnityEngine;
+using Unity.VisualScripting;
 
-public class Shotgun : MonoBehaviour
+public class Shotgun : WeaponBase
 {
-    [Header("References")] public Rigidbody rb;
+    [Header("References")]
+    public Rigidbody rb;
     public PlayerMovement playerScript;
-    public Camera fpsCam;
-    public WeaponSwap ws;
+    public Animator anim;
 
-    [Header("Crosshairs")] public UnityEngine.UI.Image ReloadCrosshair;
-    public UnityEngine.UI.Image NormalCrosshair;
+    [Header("Shotgun Stats")]
+    public float shotgunDamage = 4f;
+    public float shotgunRange = 20f;
+    public float shotgunFireDelay = 0.5f;
+    public int shotgunMaxAmmo = 5;
+    public float shotgunReloadTime = 2f;
 
-    [Header("Audio")] public AudioSource reloadSound;
-    public AudioSource shootSound;
-
-    [Header("Particles")] public ParticleSystem shootParticles;
-
-    [Header("Animation")] public Animator anim;
-
-    [Header("Tag")] private const string PadTag = "ShotgunPad";
-
-    [Header("UI")] public TextMeshProUGUI ammoText;
-
-    [Header("Weapon Settings")] 
+    [Header("Knockback")]
     public float pushForce = 30f;
-    public int maxAmmo = 5;
-    public float range = 20f;
-    public int currentAmmo;
-    public float reloadTime = 2f;
-    public bool readyToShoot = true;
-    public bool isReloading = false;
-    public int damage = 4;
     public float forceBoost = 3f;
-    public float shootDelay = 0.5f;
 
-    [Header("Constants")] private const string enemyTag = "Enemy";
+    [Header("Particles")]
+    public ParticleSystem shootParticles;
 
-    private void Start()
+    [Header("Audio")]
+    public AudioSource shootSound;
+    public AudioSource reloadSound;
+
+    [Header("Tags")]
+    private const string EnemyTag = "Enemy";
+    private const string PadTag = "ShotgunPad";
+
+    protected override void ApplyWeaponStats()
     {
-        currentAmmo = maxAmmo;
+        damage = shotgunDamage;
+        range = shotgunRange;
+        shootDelay = shotgunFireDelay;
+        maxAmmo = shotgunMaxAmmo;
     }
 
-    private void Update()
+    void OnEnable()
     {
-        if (isReloading) return;
+        ResetShotgunRotation();
+    }
 
-        ammoText.text = currentAmmo.ToString();
+    protected override void Shoot()
+    {
+        base.Shoot();
 
-        if (readyToShoot && Input.GetMouseButtonDown(0) && currentAmmo > 0 && WeaponSwap.currentWeaponIndex == 1 &&
-            !isReloading)
+        shootSound?.Play();
+        shootParticles?.Play();
+        anim?.SetTrigger("Shot");
+        
+        ApplyKnockback();
+    }
+
+    protected override IEnumerator Reload()
+    {
+        anim?.SetTrigger("Reload");
+        reloadSound?.Play();
+        return base.Reload();
+    }
+
+    protected override float GetReloadTime()
+    {
+        return shotgunReloadTime;
+    }
+
+    protected override void DealDamage(RaycastHit hit)
+    {
+        if (hit.transform.CompareTag(EnemyTag))
         {
-            Shoot();
-            Invoke(nameof(ResetShotgunRotation), 1f);
-        }
-
-        else if ((currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R)) && WeaponSwap.currentWeaponIndex == 1 &&
-                 currentAmmo != maxAmmo && !isReloading)
-        {
-            isReloading = true;
-
-            if (reloadSound != null) reloadSound.Play();
-            if (anim != null) anim.SetTrigger("Reload");
-
-            Invoke(nameof(Reload), reloadTime);
+            EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+            enemyHealth?.TakeDamage(damage);
         }
     }
 
-    private void Shoot()
+    private void ApplyKnockback()
     {
-        readyToShoot = false;
+        if (playerScript.crouching) return;
 
-        if (shootSound != null) shootSound.Play();
+        float multiplier = 1f;
+        RaycastHit hitPad;
 
-        currentAmmo--;
-
-        if (shootParticles != null) shootParticles.Play();
-
-        if (anim != null) anim.SetTrigger("Shot");
-
-        if (!playerScript.crouching)
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitPad, range))
         {
-            float multiplier = 1f;
-            
-            RaycastHit hitPad;
-            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitPad, range))
-            {
-                if (hitPad.transform.CompareTag(PadTag)) 
-                {
-                    multiplier = forceBoost;
-                } else multiplier = 1f;
-            }
-            Vector3 knockbackDir = (-fpsCam.transform.forward + fpsCam.transform.up * 0.35f).normalized;
-            rb.AddForce(knockbackDir * (pushForce * multiplier), ForceMode.Impulse);
+            if (hitPad.transform.CompareTag(PadTag))
+                multiplier = forceBoost;
         }
 
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-        {
-            if (hit.transform.CompareTag(enemyTag))
-            {
-                EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
-                if (enemyHealth != null)
-                    enemyHealth.TakeDamage(damage);
-            }
-        }
+        Vector3 knockbackDir =
+            (-fpsCam.transform.forward + fpsCam.transform.up * 0.35f).normalized;
 
-        Invoke(nameof(ResetAttack), shootDelay);
-    }
+        rb.AddForce(knockbackDir * (pushForce * multiplier), ForceMode.Impulse);
 
-    private void ResetAttack()
-    {
-        readyToShoot = true;
-    }
-
-    private void Reload()
-    {
-        // NormalCrosshair.gameObject.SetActive(false);
-        // ReloadCrosshair.fillAmount = 0f;
-        // ReloadCrosshair.gameObject.SetActive(true);
-
-        // if (reloadSound != null) reloadSound.Play();
-
-        // float elapsed = 0f;
-
-        // while (elapsed < reloadTime)
-        // {
-        //     elapsed += Time.deltaTime;
-        //
-        //     ReloadCrosshair.fillAmount = Mathf.Clamp01(elapsed / reloadTime);
-        //     if (elapsed >= reloadTime * 0.8f)
-        //     {
-        //         if (!reloadFinishSound.isPlaying) reloadFinishSound.Play();
-        //     }
-        // }
-
-        currentAmmo = maxAmmo;
-
-        // ReloadCrosshair.gameObject.SetActive(false);
-        // NormalCrosshair.gameObject.SetActive(true);
-
-        isReloading = false;
-
-        readyToShoot = true;
-
-        if (anim != null) anim.ResetTrigger("Reload");
-
-        ammoText.text = currentAmmo.ToString();
+        Invoke(nameof(ResetShotgunRotation), 1f);
     }
 
     private void ResetShotgunRotation()
     {
-        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        transform.localRotation = Quaternion.Euler(-90f, 0f, -90f);
     }
 }

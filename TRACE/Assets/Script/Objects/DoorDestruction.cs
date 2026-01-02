@@ -8,7 +8,6 @@ public class DoorDestruction : MonoBehaviour
     
     [Header("Settings")]
     public float explosionForce = 5f;
-    public float explosionRadius = 2f;
         
     [Header("Audio")]
     public AudioSource doorDestruction;
