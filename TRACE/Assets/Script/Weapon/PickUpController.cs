@@ -9,6 +9,7 @@ public class PickUpController : MonoBehaviour
 
     [Header("Settings")]
     public float pickUpRange = 3f;
+    public float raycastRadius = 0.3f;
     public LayerMask pickableLayer;
     private Outline currentOutline;
     private PickUpItem currentItem;
@@ -23,7 +24,7 @@ public class PickUpController : MonoBehaviour
     void HandleRaycast()
     {
         RaycastHit hit;
-        if (Physics.SphereCast(fpsCam.transform.position, 0.3f, fpsCam.transform.forward, out hit, pickUpRange, pickableLayer))
+        if (Physics.SphereCast(fpsCam.transform.position, raycastRadius, fpsCam.transform.forward, out hit, pickUpRange, pickableLayer))
         {
             PickUpItem item = hit.transform.GetComponent<PickUpItem>();
 
@@ -37,7 +38,6 @@ public class PickUpController : MonoBehaviour
                     if (currentOutline != null)
                         currentOutline.enabled = true;
                 }
-                
                 if (Input.GetKeyDown(KeyCode.E) && !slotFull)
                 {
                     PickUp(item);

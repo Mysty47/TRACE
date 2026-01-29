@@ -143,19 +143,6 @@ public class PlayerMovement : MonoBehaviour
 	{
 		//For moving
 		Movement();
-		
-		// Play particles if moving fast
-	}
-	
-	IEnumerator FadeOutSound(AudioSource audioSource)
-	{
-		while (audioSource.volume > 0)
-		{
-			audioSource.volume -= Time.deltaTime * 2f; // Adjust fade speed
-			yield return null;
-		}
-		audioSource.Stop();
-		audioSource.volume = 0.5f; // Reset volume
 	}
 	
 	private void Update()
@@ -240,8 +227,9 @@ public class PlayerMovement : MonoBehaviour
 		else
 		{
 			float horizontalSpeed = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
-
-			if (horizontalSpeed > 0.5f)
+			float runningDecider = 0.5f;
+			
+			if (horizontalSpeed > runningDecider)
 				newState = MovementState.running;
 			else
 				newState = MovementState.idle;
@@ -324,7 +312,8 @@ public class PlayerMovement : MonoBehaviour
 	//Moving around with WASD
 	private void Movement()
 	{
-		rb.AddForce(Vector3.down * Time.fixedDeltaTime * 10f);
+		float groundStickForce = 10f;
+		rb.AddForce(Vector3.down * Time.fixedDeltaTime * groundStickForce);
 		
 		// We get the speed of the player in the direction he is moving
 		Vector2 relativeVelocity = FindVelRelativeToLook();
@@ -344,7 +333,10 @@ public class PlayerMovement : MonoBehaviour
 		// Applying force on the player so he can stick to the ground
 		if (crouching && grounded && readyToJump)
 		{
-			rb.AddForce(Vector3.down * Time.fixedDeltaTime * 3000f);
+			float stickingForce = 3000f;
+			
+			rb.AddForce(Vector3.down * Time.fixedDeltaTime * stickingForce);
+			
 			return;
 		}
 		
@@ -411,9 +403,13 @@ public class PlayerMovement : MonoBehaviour
 		if ((grounded || wallRunning || surfing) && readyToJump)
 		{
 			Vector3 velocity = rb.linearVelocity;
+			
 			readyToJump = false;
+			
 			rb.AddForce(Vector2.up * jumpForce * 1.5f);
+			
 			rb.AddForce(normalVector * jumpForce * 0.5f);
+			
 			if (rb.linearVelocity.y < 0.5f)
 			{
 				rb.linearVelocity = new Vector3(velocity.x, 0f, velocity.z);
@@ -530,6 +526,16 @@ public class PlayerMovement : MonoBehaviour
 			wallRunRotation = 0f;
 			return;
 		}
+
+		const float rotationDivider = 90f;
+		const float rotationMultiplier = 15f;
+		const float wallNormalTolerance = 0.1f;
+		
+		const float angleFront = 0f;
+		const float angleBack = 180f;
+		const float angleRight = 90f;
+		const float angleLeft = 270f;
+		
 		// the angle of the wall
 		float wallAngle = 0f;
 		
@@ -537,21 +543,21 @@ public class PlayerMovement : MonoBehaviour
 		float camYaw = playerCam.transform.rotation.eulerAngles.y;
 		
 		// finds the approximate angle
-		if (Math.Abs(wallNormalVector.x - 1f) < 0.1f)
+		if (Math.Abs(wallNormalVector.x - 1f) < wallNormalTolerance)
 		{
-			wallAngle = 90f;
+			wallAngle = angleRight;
 		}
-		else if (Math.Abs(wallNormalVector.x + 1f) < 0.1f)
+		else if (Math.Abs(wallNormalVector.x + 1f) < wallNormalTolerance)
 		{
-			wallAngle = 270f;
+			wallAngle = angleLeft;
 		}
-		else if (Math.Abs(wallNormalVector.z - 1f) < 0.1f)
+		else if (Math.Abs(wallNormalVector.z - 1f) < wallNormalTolerance)
 		{
-			wallAngle = 0f;
+			wallAngle = angleFront;
 		}
-		else if (Math.Abs(wallNormalVector.z + 1f) < 0.1f)
+		else if (Math.Abs(wallNormalVector.z + 1f) < wallNormalTolerance)
 		{
-			wallAngle = 180f;
+			wallAngle = angleBack;
 		}
 
 		wallAngle = Vector3.SignedAngle(new Vector3(0f, 0f, 1f), wallNormalVector, Vector3.up);
@@ -560,22 +566,25 @@ public class PlayerMovement : MonoBehaviour
 		float deltaAngle = Mathf.DeltaAngle(camYaw, wallAngle);
 		
 		// calculates how much should the camera rotate for the wallrun
-		wallRunRotation = (0f - deltaAngle / 90f) * 15f;
+		wallRunRotation = (0f - deltaAngle / rotationDivider) * rotationMultiplier;
 		
 		if (!readyToWallrun)
 		{
 			return;
 		}
 
+		float wallRunRotationMin = 4f;
+		float wallRunRotationMax = 22f;
+
+		float cancelDelay = 0.2f;
 		//  Automatically ends wallRun in certain conditions
-		if ((Mathf.Abs(wallRunRotation) < 4f && inputY > 0f && Math.Abs(inputX) < 0.1f) ||
-		    (Mathf.Abs(wallRunRotation) > 22f && inputY < 0f && Math.Abs(inputX) < 0.1f))
+		if ((Mathf.Abs(wallRunRotation) < wallRunRotationMin && inputY > 0f && Math.Abs(inputX) < 0.1f) ||
+		    (Mathf.Abs(wallRunRotation) > wallRunRotationMax && inputY < 0f && Math.Abs(inputX) < 0.1f))
 		{
 			if (!cancelling)
 			{
 				cancelling = true;
-				// CancelInvoke("CancelWallrun");
-				Invoke("CancelWallrun", 0.2f); // little delay before ending wallRun
+				Invoke("CancelWallrun", cancelDelay); // little delay before ending wallRun
 			}
 		}
 		else
@@ -587,9 +596,11 @@ public class PlayerMovement : MonoBehaviour
 
 	private void CancelWallrun()
 	{
-		MonoBehaviour.print("cancelled");
 		Invoke("GetReadyToWallrun", 0.1f);
-		rb.AddForce(wallNormalVector * 600f);
+		
+		float forceMultiplier = 600f;
+		
+		rb.AddForce(wallNormalVector * forceMultiplier);
 		readyToWallrun = false;
 	}
 
@@ -661,14 +672,18 @@ public class PlayerMovement : MonoBehaviour
 		
 		Vector3 maxVaultPos = transform.position + Vector3.up * 1.5f;
 
+		float maxDistanceSpaceAbove = 2f;
+		
 		// checks if there is space above
-		if (Physics.Raycast(maxVaultPos, dir, out RaycastHit forwardHit, 2f, whatIsGround))
+		if (Physics.Raycast(maxVaultPos, dir, out RaycastHit forwardHit, maxDistanceSpaceAbove, whatIsGround))
 		{
 			return;
 		}
+		
+		float maxDistanceSpaceBelow = 3f;
 
 		// finding the ground under the player
-		if (Physics.Raycast(maxVaultPos + dir * 1.5f, Vector3.down, out RaycastHit downHit, 3f, whatIsGround))
+		if (Physics.Raycast(maxVaultPos + dir * 1.5f, Vector3.down, out RaycastHit downHit, maxDistanceSpaceBelow, whatIsGround))
 		{
 			Vector3 landPos = downHit.point + Vector3.up * 0.5f;
 

@@ -12,10 +12,15 @@ public class PickUpItem : MonoBehaviour
     private Outline outline;
     public PickUpController puc;
     public InstructionsController ic;
+    public WeaponSelection weapon;
     
     [Header("Settings")]
     public bool PickedUp = false;
-    public WeaponSelection weapon;
+    public float instructionsTimeDelay = 3f;
+    public Vector3 pistolLocalScale = new Vector3(0.04f, 0.04f, 0.04f);
+    public Quaternion pistolLocalRotation =  Quaternion.Euler(0f, 90f, 0f);
+    public Vector3 shotgunLocalScale = new Vector3(13f, 13f, 13f);
+    public Quaternion shotgunLocalRotation = Quaternion.Euler(0f, 0f, 0f);
     
     public enum WeaponSelection
     {
@@ -63,25 +68,19 @@ public class PickUpItem : MonoBehaviour
         
         if (weapon == WeaponSelection.Pistol)
         {
-            transform.localRotation = Quaternion.Euler(0, 90, 0);
-            transform.localScale = new Vector3(0.04f,0.04f, 0.04f);
+            transform.localRotation = pistolLocalRotation;
+            transform.localScale = pistolLocalScale;
         }
         else if(weapon == WeaponSelection.Shotgun)
         {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-            transform.localScale = new Vector3(13f, 13f, 13f);
+            transform.localRotation = shotgunLocalRotation;
+            transform.localScale = shotgunLocalScale;
             if(ws != null) SwapToTheWeaponOnPickup(1);
         }
         
         coll.isTrigger = true;
         ws.enabled = true;
         gg.enabled = true;
-
-        // GunRecoil recoil = GetComponent<GunRecoil>();
-        // if (recoil != null)
-        // {
-        //     recoil.ResetRecoilOrigin();
-        // }
         
         if (outline != null)
             outline.enabled = false;
@@ -92,7 +91,7 @@ public class PickUpItem : MonoBehaviour
     private void ManageInstructions()
     {
         ic.ShowText();
-        Invoke(nameof(HideInstructionText), 3f);
+        Invoke(nameof(HideInstructionText), instructionsTimeDelay);
     }
     
     private void HideInstructionText()

@@ -5,6 +5,7 @@ public class InstructionsController : MonoBehaviour
 {
     [Header("Settings")]
     public bool shouldShowAtStart = false;
+    public float timeToHide = 5f;
     
     [Header("Animator")]
     private Animator textAnimator;
@@ -19,7 +20,7 @@ public class InstructionsController : MonoBehaviour
         if (textAnimator != null && shouldShowAtStart)
         {
             ShowText();
-            Invoke(nameof(HideText), 5f);
+            Invoke(nameof(HideText), timeToHide);
         }
     }
 

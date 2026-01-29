@@ -14,6 +14,7 @@ public abstract class WeaponBase : MonoBehaviour
     protected int currentAmmo;
     protected bool readyToShoot = true;
     public bool isReloading;
+    public bool areThereEnemiesInScene;
 
     [Header("References")]
     public Camera fpsCam;
@@ -21,6 +22,8 @@ public abstract class WeaponBase : MonoBehaviour
     [Header("Impact Effects")]
     public GameObject impactEffect;
     public GameObject impactEffectLongerVersion;
+    public GameObject whiteEffect;
+    public GameObject redEffect;
     
     [Header("UI")]
     public TextMeshProUGUI ammoText;
@@ -102,6 +105,7 @@ public abstract class WeaponBase : MonoBehaviour
         if (hit.transform.CompareTag("Enemy"))
         {
             EnemyHealth enemy = hit.transform.GetComponent<EnemyHealth>();
+            if(areThereEnemiesInScene) SpawnEnemyImpact(hit);
             if (enemy != null)
                 enemy.TakeDamage(damage);
         }
@@ -114,6 +118,15 @@ public abstract class WeaponBase : MonoBehaviour
 
         if (impactEffectLongerVersion != null)
             Destroy(Instantiate(impactEffectLongerVersion, hit.point, Quaternion.LookRotation(hit.normal)), 2f);
+    }
+    
+    protected virtual void SpawnEnemyImpact(RaycastHit hit)
+    {
+        if (whiteEffect != null)
+            Destroy(Instantiate(whiteEffect, hit.point, Quaternion.LookRotation(hit.normal)), 2f);
+
+        if (redEffect != null)
+            Destroy(Instantiate(redEffect, hit.point, Quaternion.LookRotation(hit.normal)), 2f);
     }
 
     protected void ResetShoot()

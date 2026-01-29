@@ -5,7 +5,6 @@ public class Projectile : MonoBehaviour
 {
     [Header("References")]
     public GameObject hitEffect;
-    public PlayerHealth playerHealth;
     
     private void OnTriggerEnter(Collider other)
     {

@@ -39,8 +39,11 @@ public class EnemyAi : MonoBehaviour
 
     private void Awake()
     {
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null) player = playerObj.transform;
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null) player = playerObj.transform;
+        }
         agent = GetComponent<NavMeshAgent>();
         outline =  GetComponent<Outline>();
         outline.enabled = false;
