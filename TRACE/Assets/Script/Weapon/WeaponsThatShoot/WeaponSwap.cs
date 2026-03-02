@@ -26,8 +26,6 @@ public class WeaponSwap : MonoBehaviour
 
     void HandleWeaponSwitchInput()
     {
-            
-        
         for (int i = 0; i < weapons.Length; i++)
         {
             if (Input.GetKeyDown((i + 1).ToString()))
@@ -51,17 +49,5 @@ public class WeaponSwap : MonoBehaviour
         {
             weapons[i].SetActive(i == currentWeaponIndex);
         }
-    }
-
-    public void SelectNextWeapon()
-    {
-        int nextIndex = (currentWeaponIndex + 1) % weapons.Length;
-        SelectWeapon(nextIndex);
-    }
-
-    public void SelectPreviousWeapon()
-    {
-        int prevIndex = (currentWeaponIndex - 1 + weapons.Length) % weapons.Length;
-        SelectWeapon(prevIndex);
     }
 }

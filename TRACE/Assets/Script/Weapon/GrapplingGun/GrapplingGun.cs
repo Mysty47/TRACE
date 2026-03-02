@@ -82,8 +82,7 @@ public class GrapplingGun : MonoBehaviour {
             }
         }
     }
-
-
+    
     void StopSwing() {
         swinging = false;
         

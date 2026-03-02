@@ -1963,7 +1963,6 @@ MonoBehaviour:
   Cover: {fileID: 8673662644607390943}
   player: {fileID: 0}
   explosionForce: 30
-  explosionRadius: 10
   doorDestruction: {fileID: 8722175340499132506}
 --- !u!65 &525049659289992574
 BoxCollider:

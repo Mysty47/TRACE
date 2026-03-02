@@ -36,7 +36,6 @@ public class BananaManIK : MonoBehaviour
             animator.SetIKRotation(AvatarIKGoal.RightFoot, rightFootTarget.rotation);
         }
     }
-
     
     Vector3 GetFootPosition(Transform footTarget)
     {
@@ -51,5 +50,4 @@ public class BananaManIK : MonoBehaviour
             return footTarget.position;
         }
     }
-
 }
