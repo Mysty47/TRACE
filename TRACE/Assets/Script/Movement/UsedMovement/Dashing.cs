@@ -36,6 +36,9 @@ public class Dashing : MonoBehaviour
 
     [Header("Input")]
     public KeyCode dashKey = KeyCode.F;
+    
+    [Header("Sound")]
+    public AudioSource dashSound;
 
     private void Start()
     {
@@ -89,6 +92,8 @@ public class Dashing : MonoBehaviour
         if (dashCdTimer > 0) return;
         else dashCdTimer = dashCd;
 
+        if(dashBar != null) 
+            dashSound.Play();
         pm.dashing = true;
         pm.maxYSpeed = maxDashYSpeed;
 

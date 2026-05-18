@@ -4,7 +4,6 @@ public class WeaponSwap : MonoBehaviour
 {
     [Header("Settings")]
     public GameObject[] weapons;
-    
     public static int currentWeaponIndex = 0;
     
     [Header("References")]
@@ -15,6 +14,7 @@ public class WeaponSwap : MonoBehaviour
 
     void Start()
     {
+        currentWeaponIndex = 0;
         SelectWeapon(currentWeaponIndex);
     }
 
