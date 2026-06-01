@@ -98,6 +98,7 @@ public class EnemyAi : MonoBehaviour
             walkPointSet = false;
     }
 
+    // Choosing random destination for walking
     private void SearchWalkPoint()
     {
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
@@ -140,17 +141,17 @@ public class EnemyAi : MonoBehaviour
 
         // if we have shootPoint we use it
         Vector3 spawnPos;
-        Quaternion spawnRot;
+        // Quaternion spawnRot;
 
         if (gunTip != null)
         {
             spawnPos = gunTip.position;
-            spawnRot = gunTip.rotation;
+            // spawnRot = gunTip.rotation;
         }
         else
         {
             spawnPos = transform.position + Vector3.up * 2f;
-            spawnRot = transform.rotation;
+            // spawnRot = transform.rotation;
         }
 
         // direction to the player
@@ -179,11 +180,11 @@ public class EnemyAi : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
-    }
+    // private void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawWireSphere(transform.position, attackRange);
+    //     Gizmos.color = Color.yellow;
+    //     Gizmos.DrawWireSphere(transform.position, sightRange);
+    // }
 }

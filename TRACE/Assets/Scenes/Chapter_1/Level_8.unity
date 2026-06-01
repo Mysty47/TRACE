@@ -5279,7 +5279,7 @@ GameObject:
   - component: {fileID: 107016596}
   - component: {fileID: 107016595}
   m_Layer: 8
-  m_Name: Cube (2)
+  m_Name: END
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5297,7 +5297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f9b57da7b2dcc49b2d9a852900e40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeSceneOnCollision
-  scene: 1
+  scene: 9
   objectName: Player
 --- !u!64 &107016596
 MeshCollider:

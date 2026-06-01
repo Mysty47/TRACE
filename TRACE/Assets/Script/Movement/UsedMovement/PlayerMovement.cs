@@ -179,6 +179,7 @@ public class PlayerMovement : MonoBehaviour
 		HandleMovement();
 	}
 
+	// Moving the player with WASD
 	void HandleMovement()
 	{
 		float speed = isCrouched ? crouchSpeed : normalSpeed;
@@ -309,9 +310,10 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	//Moving around with WASD
+	// Decides speed of the player
 	private void Movement()
 	{
+		// Extra downforce
 		float groundStickForce = 10f;
 		rb.AddForce(Vector3.down * Time.fixedDeltaTime * groundStickForce);
 		
@@ -448,10 +450,13 @@ public class PlayerMovement : MonoBehaviour
 			desiredX = playerCam.transform.localRotation.eulerAngles.y + mouseX;
 			
 			xRotation -= mouseY;
+			
+			// Limits the rotation
 			xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 			
 			if(!climbing) FindWallRunRotation();
 			
+			// Smooth camera movement
 			actualWallRotation = Mathf.SmoothDamp(actualWallRotation, wallRunRotation, ref wallRotationVel, 0.2f);
 			
 			playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, actualWallRotation);
@@ -543,22 +548,22 @@ public class PlayerMovement : MonoBehaviour
 		float camYaw = playerCam.transform.rotation.eulerAngles.y;
 		
 		// finds the approximate angle
-		if (Math.Abs(wallNormalVector.x - 1f) < wallNormalTolerance)
-		{
-			wallAngle = angleRight;
-		}
-		else if (Math.Abs(wallNormalVector.x + 1f) < wallNormalTolerance)
-		{
-			wallAngle = angleLeft;
-		}
-		else if (Math.Abs(wallNormalVector.z - 1f) < wallNormalTolerance)
-		{
-			wallAngle = angleFront;
-		}
-		else if (Math.Abs(wallNormalVector.z + 1f) < wallNormalTolerance)
-		{
-			wallAngle = angleBack;
-		}
+		// if (Math.Abs(wallNormalVector.x - 1f) < wallNormalTolerance)
+		// {
+		// 	wallAngle = angleRight;
+		// }
+		// else if (Math.Abs(wallNormalVector.x + 1f) < wallNormalTolerance)
+		// {
+		// 	wallAngle = angleLeft;
+		// }
+		// else if (Math.Abs(wallNormalVector.z - 1f) < wallNormalTolerance)
+		// {
+		// 	wallAngle = angleFront;
+		// }
+		// else if (Math.Abs(wallNormalVector.z + 1f) < wallNormalTolerance)
+		// {
+		// 	wallAngle = angleBack;
+		// }
 
 		wallAngle = Vector3.SignedAngle(new Vector3(0f, 0f, 1f), wallNormalVector, Vector3.up);
 		
@@ -577,6 +582,7 @@ public class PlayerMovement : MonoBehaviour
 		float wallRunRotationMax = 22f;
 
 		float cancelDelay = 0.2f;
+		
 		//  Automatically ends wallRun in certain conditions
 		if ((Mathf.Abs(wallRunRotation) < wallRunRotationMin && inputY > 0f && Math.Abs(inputX) < 0.1f) ||
 		    (Mathf.Abs(wallRunRotation) > wallRunRotationMax && inputY < 0f && Math.Abs(inputX) < 0.1f))
@@ -596,7 +602,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void CancelWallrun()
 	{
-		Invoke("GetReadyToWallrun", 0.1f);
+		Invoke("GetReadyToWallrun", 0.3f);
 		
 		float forceMultiplier = 600f;
 		

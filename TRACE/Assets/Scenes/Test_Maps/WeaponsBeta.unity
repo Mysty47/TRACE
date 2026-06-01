@@ -1557,6 +1557,7 @@ MonoBehaviour:
   resetVel: 1
   dashCd: 1.5
   dashKey: 102
+  dashSound: {fileID: 0}
 --- !u!4 &132121490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5627712649297578818, guid: 91c0699a527f32043b8b7c26b3f2a770, type: 3}
@@ -32326,9 +32327,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
   outline: {fileID: 0}
   fpsCam: {fileID: 0}
   gunTip: {fileID: 0}
@@ -32340,9 +32338,11 @@ MonoBehaviour:
   walkPointRange: 5
   sightRange: 25
   attackRange: 10
-  eyeHeight: 1.6
+  playerInSightRange: 0
+  playerInAttackRange: 0
   walkSound: {fileID: 1954712331}
   shootSound: {fileID: 427486458}
+  isPlayerAimedAtYou: 0
 --- !u!4 &834904462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dec7f3e41b41399459e7583baae0e1e2, type: 3}
@@ -32978,9 +32978,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 2048
   outline: {fileID: 877903637}
   fpsCam: {fileID: 1264937317}
   gunTip: {fileID: 1768114662}
@@ -32992,9 +32989,11 @@ MonoBehaviour:
   walkPointRange: 10
   sightRange: 20
   attackRange: 10
-  eyeHeight: 1.6
+  playerInSightRange: 0
+  playerInAttackRange: 0
   walkSound: {fileID: 1954712331}
   shootSound: {fileID: 427486458}
+  isPlayerAimedAtYou: 0
 --- !u!195 &877903633
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -70360,6 +70359,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 4070920458726974039, guid: 81bb9eea30387e442899949a80011e55, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4207725056094271318, guid: 81bb9eea30387e442899949a80011e55, type: 3}
       propertyPath: m_Layer
       value: 18
@@ -79374,9 +79377,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 2048
   outline: {fileID: 1836941978}
   fpsCam: {fileID: 1264937317}
   gunTip: {fileID: 2104021285}
@@ -79388,9 +79388,11 @@ MonoBehaviour:
   walkPointRange: 10
   sightRange: 20
   attackRange: 10
-  eyeHeight: 1.6
+  playerInSightRange: 0
+  playerInAttackRange: 0
   walkSound: {fileID: 1288913984}
   shootSound: {fileID: 536488909}
+  isPlayerAimedAtYou: 0
 --- !u!195 &1836941982
 NavMeshAgent:
   m_ObjectHideFlags: 0

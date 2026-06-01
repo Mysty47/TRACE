@@ -16,7 +16,7 @@ public class ProceduralWalker : MonoBehaviour
     private Vector3 oldPosition, newPosition, currentPosition;
     private Vector3 previousBodyPosition;
     private bool isMoving = false;
-    private float lerp = 1f;
+    private float stepProgress = 1f;
 
     void Start()
     {
@@ -45,7 +45,7 @@ public class ProceduralWalker : MonoBehaviour
                 if (distance > stepDistance)
                 {
                     newPosition = info.point;
-                    lerp = 0f;
+                    stepProgress = 0f;
                     isMoving = true;
                 }
             }
@@ -54,13 +54,13 @@ public class ProceduralWalker : MonoBehaviour
         // leg movement
         if (isMoving)
         {
-            lerp += Time.deltaTime * stepSpeed;
+            stepProgress += Time.deltaTime * stepSpeed;
 
-            Vector3 footPosition = Vector3.Lerp(oldPosition, newPosition, lerp);
-            footPosition.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
+            Vector3 footPosition = Vector3.Lerp(oldPosition, newPosition, stepProgress);
+            footPosition.y += Mathf.Sin(stepProgress * Mathf.PI) * stepHeight;
             currentPosition = footPosition;
 
-            if (lerp >= 1f)
+            if (stepProgress >= 1f)
             {
                 isMoving = false;
                 oldPosition = newPosition;
@@ -68,9 +68,9 @@ public class ProceduralWalker : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(newPosition, 0.05f);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawSphere(newPosition, 0.05f);
+    // }
 }
